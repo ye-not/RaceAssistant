@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A49662313039C82000242699 /* Race Assistant Watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A49662113039C81E00242699 /* Race Assistant Watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		A49661933038C16100242699 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,12 +25,50 @@
 			remoteGlobalIDString = A49661803038C15F00242699;
 			remoteInfo = "Race Assistant";
 		};
+		A496621E3039C82000242699 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A49661793038C15F00242699 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A49662103039C81E00242699;
+			remoteInfo = "Race Assistant Watch Watch App";
+		};
+		A49662283039C82000242699 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A49661793038C15F00242699 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A49662103039C81E00242699;
+			remoteInfo = "Race Assistant Watch Watch App";
+		};
+		A496622F3039C82000242699 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A49661793038C15F00242699 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A49662103039C81E00242699;
+			remoteInfo = "Race Assistant Watch Watch App";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A49662353039C82000242699 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A49662313039C82000242699 /* Race Assistant Watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A49661813038C15F00242699 /* Race Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49661923038C16100242699 /* Race AssistantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Race AssistantTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A496619C3038C16100242699 /* Race AssistantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Race AssistantUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A49662113039C81E00242699 /* Race Assistant Watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Assistant Watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A496621D3039C82000242699 /* Race Assistant Watch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Race Assistant Watch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A49662273039C82000242699 /* Race Assistant Watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Race Assistant Watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -34,6 +76,13 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+			);
+			target = A49661803038C15F00242699 /* Race Assistant */;
+		};
+		A49662413039C9E800242699 /* Exceptions for "Race Assistant Watch Watch App" folder in "Race Assistant" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WatchScheduleData.swift,
 			);
 			target = A49661803038C15F00242699 /* Race Assistant */;
 		};
@@ -56,6 +105,24 @@
 		A496619F3038C16100242699 /* Race AssistantUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Race AssistantUITests";
+			sourceTree = "<group>";
+		};
+		A49662123039C81E00242699 /* Race Assistant Watch Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A49662413039C9E800242699 /* Exceptions for "Race Assistant Watch Watch App" folder in "Race Assistant" target */,
+			);
+			path = "Race Assistant Watch Watch App";
+			sourceTree = "<group>";
+		};
+		A49662203039C82000242699 /* Race Assistant Watch Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Race Assistant Watch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		A496622A3039C82000242699 /* Race Assistant Watch Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Race Assistant Watch Watch AppUITests";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -82,6 +149,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A496620E3039C81E00242699 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A496621A3039C82000242699 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A49662243039C82000242699 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -91,6 +179,9 @@
 				A49661833038C15F00242699 /* Race Assistant */,
 				A49661953038C16100242699 /* Race AssistantTests */,
 				A496619F3038C16100242699 /* Race AssistantUITests */,
+				A49662123039C81E00242699 /* Race Assistant Watch Watch App */,
+				A49662203039C82000242699 /* Race Assistant Watch Watch AppTests */,
+				A496622A3039C82000242699 /* Race Assistant Watch Watch AppUITests */,
 				A49661823038C15F00242699 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +192,9 @@
 				A49661813038C15F00242699 /* Race Assistant.app */,
 				A49661923038C16100242699 /* Race AssistantTests.xctest */,
 				A496619C3038C16100242699 /* Race AssistantUITests.xctest */,
+				A49662113039C81E00242699 /* Race Assistant Watch Watch App.app */,
+				A496621D3039C82000242699 /* Race Assistant Watch Watch AppTests.xctest */,
+				A49662273039C82000242699 /* Race Assistant Watch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,10 +209,12 @@
 				A496617D3038C15F00242699 /* Sources */,
 				A496617E3038C15F00242699 /* Frameworks */,
 				A496617F3038C15F00242699 /* Resources */,
+				A49662353039C82000242699 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A49662303039C82000242699 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A49661833038C15F00242699 /* Race Assistant */,
@@ -176,6 +272,74 @@
 			productReference = A496619C3038C16100242699 /* Race AssistantUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A49662103039C81E00242699 /* Race Assistant Watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A49662323039C82000242699 /* Build configuration list for PBXNativeTarget "Race Assistant Watch Watch App" */;
+			buildPhases = (
+				A496620D3039C81E00242699 /* Sources */,
+				A496620E3039C81E00242699 /* Frameworks */,
+				A496620F3039C81E00242699 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A49662123039C81E00242699 /* Race Assistant Watch Watch App */,
+			);
+			name = "Race Assistant Watch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Race Assistant Watch Watch App";
+			productReference = A49662113039C81E00242699 /* Race Assistant Watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A496621C3039C82000242699 /* Race Assistant Watch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A49662363039C82000242699 /* Build configuration list for PBXNativeTarget "Race Assistant Watch Watch AppTests" */;
+			buildPhases = (
+				A49662193039C82000242699 /* Sources */,
+				A496621A3039C82000242699 /* Frameworks */,
+				A496621B3039C82000242699 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A496621F3039C82000242699 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A49662203039C82000242699 /* Race Assistant Watch Watch AppTests */,
+			);
+			name = "Race Assistant Watch Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Race Assistant Watch Watch AppTests";
+			productReference = A496621D3039C82000242699 /* Race Assistant Watch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A49662263039C82000242699 /* Race Assistant Watch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A49662393039C82000242699 /* Build configuration list for PBXNativeTarget "Race Assistant Watch Watch AppUITests" */;
+			buildPhases = (
+				A49662233039C82000242699 /* Sources */,
+				A49662243039C82000242699 /* Frameworks */,
+				A49662253039C82000242699 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A49662293039C82000242699 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A496622A3039C82000242699 /* Race Assistant Watch Watch AppUITests */,
+			);
+			name = "Race Assistant Watch Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Race Assistant Watch Watch AppUITests";
+			productReference = A49662273039C82000242699 /* Race Assistant Watch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,6 +361,17 @@
 						CreatedOnToolsVersion = 26.6;
 						TestTargetID = A49661803038C15F00242699;
 					};
+					A49662103039C81E00242699 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					A496621C3039C82000242699 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = A49662103039C81E00242699;
+					};
+					A49662263039C82000242699 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = A49662103039C81E00242699;
+					};
 				};
 			};
 			buildConfigurationList = A496617C3038C15F00242699 /* Build configuration list for PBXProject "Race Assistant" */;
@@ -216,6 +391,9 @@
 				A49661803038C15F00242699 /* Race Assistant */,
 				A49661913038C16100242699 /* Race AssistantTests */,
 				A496619B3038C16100242699 /* Race AssistantUITests */,
+				A49662103039C81E00242699 /* Race Assistant Watch Watch App */,
+				A496621C3039C82000242699 /* Race Assistant Watch Watch AppTests */,
+				A49662263039C82000242699 /* Race Assistant Watch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -236,6 +414,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A496619A3038C16100242699 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A496620F3039C81E00242699 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A496621B3039C82000242699 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A49662253039C82000242699 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -266,6 +465,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A496620D3039C81E00242699 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A49662193039C82000242699 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A49662233039C82000242699 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -279,6 +499,21 @@
 			target = A49661803038C15F00242699 /* Race Assistant */;
 			targetProxy = A496619D3038C16100242699 /* PBXContainerItemProxy */;
 		};
+		A496621F3039C82000242699 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A49662103039C81E00242699 /* Race Assistant Watch Watch App */;
+			targetProxy = A496621E3039C82000242699 /* PBXContainerItemProxy */;
+		};
+		A49662293039C82000242699 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A49662103039C81E00242699 /* Race Assistant Watch Watch App */;
+			targetProxy = A49662283039C82000242699 /* PBXContainerItemProxy */;
+		};
+		A49662303039C82000242699 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A49662103039C81E00242699 /* Race Assistant Watch Watch App */;
+			targetProxy = A496622F3039C82000242699 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -290,9 +525,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Race Assistant/Race_Assistant.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6N4LGFD8Q2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Race Assistant/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -323,9 +560,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Race Assistant/Race_Assistant.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6N4LGFD8Q2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Race Assistant/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -547,6 +786,160 @@
 			};
 			name = Release;
 		};
+		A49662333039C82000242699 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6N4LGFD8Q2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Race Assistant Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Homemade.Race-Assistant";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Homemade.Race-Assistant.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		A49662343039C82000242699 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6N4LGFD8Q2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Race Assistant Watch";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "Homemade.Race-Assistant";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Homemade.Race-Assistant.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		A49662373039C82000242699 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Homemade.Race-Assistant-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Race Assistant Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Race Assistant Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		A49662383039C82000242699 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Homemade.Race-Assistant-Watch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Race Assistant Watch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Race Assistant Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
+		A496623A3039C82000242699 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Homemade.Race-Assistant-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Race Assistant Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		A496623B3039C82000242699 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Homemade.Race-Assistant-Watch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Race Assistant Watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -582,6 +975,33 @@
 			buildConfigurations = (
 				A49661AE3038C16100242699 /* Debug */,
 				A49661AF3038C16100242699 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A49662323039C82000242699 /* Build configuration list for PBXNativeTarget "Race Assistant Watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A49662333039C82000242699 /* Debug */,
+				A49662343039C82000242699 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A49662363039C82000242699 /* Build configuration list for PBXNativeTarget "Race Assistant Watch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A49662373039C82000242699 /* Debug */,
+				A49662383039C82000242699 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A49662393039C82000242699 /* Build configuration list for PBXNativeTarget "Race Assistant Watch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A496623A3039C82000242699 /* Debug */,
+				A496623B3039C82000242699 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
