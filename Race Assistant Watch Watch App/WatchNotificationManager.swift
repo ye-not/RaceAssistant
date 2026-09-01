@@ -280,7 +280,8 @@ final class WatchNotificationManager:
                         .month,
                         .day,
                         .hour,
-                        .minute
+                        .minute,
+                        .second
                     ],
                     from:
                         notificationDate

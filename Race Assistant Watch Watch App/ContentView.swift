@@ -10,7 +10,7 @@ struct ContentView: View {
         TimelineView(
             .periodic(
                 from: .now,
-                by: 30
+                by: 5
             )
         ) { context in
 
@@ -150,15 +150,40 @@ struct ContentView: View {
 
                     // MARK: Next
 
-                    if let next {
+                    // MARK: Следующее и последующее события
+
+                    if let next =
+                        nextEvent(
+                            schedule.events,
+                            now: now
+                        ) {
 
                         nextEventView(
                             next,
-                            schedule:
-                                schedule,
-                            now:
-                                now
+                            schedule: schedule,
+                            now: now,
+                            label: "ДАЛЕЕ"
                         )
+
+                        if currentEvent(
+                            schedule.events,
+                            now: now
+                        ) == nil,
+                           let following =
+                            followingEvent(
+                                schedule.events,
+                                after: next
+                            ) {
+
+                            Divider()
+
+                            nextEventView(
+                                following,
+                                schedule: schedule,
+                                now: now,
+                                label: "ПОТОМ"
+                            )
+                        }
                     }
 
                     // MARK: Nothing Ahead
@@ -513,7 +538,8 @@ struct ContentView: View {
     private func nextEventView(
         _ event: WatchScheduleItem,
         schedule: WatchScheduleData,
-        now: Date
+        now: Date,
+        label: String
     ) -> some View {
 
         let personal =
@@ -569,7 +595,7 @@ struct ContentView: View {
             HStack {
 
                 Text(
-                    "ДАЛЕЕ"
+                    label
                 )
                 .font(.caption2)
                 .fontWeight(
@@ -789,6 +815,19 @@ struct ContentView: View {
             event.start >
                 now
         }
+    }
+    
+    private func followingEvent(
+        _ events: [WatchScheduleItem],
+        after event: WatchScheduleItem
+    ) -> WatchScheduleItem? {
+        events
+            .sorted {
+                $0.start < $1.start
+            }
+            .first {
+                $0.start > event.start
+            }
     }
 
     // MARK: - Time
