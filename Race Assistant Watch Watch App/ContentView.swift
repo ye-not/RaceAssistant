@@ -103,27 +103,17 @@ struct ContentView: View {
                 spacing: 12
             ) {
 
-                // MARK: Header
-
                 headerView(
                     schedule
                 )
 
                 Divider()
 
-                // MARK: No Schedule At All
-
                 if schedule.events.isEmpty {
 
                     emptyScheduleView()
 
-                }
-
-                // MARK: Role Selected,
-                // But There Are No Events
-                // For This Role
-
-                else if
+                } else if
                     !schedule.myRole.isEmpty
                     &&
                     relevant.isEmpty {
@@ -134,8 +124,6 @@ struct ContentView: View {
                     )
 
                 } else {
-
-                    // MARK: Current
 
                     if let current {
 
@@ -148,45 +136,39 @@ struct ContentView: View {
                         )
                     }
 
-                    // MARK: Next
-
-                    // MARK: Следующее и последующее события
-
-                    if let next =
-                        nextEvent(
-                            schedule.events,
-                            now: now
-                        ) {
+                    if let next {
 
                         nextEventView(
                             next,
-                            schedule: schedule,
-                            now: now,
-                            label: "ДАЛЕЕ"
+                            schedule:
+                                schedule,
+                            now:
+                                now,
+                            label:
+                                "ДАЛЕЕ"
                         )
 
-                        if currentEvent(
-                            schedule.events,
-                            now: now
-                        ) == nil,
+                        if current == nil,
                            let following =
                             followingEvent(
-                                schedule.events,
-                                after: next
+                                relevant,
+                                after:
+                                    next
                             ) {
 
                             Divider()
 
                             nextEventView(
                                 following,
-                                schedule: schedule,
-                                now: now,
-                                label: "ПОТОМ"
+                                schedule:
+                                    schedule,
+                                now:
+                                    now,
+                                label:
+                                    "ПОТОМ"
                             )
                         }
                     }
-
-                    // MARK: Nothing Ahead
 
                     if current == nil
                         &&
@@ -215,66 +197,98 @@ struct ContentView: View {
 
         VStack(
             alignment: .leading,
-            spacing: 3
+            spacing: 4
         ) {
 
-            // Серия
-
-            Text(
-                schedule.championshipName
-            )
-            .font(.caption)
-            .foregroundStyle(
-                .secondary
-            )
-
-            // Роль
-
-            if !schedule.myRole.isEmpty {
+            HStack(
+                spacing: 4
+            ) {
 
                 Text(
-                    schedule.myRole
+                    schedule.championshipName
                 )
-                .font(.headline)
+                .foregroundStyle(
+                    .secondary
+                )
+
+                Text("·")
+                    .foregroundStyle(
+                        .secondary
+                    )
+
+                Text(
+                    schedule.stageName
+                )
                 .fontWeight(
                     .semibold
                 )
-                .foregroundStyle(
-                    .orange
-                )
             }
-
-            // Этап
-
-            Text(
-                schedule.stageName
+            .font(
+                .caption
             )
-            .font(.headline)
+            .lineLimit(
+                1
+            )
+            .truncationMode(
+                .tail
+            )
 
-            // Автодром
+            HStack(
+                spacing: 5
+            ) {
 
-            if !schedule
-                .circuitName
-                .isEmpty {
-
-                HStack(
-                    spacing: 4
-                ) {
+                if !schedule
+                    .circuitName
+                    .isEmpty {
 
                     Image(
                         systemName:
                             "road.lanes"
                     )
+                    .foregroundStyle(
+                        .secondary
+                    )
 
                     Text(
                         schedule.circuitName
                     )
+                    .foregroundStyle(
+                        .secondary
+                    )
+                    .lineLimit(
+                        1
+                    )
+                    .truncationMode(
+                        .tail
+                    )
                 }
-                .font(.caption2)
-                .foregroundStyle(
-                    .secondary
+
+                Spacer(
+                    minLength: 4
                 )
+
+                if !schedule
+                    .myRole
+                    .isEmpty {
+
+                    Text(
+                        schedule.myRole
+                    )
+                    .fontWeight(
+                        .bold
+                    )
+                    .foregroundStyle(
+                        .orange
+                    )
+                    .fixedSize(
+                        horizontal: true,
+                        vertical: false
+                    )
+                }
             }
+            .font(
+                .caption
+            )
         }
     }
 
@@ -445,12 +459,16 @@ struct ContentView: View {
                     schedule
             )
 
+        let progress =
+            eventProgress(
+                event,
+                now: now
+            )
+
         return VStack(
             alignment: .leading,
             spacing: 6
         ) {
-
-            // MARK: СЕЙЧАС
 
             HStack(
                 spacing: 5
@@ -486,8 +504,6 @@ struct ContentView: View {
             .foregroundStyle(
                 .green
             )
-
-            // MARK: Time + Title
 
             HStack(
                 alignment:
@@ -530,6 +546,38 @@ struct ContentView: View {
             eventDetails(
                 event
             )
+
+            if event.duration > 0 {
+
+                HStack(
+                    spacing: 6
+                ) {
+
+                    ProgressView(
+                        value:
+                            progress
+                    )
+                    .tint(
+                        .green
+                    )
+
+                    Text(
+                        "\(Int(progress * 100))%"
+                    )
+                    .font(
+                        .caption2
+                    )
+                    .monospacedDigit()
+                    .foregroundStyle(
+                        .green
+                    )
+                    .frame(
+                        width: 30,
+                        alignment:
+                            .trailing
+                    )
+                }
+            }
         }
     }
 
@@ -562,10 +610,6 @@ struct ContentView: View {
             spacing: 6
         ) {
 
-            // Если событие находится
-            // не сегодня, явно показываем
-            // дату.
-
             if !isToday {
 
                 Text(
@@ -589,8 +633,6 @@ struct ContentView: View {
                     .secondary
                 )
             }
-
-            // MARK: Следующее
 
             HStack {
 
@@ -617,8 +659,6 @@ struct ContentView: View {
                     ? .orange
                     : .secondary
             )
-
-            // MARK: Time + Title
 
             HStack(
                 alignment:
@@ -716,24 +756,11 @@ struct ContentView: View {
                 $1.start
             }
 
-        // Роль не выбрана —
-        // показываем обычное
-        // полное расписание.
-
         guard
             !schedule.myRole.isEmpty
         else {
             return sorted
         }
-
-        // Роль выбрана —
-        // Watch становится
-        // персональным экраном.
-        //
-        // События без ролей здесь
-        // не считаем общими:
-        // возможно, они просто
-        // ещё не размечены.
 
         return sorted.filter {
             event in
@@ -781,6 +808,37 @@ struct ContentView: View {
         event.start
     }
 
+    // MARK: - Event Progress
+
+    private func eventProgress(
+        _ event: WatchScheduleItem,
+        now: Date
+    ) -> Double {
+
+        guard event.duration > 0 else {
+            return 0
+        }
+
+        let totalDuration =
+            TimeInterval(
+                event.duration * 60
+            )
+
+        let elapsed =
+            now.timeIntervalSince(
+                event.start
+            )
+
+        return min(
+            max(
+                elapsed /
+                    totalDuration,
+                0
+            ),
+            1
+        )
+    }
+
     // MARK: - Current Event
 
     private func currentEvent(
@@ -816,17 +874,22 @@ struct ContentView: View {
                 now
         }
     }
-    
+
+    // MARK: - Following Event
+
     private func followingEvent(
         _ events: [WatchScheduleItem],
         after event: WatchScheduleItem
     ) -> WatchScheduleItem? {
+
         events
             .sorted {
-                $0.start < $1.start
+                $0.start <
+                $1.start
             }
             .first {
-                $0.start > event.start
+                $0.start >
+                event.start
             }
     }
 
