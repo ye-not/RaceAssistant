@@ -128,10 +128,12 @@ enum SeedDataImporter {
 
         try modelContext.save()
 
-        try importSchedule(
-            seed.scheduleImport,
-            modelContext: modelContext
-        )
+        for scheduleImport in seed.scheduleImports {
+            try importSchedule(
+                scheduleImport,
+                modelContext: modelContext
+            )
+        }
     }
 
     // MARK: - Roles
@@ -921,20 +923,15 @@ enum SeedDataImporter {
 
 // MARK: - JSON Models
 
-private struct RaceAssistantSeed:
-    Decodable {
-
+private struct RaceAssistantSeed: Decodable {
     let schemaVersion: Int
     let generatedFrom: String
 
-    let referenceData:
-        SeedReferenceData
+    let referenceData: SeedReferenceData
 
-    let series:
-        [SeedSeries]
+    let series: [SeedSeries]
 
-    let scheduleImport:
-        SeedScheduleImport
+    let scheduleImports: [SeedScheduleImport]
 }
 
 
