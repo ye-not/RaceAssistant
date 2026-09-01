@@ -3,98 +3,132 @@ import SwiftData
 
 struct StageDetailView: View {
     @Environment(\.modelContext) private var modelContext
-
+    
     @Query(sort: \Role.name)
     private var allRoles: [Role]
-
+    
     let stage: Stage
-
+    
     @State private var showingAddScheduleEvent = false
     @State private var eventToEdit: ScheduleEvent?
     @State private var eventToShift: ScheduleEvent?
-
+    
     // Здесь храним дни,
     // которые пользователь раскрыл вручную.
     @State private var expandedCollapsedDays: Set<Date> = []
-
+    
     @State private var showingFullToday = false
-
+    
     // MARK: - Roles
-
+    
     private var activeRoles: [Role] {
         allRoles.filter {
             $0.active
         }
     }
-
+    
     // MARK: - Events
-
+    
     private var sortedEvents: [ScheduleEvent] {
         stage.scheduleEvents.sorted {
             $0.plannedStart < $1.plannedStart
         }
     }
-
+    
     private var groupedEvents: [(date: Date, events: [ScheduleEvent])] {
         let calendar = Calendar.current
-
+        
         let grouped =
-            Dictionary(
-                grouping: sortedEvents
-            ) { event in
-
-                calendar.startOfDay(
-                    for: event.plannedStart
-                )
-            }
-
+        Dictionary(
+            grouping: sortedEvents
+        ) { event in
+            
+            calendar.startOfDay(
+                for: event.plannedStart
+            )
+        }
+        
         return grouped
             .map {
                 (
                     date: $0.key,
                     events: $0.value.sorted {
                         $0.plannedStart <
-                        $1.plannedStart
+                            $1.plannedStart
                     }
                 )
             }
             .sorted {
                 $0.date <
-                $1.date
+                    $1.date
             }
     }
-
+    // MARK: - Schedule Groups
+    
+    private func normalizedGroupID(
+        _ value: String?
+    ) -> String? {
+        
+        guard let value
+        else {
+            return nil
+        }
+        
+        let trimmed =
+        value.trimmingCharacters(
+            in: .whitespacesAndNewlines
+        )
+        
+        return trimmed.isEmpty
+        ? nil
+        : trimmed
+    }
+    
+    private func groupIsRace(
+        groupID: String,
+        events: [ScheduleEvent]
+    ) -> Bool {
+        
+        events.contains { event in
+            
+            normalizedGroupID(
+                event.groupID
+            ) == groupID
+            &&
+            event.isRace
+        }
+    }
     // MARK: - Body
-
+    
     var body: some View {
-
+        
         TimelineView(
             .periodic(
                 from: .now,
                 by: 30
             )
         ) { context in
-
+            
             List {
-
+                
                 // MARK: Моя роль
-
+                
                 Section("Моя роль") {
-
+                    
                     Picker(
                         "Роль на этапе",
                         selection: roleBinding
                     ) {
-
+                        
                         Text("Не выбрана")
                             .tag(
                                 nil as Role?
                             )
-
+                        
                         ForEach(
                             activeRoles
                         ) { role in
-
+                            
                             Text(
                                 roleDisplayName(
                                     role
@@ -106,35 +140,35 @@ struct StageDetailView: View {
                         }
                     }
                 }
-
+                
                 // MARK: Уведомления
-
+                
                 Section("Уведомления") {
-
+                    
                     Picker(
                         "События",
                         selection:
                             notificationModeBinding
                     ) {
-
+                        
                         ForEach(
                             StageNotificationMode
                                 .allCases,
                             id: \.self
                         ) { mode in
-
+                            
                             Text(
                                 mode.title
                             )
                             .tag(mode)
                         }
                     }
-
+                    
                     VStack(
                         alignment: .leading,
                         spacing: 10
                     ) {
-
+                        
                         Text(
                             "Напоминать за"
                         )
@@ -142,68 +176,68 @@ struct StageDetailView: View {
                         .foregroundStyle(
                             .secondary
                         )
-
+                        
                         HStack(
                             spacing: 12
                         ) {
-
+                            
                             reminderButton(
                                 title: "10 мин",
                                 isOn:
                                     stage
-                                        .stageRemind10Minutes
+                                    .stageRemind10Minutes
                             ) {
-
+                                
                                 stage
                                     .stageRemind10Minutes
                                     .toggle()
-
+                                
                                 notificationSettingsChanged()
                             }
-
+                            
                             reminderButton(
                                 title: "5 мин",
                                 isOn:
                                     stage
-                                        .stageRemind5Minutes
+                                    .stageRemind5Minutes
                             ) {
-
+                                
                                 stage
                                     .stageRemind5Minutes
                                     .toggle()
-
+                                
                                 notificationSettingsChanged()
                             }
-
+                            
                             reminderButton(
                                 title: "1 мин",
                                 isOn:
                                     stage
-                                        .stageRemind1Minute
+                                    .stageRemind1Minute
                             ) {
-
+                                
                                 stage
                                     .stageRemind1Minute
                                     .toggle()
-
+                                
                                 notificationSettingsChanged()
                             }
                         }
                         .disabled(
                             stage.notificationMode
-                                == .none
+                            == .none
                         )
                         .opacity(
                             stage.notificationMode
-                                == .none
-                                ? 0.35
-                                : 1.0
+                            == .none
+                            ? 0.35
+                            : 1.0
                         )
-
+                        
                         if stage.notificationMode
                             == .myRole,
                            stage.myRole == nil {
-
+                            
                             Label(
                                 "Для уведомлений по роли сначала выбери свою роль",
                                 systemImage:
@@ -220,11 +254,11 @@ struct StageDetailView: View {
                         3
                     )
                 }
-
+                
                 // MARK: Расписание
-
+                
                 if sortedEvents.isEmpty {
-
+                    
                     ContentUnavailableView(
                         "Расписание пустое",
                         systemImage:
@@ -233,14 +267,14 @@ struct StageDetailView: View {
                             "Добавь первую строку расписания"
                         )
                     )
-
+                    
                 } else {
-
+                    
                     ForEach(
                         groupedEvents,
                         id: \.date
                     ) { group in
-
+                        
                         daySection(
                             date:
                                 group.date,
@@ -259,21 +293,21 @@ struct StageDetailView: View {
         .navigationBarTitleDisplayMode(
             .inline
         )
-
+        
         // MARK: - Toolbar
-
+        
         .toolbar {
-
+            
             ToolbarItem(
                 placement:
-                    .topBarTrailing
+                        .topBarTrailing
             ) {
-
+                
                 Button {
                     showingAddScheduleEvent =
-                        true
+                    true
                 } label: {
-
+                    
                     Image(
                         systemName:
                             "plus"
@@ -281,99 +315,99 @@ struct StageDetailView: View {
                 }
             }
         }
-
+        
         // MARK: - Add
-
+        
         .sheet(
             isPresented:
                 $showingAddScheduleEvent
         ) {
-
+            
             AddScheduleEventView(
                 stage: stage
             )
         }
-
+        
         // MARK: - Edit
-
+        
         .sheet(
             item:
                 $eventToEdit
         ) { event in
-
+            
             EditScheduleEventView(
                 event: event
             )
         }
-
+        
         // MARK: - Shift
-
+        
         .sheet(
             item:
                 $eventToShift
         ) { event in
-
+            
             ShiftScheduleView(
                 event: event
             )
         }
     }
-
+    
     // MARK: - Notification Mode Binding
-
+    
     private var notificationModeBinding:
-        Binding<StageNotificationMode> {
-
+    Binding<StageNotificationMode> {
+        
         Binding(
             get: {
                 stage.notificationMode
             },
             set: { newMode in
-
+                
                 stage.notificationMode =
-                    newMode
-
+                newMode
+                
                 notificationSettingsChanged()
             }
         )
     }
-
+    
     // MARK: - Reminder Button
-
+    
     @ViewBuilder
     private func reminderButton(
         title: String,
         isOn: Bool,
         action: @escaping () -> Void
     ) -> some View {
-
+        
         Button(
             action: action
         ) {
-
+            
             HStack(
                 spacing: 5
             ) {
-
+                
                 Image(
                     systemName:
                         isOn
-                        ? "checkmark.circle.fill"
-                        : "circle"
+                    ? "checkmark.circle.fill"
+                    : "circle"
                 )
-
+                
                 Text(title)
             }
             .font(.subheadline)
             .fontWeight(
                 isOn
-                    ? .semibold
-                    : .regular
+                ? .semibold
+                : .regular
             )
             .foregroundStyle(
                 isOn
-                    ? Color.orange
-                    : Color.secondary
+                ? Color.orange
+                : Color.secondary
             )
             .padding(
                 .horizontal,
@@ -384,7 +418,7 @@ struct StageDetailView: View {
                 7
             )
             .background {
-
+                
                 Capsule()
                     .fill(
                         isOn
@@ -399,125 +433,120 @@ struct StageDetailView: View {
             .plain
         )
     }
-
+    
     // MARK: - Notification Settings Changed
-
+    
     private func notificationSettingsChanged() {
-
+        
         do {
-
+            
             try modelContext.save()
-
+            
             Task {
-
+                
                 await NotificationManager
                     .shared
                     .rescheduleNotifications(
                         for: stage
                     )
-
+                
                 PhoneWatchConnectivityManager
                     .shared
                     .send(
                         stage: stage
                     )
             }
-
+            
         } catch {
-
+            
             print(
                 "Ошибка сохранения настроек уведомлений: \(error)"
             )
         }
     }
-
+    
     // MARK: - Day Section
-
+    
     @ViewBuilder
     private func daySection(
         date: Date,
         events: [ScheduleEvent],
         now: Date
     ) -> some View {
-
+        
         let calendar =
-            Calendar.current
-
+        Calendar.current
+        
         let day =
-            calendar.startOfDay(
-                for: date
-            )
-
+        calendar.startOfDay(
+            for: date
+        )
+        
         let today =
-            calendar.startOfDay(
-                for: now
-            )
-
+        calendar.startOfDay(
+            for: now
+        )
+        
         let isPastDay =
-            day < today
-
+        day < today
+        
         let isToday =
-            calendar.isDate(
-                day,
-                inSameDayAs: today
-            )
-
+        calendar.isDate(
+            day,
+            inSameDayAs: today
+        )
+        
         // Есть ли в этом дне
         // хотя бы одна активность моей роли.
-
+        
         let hasMyEvents =
-            dayHasMyEvents(
-                events
-            )
-
+        dayHasMyEvents(
+            events
+        )
+        
         // Если роль выбрана, но
         // в течение дня ни одной
         // активности этой роли нет —
         // день считаем "не моим".
-
+        
         let isIrrelevantDay =
-            stage.myRole != nil
-            &&
-            !hasMyEvents
-
+        stage.myRole != nil
+        &&
+        !hasMyEvents
+        
         // Прошедшие дни и дни без моей роли
         // автоматически сворачиваются.
-
+        
         let shouldAutoCollapse =
-            isPastDay
-            ||
-            isIrrelevantDay
-
+        isPastDay
+        ||
+        isIrrelevantDay
+        
         let isManuallyExpanded =
-            expandedCollapsedDays
-                .contains(day)
-
+        expandedCollapsedDays
+            .contains(day)
+        
         // MARK: - Collapsed Day
-
+        
         if shouldAutoCollapse {
-
+            
             Section {
-
+                
                 if isManuallyExpanded {
-
-                    ForEach(
-                        events
-                    ) { event in
-
-                        eventButton(
-                            event,
-                            now: now,
-                            forceDimmed:
-                                isIrrelevantDay
-                        )
-                    }
-
+                    
+                    eventList(
+                        events,
+                        now: now,
+                        forceDimmed:
+                            isIrrelevantDay
+                    )
+                    
                     Button {
                         toggleCollapsedDay(
                             day
                         )
                     } label: {
-
+                        
                         centeredAction(
                             "Свернуть день",
                             systemImage:
@@ -527,15 +556,15 @@ struct StageDetailView: View {
                     .buttonStyle(
                         .plain
                     )
-
+                    
                 } else {
-
+                    
                     Button {
                         toggleCollapsedDay(
                             day
                         )
                     } label: {
-
+                        
                         collapsedDayRow(
                             date: day,
                             events:
@@ -548,11 +577,11 @@ struct StageDetailView: View {
                         .plain
                     )
                 }
-
+                
             } header: {
-
+                
                 if isManuallyExpanded {
-
+                    
                     dayHeader(
                         date: day,
                         isToday:
@@ -561,41 +590,36 @@ struct StageDetailView: View {
                 }
             }
         }
-
+        
         // MARK: - Today With My Events
-
+        
         else if isToday {
-
+            
             Section {
-
+                
                 let visible =
-                    showingFullToday
-                    ? events
-                    : compactTodayEvents(
-                        events,
-                        now: now
-                    )
-
-                ForEach(
-                    visible
-                ) { event in
-
-                    eventButton(
-                        event,
-                        now: now,
-                        forceDimmed:
-                            false
-                    )
-                }
-
+                showingFullToday
+                ? events
+                : compactTodayEvents(
+                    events,
+                    now: now
+                )
+                
+                eventList(
+                    visible,
+                    now: now,
+                    forceDimmed:
+                        false
+                )
+                
                 if visible.count <
                     events.count {
-
+                    
                     Button {
                         showingFullToday =
-                            true
+                        true
                     } label: {
-
+                        
                         centeredAction(
                             "Показать весь день",
                             systemImage:
@@ -605,15 +629,15 @@ struct StageDetailView: View {
                     .buttonStyle(
                         .plain
                     )
-
+                    
                 } else if
                     showingFullToday {
-
+                    
                     Button {
                         showingFullToday =
-                            false
+                        false
                     } label: {
-
+                        
                         centeredAction(
                             "Свернуть",
                             systemImage:
@@ -624,9 +648,9 @@ struct StageDetailView: View {
                         .plain
                     )
                 }
-
+                
             } header: {
-
+                
                 dayHeader(
                     date: day,
                     isToday:
@@ -634,27 +658,22 @@ struct StageDetailView: View {
                 )
             }
         }
-
+        
         // MARK: - Future Day With My Events
-
+        
         else {
-
+            
             Section {
-
-                ForEach(
-                    events
-                ) { event in
-
-                    eventButton(
-                        event,
-                        now: now,
-                        forceDimmed:
-                            false
-                    )
-                }
-
+                
+                eventList(
+                    events,
+                    now: now,
+                    forceDimmed:
+                        false
+                )
+                
             } header: {
-
+                
                 dayHeader(
                     date: day,
                     isToday:
@@ -663,18 +682,18 @@ struct StageDetailView: View {
             }
         }
     }
-
+    
     // MARK: - Day Has My Events
-
+    
     private func dayHasMyEvents(
         _ events: [ScheduleEvent]
     ) -> Bool {
-
+        
         guard stage.myRole != nil
         else {
             return true
         }
-
+        
         return events.contains {
             requiresMyRole(
                 $0
@@ -740,9 +759,9 @@ struct StageDetailView: View {
                     )
 
                     let races =
-                        events.filter {
-                            $0.isRace
-                        }.count
+                        raceCount(
+                            in: events
+                        )
 
                     if races > 0 {
 
@@ -860,12 +879,45 @@ struct StageDetailView: View {
                 }
                 .prefix(5)
 
-        // Гонки оставляем видимыми
-        // как контрольные точки.
+        // Если гонка входит в группу,
+        // оставляем видимой всю группу,
+        // а не только строку "Старт гонки".
+
+        let raceGroupIDs =
+            Set(
+                events
+                    .filter {
+                        $0.isRace
+                    }
+                    .compactMap {
+                        normalizedGroupID(
+                            $0.groupID
+                        )
+                    }
+            )
 
         let races =
-            events.filter {
-                $0.isRace
+            events.filter { event in
+
+                if event.isRace
+                    &&
+                    normalizedGroupID(
+                        event.groupID
+                    ) == nil {
+
+                    return true
+                }
+
+                guard let groupID =
+                    normalizedGroupID(
+                        event.groupID
+                    )
+                else {
+                    return false
+                }
+
+                return raceGroupIDs
+                    .contains(groupID)
             }
 
         var result:
@@ -943,13 +995,88 @@ struct StageDetailView: View {
         }
     }
 
+    // MARK: - Event List
+
+    @ViewBuilder
+    private func eventList(
+        _ events: [ScheduleEvent],
+        now: Date,
+        forceDimmed: Bool
+    ) -> some View {
+
+        ForEach(
+            events.indices,
+            id: \.self
+        ) { index in
+
+            let event =
+                events[index]
+
+            let groupID =
+                normalizedGroupID(
+                    event.groupID
+                )
+
+            let previousGroupID: String? =
+                index > events.startIndex
+                ? normalizedGroupID(
+                    events[index - 1].groupID
+                )
+                : nil
+
+            let nextGroupID: String? =
+                index < events.index(
+                    before: events.endIndex
+                )
+                ? normalizedGroupID(
+                    events[index + 1].groupID
+                )
+                : nil
+
+            let showsGroupHeader =
+                groupID != nil
+                &&
+                groupID != previousGroupID
+
+            let closesGroup =
+                groupID != nil
+                &&
+                groupID != nextGroupID
+
+            let raceGroup =
+                groupID.map {
+                    groupIsRace(
+                        groupID: $0,
+                        events: events
+                    )
+                }
+                ?? false
+
+            eventButton(
+                event,
+                now: now,
+                forceDimmed: forceDimmed,
+                groupTitle:
+                    showsGroupHeader
+                    ? groupID
+                    : nil,
+                groupIsRace:
+                    raceGroup,
+                isGroupEnd:
+                    closesGroup
+            )
+        }
+    }
     // MARK: - Event Button
 
     @ViewBuilder
     private func eventButton(
         _ event: ScheduleEvent,
         now: Date,
-        forceDimmed: Bool
+        forceDimmed: Bool,
+        groupTitle: String? = nil,
+        groupIsRace: Bool = false,
+        isGroupEnd: Bool = false
     ) -> some View {
 
         Button {
@@ -963,7 +1090,13 @@ struct StageDetailView: View {
                 event,
                 now: now,
                 forceDimmed:
-                    forceDimmed
+                    forceDimmed,
+                groupTitle:
+                    groupTitle,
+                groupIsRace:
+                    groupIsRace,
+                isGroupEnd:
+                    isGroupEnd
             )
         }
         .buttonStyle(
@@ -1113,11 +1246,14 @@ struct StageDetailView: View {
     // MARK: - Event Row
 
     @ViewBuilder
-    private func eventRow(
-        _ event: ScheduleEvent,
-        now: Date,
-        forceDimmed: Bool
-    ) -> some View {
+        private func eventRow(
+            _ event: ScheduleEvent,
+            now: Date,
+            forceDimmed: Bool,
+            groupTitle: String?,
+            groupIsRace: Bool,
+            isGroupEnd: Bool
+        ) -> some View {
 
         let personal =
             requiresMyRole(
@@ -1156,6 +1292,19 @@ struct StageDetailView: View {
                 now: now
             )
 
+            VStack(
+                alignment: .leading,
+                spacing: 6
+            ) {
+
+                if let groupTitle {
+
+                    sessionGroupHeader(
+                        title: groupTitle,
+                        isRace: groupIsRace
+                    )
+                }
+                
         HStack(
             alignment:
                 .top,
@@ -1232,7 +1381,11 @@ struct StageDetailView: View {
 
                 // Гонка
 
-                if event.isRace {
+                if event.isRace
+                    &&
+                    normalizedGroupID(
+                        event.groupID
+                    ) == nil {
 
                     Text(
                         "ГОНКА"
@@ -1479,17 +1632,144 @@ struct StageDetailView: View {
                 }
             }
         }
-        .padding(
-            .vertical,
-            foreign
-                ? 0
-                : 2
-        )
-        .opacity(
-            foreign
-                ? 0.58
-                : 1.0
-        )
+    }
+    .padding(
+        .vertical,
+        foreign
+            ? 0
+            : 2
+    )
+    .opacity(
+        foreign
+            ? 0.58
+            : 1.0
+    )
+    .padding(
+        .leading,
+        normalizedGroupID(
+            event.groupID
+        ) != nil
+            ? 9
+            : 0
+    )
+    .padding(
+        .bottom,
+        isGroupEnd
+            ? 5
+            : 0
+    )
+    .overlay(
+        alignment: .leading
+    ) {
+
+        if normalizedGroupID(
+            event.groupID
+        ) != nil {
+
+            Capsule()
+                .fill(
+                    Color.orange
+                        .opacity(0.55)
+                )
+                .frame(
+                    width: 3
+                )
+        }
+    }
+    }
+
+    // MARK: - Session Group Header
+
+    @ViewBuilder
+    private func sessionGroupHeader(
+        title: String,
+        isRace: Bool
+    ) -> some View {
+
+        HStack(
+            alignment: .center,
+            spacing: 8
+        ) {
+
+            Text(title)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundStyle(
+                    isRace
+                        ? Color.orange
+                        : Color.secondary
+                )
+
+            Spacer(
+                minLength: 8
+            )
+
+            if isRace {
+
+                Text("ГОНКА")
+                    .font(
+                        .system(
+                            size: 9,
+                            weight: .bold
+                        )
+                    )
+                    .foregroundStyle(
+                        Color.orange
+                    )
+                    .padding(
+                        .horizontal,
+                        6
+                    )
+                    .padding(
+                        .vertical,
+                        2
+                    )
+                    .background {
+
+                        Capsule()
+                            .fill(
+                                Color.orange
+                                    .opacity(0.12)
+                            )
+                    }
+            }
+        }
+    }
+
+    // MARK: - Race Count
+
+    private func raceCount(
+        in events: [ScheduleEvent]
+    ) -> Int {
+
+        var groupIDs:
+            Set<String> = []
+
+        var standaloneRaces =
+            0
+
+        for event in events
+        where event.isRace {
+
+            if let groupID =
+                normalizedGroupID(
+                    event.groupID
+                ) {
+
+                groupIDs.insert(
+                    groupID
+                )
+
+            } else {
+
+                standaloneRaces += 1
+            }
+        }
+
+        return
+            groupIDs.count
+            +
+            standaloneRaces
     }
 
     // MARK: - Current
