@@ -13,6 +13,7 @@ final class ScheduleEvent {
     var status: String
     // Тип активности
     var isRace: Bool = false
+    var groupID: String?
 
     var stage: Stage?
 
@@ -42,14 +43,16 @@ final class ScheduleEvent {
         plannedDuration: Int,
         stage: Stage? = nil,
         isRace: Bool = false,
+        groupID: String? = nil,
         remind10Minutes: Bool = true,
         remind5Minutes: Bool = true,
-        remind1Minute: Bool = true
+        remind1Minute: Bool = true,
     ) {
         self.title = title
         self.plannedStart = plannedStart
         self.plannedDuration = plannedDuration
         self.stage = stage
+        self.groupID = groupID
 
         self.actualStart = nil
         self.actualDuration = nil

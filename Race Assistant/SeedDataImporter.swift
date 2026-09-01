@@ -631,6 +631,8 @@ enum SeedDataImporter {
                         stage,
                     isRace:
                         item.isRace,
+                    groupID:
+                        item.groupID,
                     remind10Minutes:
                         item.remind10Minutes,
                     remind5Minutes:
@@ -926,6 +928,7 @@ enum SeedDataImporter {
 private struct RaceAssistantSeed: Decodable {
     let schemaVersion: Int
     let generatedFrom: String
+    
 
     let referenceData: SeedReferenceData
 
@@ -1038,6 +1041,7 @@ private struct SeedScheduleEvent:
     let title: String
     let type: String
     let isRace: Bool
+    let groupID: String?
 
     let classShortNames:
         [String]
