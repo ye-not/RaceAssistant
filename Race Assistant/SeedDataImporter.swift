@@ -587,7 +587,46 @@ enum SeedDataImporter {
                     timeString:
                         startTime
                 )
+            let plannedDuration: Int
 
+            if let endTime = item.endTime {
+
+                let plannedEnd =
+                    try combine(
+                        dateString: item.date,
+                        timeString: endTime
+                    )
+
+                let calculatedDuration =
+                    max(
+                        0,
+                        Int(
+                            plannedEnd
+                                .timeIntervalSince(plannedStart) / 60
+                        )
+                    )
+
+                plannedDuration = calculatedDuration
+
+                if calculatedDuration != item.durationMinutes {
+                    print(
+                        """
+                        ⚠️ Schedule duration mismatch
+                        Source row: \(item.sourceRow)
+                        Event: \(item.title)
+                        Date: \(item.date)
+                        Time: \(startTime)–\(endTime)
+                        XLS duration: \(item.durationMinutes) min
+                        Calculated duration: \(calculatedDuration) min
+                        Using calculated duration.
+                        """
+                    )
+                }
+
+            } else {
+
+                plannedDuration = item.durationMinutes
+            }
             // Защита от повторного импорта:
             // одна и та же строка определяется
             // названием + точным временем начала.
@@ -626,7 +665,7 @@ enum SeedDataImporter {
                     plannedStart:
                         plannedStart,
                     plannedDuration:
-                        item.durationMinutes,
+                        plannedDuration,
                     stage:
                         stage,
                     isRace:
