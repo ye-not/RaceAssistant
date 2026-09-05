@@ -20,10 +20,6 @@ struct EditScheduleEventView: View {
     @State private var selectedRoles: [Role]
     @State private var selectedRaceClasses: [RaceClass]
 
-    @State private var remind10Minutes: Bool
-    @State private var remind5Minutes: Bool
-    @State private var remind1Minute: Bool
-
     @State private var showingFinishConfirmation = false
 
     private var activeRoles: [Role] {
@@ -89,17 +85,6 @@ struct EditScheduleEventView: View {
                 .compactMap { $0.raceClass }
         )
 
-        _remind10Minutes = State(
-            initialValue: event.remind10Minutes
-        )
-
-        _remind5Minutes = State(
-            initialValue: event.remind5Minutes
-        )
-
-        _remind1Minute = State(
-            initialValue: event.remind1Minute
-        )
     }
 
     var body: some View {
@@ -213,24 +198,6 @@ struct EditScheduleEventView: View {
                     }
                 }
 
-                // MARK: - Напоминания
-
-                Section("Напоминания") {
-                    Toggle(
-                        "За 10 минут",
-                        isOn: $remind10Minutes
-                    )
-
-                    Toggle(
-                        "За 5 минут",
-                        isOn: $remind5Minutes
-                    )
-
-                    Toggle(
-                        "За 1 минуту",
-                        isOn: $remind1Minute
-                    )
-                }
 
                 // MARK: - Завершение
 
@@ -313,13 +280,43 @@ struct EditScheduleEventView: View {
     // MARK: - Duration
 
     private var durationOptions: [Int] {
-        Array(
+        let shortDurations = Array(
             stride(
                 from: 0,
-                through: 240,
+                through: 60,
                 by: 5
             )
         )
+
+        let mediumDurations = Array(
+            stride(
+                from: 90,
+                through: 240,
+                by: 30
+            )
+        )
+
+        let longDurations = [
+            360,   // 6 ч
+            480,   // 8 ч
+            720,   // 12 ч
+            1080,  // 18 ч
+            1440   // 24 ч
+        ]
+
+        var options =
+            shortDurations
+            + mediumDurations
+            + longDurations
+
+        let existingDuration =
+            event.plannedDuration
+
+        if !options.contains(existingDuration) {
+            options.append(existingDuration)
+        }
+
+        return options.sorted()
     }
 
     private func durationText(
@@ -383,10 +380,7 @@ struct EditScheduleEventView: View {
 
         event.plannedStart = plannedStart
         event.plannedDuration = plannedDuration
-
-        event.remind10Minutes = remind10Minutes
-        event.remind5Minutes = remind5Minutes
-        event.remind1Minute = remind1Minute
+        
 
         // Роли
 
@@ -428,19 +422,12 @@ struct EditScheduleEventView: View {
             try modelContext.save()
 
             Task {
-                if event.status == "finished" {
-                    NotificationManager.shared
-                        .removeNotifications(
-                            for: event
-                        )
-                } else {
-                    await NotificationManager.shared
-                        .scheduleNotifications(
-                            for: event
-                        )
-                }
-
                 if let stage = event.stage {
+                    await NotificationManager.shared
+                        .rescheduleNotifications(
+                            for: stage
+                        )
+
                     PhoneWatchConnectivityManager.shared
                         .send(
                             stage: stage

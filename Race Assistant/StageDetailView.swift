@@ -88,11 +88,19 @@ struct StageDetailView: View {
                 }
 
                 Section("Уведомления") {
-                    Picker("События", selection: notificationModeBinding) {
-                        ForEach(StageNotificationMode.allCases, id: \.self) { mode in
-                            Text(mode.title)
-                                .tag(mode)
+                    HStack {
+                        Text("События")
+
+                        Spacer()
+
+                        Picker("", selection: notificationModeBinding) {
+                            ForEach(StageNotificationMode.allCases, id: \.self) { mode in
+                                Text(mode.title)
+                                    .tag(mode)
+                            }
                         }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
                     }
 
                     VStack(alignment: .leading, spacing: 10) {
@@ -124,21 +132,23 @@ struct StageDetailView: View {
                                 stage.stageRemind1Minute.toggle()
                                 notificationSettingsChanged()
                             }
+
+                            Spacer()
                         }
                         .disabled(stage.notificationMode == .none)
                         .opacity(stage.notificationMode == .none ? 0.35 : 1.0)
-
-                        if stage.notificationMode == .myRole,
-                           stage.myRole == nil {
-                            Label(
-                                "Для уведомлений по роли сначала выбери свою роль",
-                                systemImage: "exclamationmark.circle"
-                            )
-                            .font(.caption)
-                            .foregroundStyle(.orange)
-                        }
                     }
                     .padding(.vertical, 3)
+
+                    if stage.notificationMode == .myRole,
+                       stage.myRole == nil {
+                        Label(
+                            "Сначала выбери свою роль",
+                            systemImage: "exclamationmark.circle"
+                        )
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                    }
                 }
 
                 if sortedEvents.isEmpty {
@@ -204,6 +214,7 @@ struct StageDetailView: View {
             HStack(spacing: 5) {
                 Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
                 Text(title)
+                    .fixedSize(horizontal: true, vertical: false)
             }
             .font(.subheadline)
             .fontWeight(isOn ? .semibold : .regular)
@@ -275,8 +286,7 @@ struct StageDetailView: View {
                 } label: {
                     collapsedDayRow(
                         date: day,
-                        events: events,
-                        noMyEvents: isIrrelevantDay
+                        events: events
                     )
                 }
                 .buttonStyle(.plain)
@@ -369,8 +379,7 @@ struct StageDetailView: View {
     @ViewBuilder
     private func collapsedDayRow(
         date: Date,
-        events: [ScheduleEvent],
-        noMyEvents: Bool
+        events: [ScheduleEvent]
     ) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -1174,15 +1183,23 @@ struct StageDetailView: View {
     private func raceCountText(
         _ count: Int
     ) -> String {
-        if count == 1 {
-            return "1 гонка"
+        let mod100 = count % 100
+        let mod10 = count % 10
+
+        if mod100 >= 11 && mod100 <= 14 {
+            return "\(count) гонок"
         }
 
-        if count >= 2 && count <= 4 {
+        switch mod10 {
+        case 1:
+            return "\(count) гонка"
+
+        case 2...4:
             return "\(count) гонки"
-        }
 
-        return "\(count) гонок"
+        default:
+            return "\(count) гонок"
+        }
     }
 
     // MARK: - Delete

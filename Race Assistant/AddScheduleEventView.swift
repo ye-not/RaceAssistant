@@ -20,10 +20,6 @@ struct AddScheduleEventView: View {
     @State private var selectedRoles: [Role] = []
     @State private var selectedRaceClasses: [RaceClass] = []
 
-    @State private var remind10Minutes = true
-    @State private var remind5Minutes = true
-    @State private var remind1Minute = true
-
     private var activeRoles: [Role] {
         allRoles.filter { $0.active }
     }
@@ -166,24 +162,7 @@ struct AddScheduleEventView: View {
                     }
                 }
 
-                // MARK: - Напоминания
-
-                Section("Напоминания") {
-                    Toggle(
-                        "За 10 минут",
-                        isOn: $remind10Minutes
-                    )
-
-                    Toggle(
-                        "За 5 минут",
-                        isOn: $remind5Minutes
-                    )
-
-                    Toggle(
-                        "За 1 минуту",
-                        isOn: $remind1Minute
-                    )
-                }
+    
             }
             .navigationTitle(
                 "Новое событие"
@@ -225,13 +204,33 @@ struct AddScheduleEventView: View {
     // MARK: - Duration
 
     private var durationOptions: [Int] {
-        Array(
+        let shortDurations = Array(
             stride(
                 from: 0,
-                through: 240,
+                through: 60,
                 by: 5
             )
         )
+
+        let mediumDurations = Array(
+            stride(
+                from: 90,
+                through: 240,
+                by: 30
+            )
+        )
+
+        let longDurations = [
+            360,   // 6 ч
+            480,   // 8 ч
+            720,   // 12 ч
+            1080,  // 18 ч
+            1440   // 24 ч
+        ]
+
+        return shortDurations
+            + mediumDurations
+            + longDurations
     }
 
     private func durationText(
@@ -305,13 +304,7 @@ struct AddScheduleEventView: View {
                 plannedDuration:
                     plannedDuration,
                 stage:
-                    stage,
-                remind10Minutes:
-                    remind10Minutes,
-                remind5Minutes:
-                    remind5Minutes,
-                remind1Minute:
-                    remind1Minute
+                    stage
             )
 
         modelContext.insert(event)
@@ -365,8 +358,8 @@ struct AddScheduleEventView: View {
 
             Task {
                 await NotificationManager.shared
-                    .scheduleNotifications(
-                        for: event
+                    .rescheduleNotifications(
+                        for: stage
                     )
 
                 PhoneWatchConnectivityManager.shared
