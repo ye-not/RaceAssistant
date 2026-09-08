@@ -16,7 +16,7 @@ struct EditScheduleEventView: View {
     @State private var title: String
     @State private var plannedStart: Date
     @State private var plannedDuration: Int
-
+    @State private var isRace: Bool
     @State private var selectedRoles: [Role]
     @State private var selectedRaceClasses: [RaceClass]
 
@@ -73,6 +73,10 @@ struct EditScheduleEventView: View {
 
         _plannedDuration = State(
             initialValue: event.plannedDuration
+        )
+        
+        _isRace = State(
+            initialValue: event.isRace
         )
 
         _selectedRoles = State(
@@ -133,6 +137,12 @@ struct EditScheduleEventView: View {
                             .hourAndMinute
                         ]
                     )
+                    
+                    Toggle(
+                        "Гонка",
+                        isOn: $isRace
+                    )
+                    
                 }
 
                 // MARK: - Длительность
@@ -380,7 +390,7 @@ struct EditScheduleEventView: View {
 
         event.plannedStart = plannedStart
         event.plannedDuration = plannedDuration
-        
+        event.isRace = isRace
 
         // Роли
 

@@ -16,6 +16,7 @@ struct AddScheduleEventView: View {
     @State private var title = ""
     @State private var plannedStart: Date
     @State private var plannedDuration = 30
+    @State private var isRace = false
 
     @State private var selectedRoles: [Role] = []
     @State private var selectedRaceClasses: [RaceClass] = []
@@ -86,6 +87,11 @@ struct AddScheduleEventView: View {
                             .date,
                             .hourAndMinute
                         ]
+                    )
+                    
+                    Toggle(
+                        "Гонка",
+                        isOn: $isRace
                     )
                 }
 
@@ -306,6 +312,8 @@ struct AddScheduleEventView: View {
                 stage:
                     stage
             )
+        
+        event.isRace = isRace
 
         modelContext.insert(event)
 

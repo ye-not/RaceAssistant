@@ -36,6 +36,12 @@ final class ScheduleEvent {
         inverse: \EventClass.scheduleEvent
     )
     var eventClasses: [EventClass] = []
+    
+    @Relationship(
+        deleteRule: .cascade,
+        inverse: \SafetyCarPeriod.scheduleEvent
+    )
+    var safetyCarPeriods: [SafetyCarPeriod] = []
 
     init(
         title: String,

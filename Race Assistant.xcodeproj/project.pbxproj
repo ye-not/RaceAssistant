@@ -79,7 +79,7 @@
 			);
 			target = A49661803038C15F00242699 /* Race Assistant */;
 		};
-		A49662413039C9E800242699 /* Exceptions for "Race Assistant Watch Watch App" folder in "Race Assistant" target */ = {
+		A49662413039C9E800242699 /* Exceptions for "Race Assistant Watch" folder in "Race Assistant" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				WatchScheduleData.swift,
@@ -107,12 +107,12 @@
 			path = "Race AssistantUITests";
 			sourceTree = "<group>";
 		};
-		A49662123039C81E00242699 /* Race Assistant Watch Watch App */ = {
+		A49662123039C81E00242699 /* Race Assistant Watch */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A49662413039C9E800242699 /* Exceptions for "Race Assistant Watch Watch App" folder in "Race Assistant" target */,
+				A49662413039C9E800242699 /* Exceptions for "Race Assistant Watch" folder in "Race Assistant" target */,
 			);
-			path = "Race Assistant Watch Watch App";
+			path = "Race Assistant Watch";
 			sourceTree = "<group>";
 		};
 		A49662203039C82000242699 /* Race Assistant Watch Watch AppTests */ = {
@@ -179,7 +179,7 @@
 				A49661833038C15F00242699 /* Race Assistant */,
 				A49661953038C16100242699 /* Race AssistantTests */,
 				A496619F3038C16100242699 /* Race AssistantUITests */,
-				A49662123039C81E00242699 /* Race Assistant Watch Watch App */,
+				A49662123039C81E00242699 /* Race Assistant Watch */,
 				A49662203039C82000242699 /* Race Assistant Watch Watch AppTests */,
 				A496622A3039C82000242699 /* Race Assistant Watch Watch AppUITests */,
 				A49661823038C15F00242699 /* Products */,
@@ -285,7 +285,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A49662123039C81E00242699 /* Race Assistant Watch Watch App */,
+				A49662123039C81E00242699 /* Race Assistant Watch */,
 			);
 			name = "Race Assistant Watch Watch App";
 			packageProductDependencies = (

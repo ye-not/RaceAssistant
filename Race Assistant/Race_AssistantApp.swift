@@ -23,6 +23,7 @@ struct Race_AssistantApp: App {
             RaceClass.self,
             EventRole.self,
             EventClass.self,
+            SafetyCarPeriod.self,
         ])
 
         let modelConfiguration =

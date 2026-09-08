@@ -18,6 +18,24 @@ struct StageDetailView: View {
     @State private var manuallyCollapsedDays: Set<Date> = []
 
     @State private var showingFullToday = false
+    
+    @State private var showingSafetyCarPanel = false
+
+    private var allSafetyCarPeriods: [SafetyCarPeriod] {
+        stage.scheduleEvents.flatMap { $0.safetyCarPeriods }
+    }
+
+    private var activeSafetyCarPeriod: SafetyCarPeriod? {
+        allSafetyCarPeriods.first { $0.isActive }
+    }
+
+    private var safetyCarDeploymentCount: Int {
+        allSafetyCarPeriods.count
+    }
+
+    private var totalSafetyCarLaps: Int {
+        allSafetyCarPeriods.reduce(0) { $0 + $1.lapCount }
+    }
 
     // MARK: - Roles
 
@@ -75,6 +93,66 @@ struct StageDetailView: View {
     var body: some View {
         TimelineView(.periodic(from: .now, by: 30)) { context in
             List {
+                if stage.myRole?.shortName
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .caseInsensitiveCompare("SC") == .orderedSame {
+
+                    Section {
+                        Button {
+                            showingSafetyCarPanel = true
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "car.side.fill")
+                                    .font(.title2)
+                                    .foregroundStyle(
+                                        activeSafetyCarPeriod == nil
+                                        ? Color.secondary
+                                        : Color.orange
+                                    )
+
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(
+                                        activeSafetyCarPeriod == nil
+                                        ? "Safety Car"
+                                        : "SAFETY CAR АКТИВЕН"
+                                    )
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(
+                                        activeSafetyCarPeriod == nil
+                                        ? Color.primary
+                                        : Color.orange
+                                    )
+
+                                    if let activeSafetyCarPeriod {
+                                        Text(
+                                            "Текущий выезд: \(activeSafetyCarPeriod.lapCount) кр. · Всего: \(totalSafetyCarLaps) кр."
+                                        )
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                    } else if safetyCarDeploymentCount > 0 {
+                                        Text(
+                                            "Выездов: \(safetyCarDeploymentCount) · Кругов: \(totalSafetyCarLaps)"
+                                        )
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                    } else {
+                                        Text("Статистика Safety Car")
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                    }
+                                }
+
+                                Spacer()
+
+                                Image(systemName: "chevron.right")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                
                 Section("Моя роль") {
                     Picker("Роль на этапе", selection: roleBinding) {
                         Text("Не выбрана")
@@ -187,6 +265,9 @@ struct StageDetailView: View {
         }
         .sheet(item: $eventToShift) { event in
             ShiftScheduleView(event: event)
+        }
+        .sheet(isPresented: $showingSafetyCarPanel) {
+            SafetyCarPanelView(stage: stage)
         }
     }
 
