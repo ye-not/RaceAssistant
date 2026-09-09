@@ -121,6 +121,10 @@ enum SeedDataImporter {
             modelContext: modelContext
         )
 
+        try normalizeLegacyCircuits(
+            modelContext: modelContext
+        )
+
         try importSeries(
             seed.series,
             modelContext: modelContext
@@ -262,32 +266,37 @@ enum SeedDataImporter {
 
         for item in items {
 
-            let alreadyExists =
-                existing.contains { circuit in
+            if let existingCircuit =
+                existing.first(
+                    where: {
+                        normalized(
+                            $0.name
+                        )
+                        ==
+                        normalized(
+                            item.name
+                        )
+                    }
+                ) {
 
-                    normalized(
-                        circuit.name
-                    )
-                    ==
-                    normalized(
-                        item.name
-                    )
-                }
+                existingCircuit.shortName =
+                    item.shortName
 
-            guard !alreadyExists else {
+                existingCircuit.city =
+                    item.city
+
+                existingCircuit.country =
+                    item.country
+
                 continue
             }
-
-            // Пока используем текущую модель Circuit:
-            // name / city / country.
-            //
-            // shortName и lengthMeters из JSON
-            // сохранять начнём после полевого теста.
 
             let circuit =
                 Circuit(
                     name:
                         item.name,
+                    shortName:
+                        item.shortName,
                     city:
                         item.city,
                     country:
@@ -296,6 +305,100 @@ enum SeedDataImporter {
 
             modelContext.insert(
                 circuit
+            )
+        }
+    }
+
+    // MARK: - Legacy circuit normalization
+
+    private static func normalizeLegacyCircuits(
+        modelContext: ModelContext
+    ) throws {
+
+        struct Rule {
+            let canonicalName: String
+            let city: String
+            let country: String
+            let aliases: [String]
+        }
+
+        let rules = [
+            Rule(
+                canonicalName: "KazanRing Canyon",
+                city: "Казань",
+                country: "Россия",
+                aliases: [
+                    "KazanRing"
+                ]
+            ),
+            Rule(
+                canonicalName: "NRing Circuit",
+                city: "Нижний Новгород",
+                country: "Россия",
+                aliases: [
+                    "NRing",
+                    "Nring Curcuit",
+                    "Nring Circuit"
+                ]
+            )
+        ]
+
+        var circuits = try modelContext.fetch(
+            FetchDescriptor<Circuit>()
+        )
+
+        let stages = try modelContext.fetch(
+            FetchDescriptor<Stage>()
+        )
+
+        for rule in rules {
+
+            let acceptedNames = Set(
+                ([rule.canonicalName] + rule.aliases)
+                    .map { normalized($0) }
+            )
+
+            var matches = circuits.filter { circuit in
+                acceptedNames.contains(
+                    normalized(circuit.name)
+                )
+            }
+
+            guard !matches.isEmpty else {
+                continue
+            }
+
+            let canonical =
+                matches.first(
+                    where: {
+                        normalized($0.name) ==
+                        normalized(rule.canonicalName)
+                    }
+                )
+                ?? matches[0]
+
+            canonical.name = rule.canonicalName
+            canonical.city = rule.city
+            canonical.country = rule.country
+
+            matches.removeAll { circuit in
+                circuit === canonical
+            }
+
+            for duplicate in matches {
+
+                for stage in stages {
+                    if let stageCircuit = stage.circuit,
+                       stageCircuit === duplicate {
+                        stage.circuit = canonical
+                    }
+                }
+
+                modelContext.delete(duplicate)
+            }
+
+            circuits = try modelContext.fetch(
+                FetchDescriptor<Circuit>()
             )
         }
     }
@@ -324,12 +427,9 @@ enum SeedDataImporter {
 
                 let season =
                     try findOrCreateSeason(
-                        year:
-                            seasonItem.year,
-                        championship:
-                            championship,
-                        modelContext:
-                            modelContext
+                        item: seasonItem,
+                        championship: championship,
+                        modelContext: modelContext
                     )
 
                 for stageItem in
@@ -407,35 +507,45 @@ enum SeedDataImporter {
     // MARK: Season
 
     private static func findOrCreateSeason(
-        year: Int,
+        item: SeedSeason,
         championship: Championship,
         modelContext: ModelContext
     ) throws -> Season {
 
-        if let existing =
-            championship.seasons.first(
-                where: {
-                    $0.year == year
-                }
-            ) {
+        let seasonName = item.resolvedName
+        let legacyYear = item.resolvedLegacyYear
+
+        if let existing = championship.seasons.first(
+            where: { season in
+                normalized(season.displayName) == normalized(seasonName)
+                || (legacyYear != nil && season.year == legacyYear)
+            }
+        ) {
+            // Migrate old stored seasons forward without overwriting user-entered data.
+            if existing.name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                existing.name = seasonName
+            }
+
+            if existing.declaredStartYear == nil {
+                existing.declaredStartYear = item.declaredStartYear ?? legacyYear
+            }
+
+            if existing.declaredEndYear == nil {
+                existing.declaredEndYear = item.declaredEndYear ?? item.declaredStartYear ?? legacyYear
+            }
 
             return existing
         }
 
-        let season =
-            Season(
-                year: year,
-                championship:
-                    championship
-            )
-
-        modelContext.insert(
-            season
+        let season = Season(
+            name: seasonName,
+            declaredStartYear: item.declaredStartYear ?? legacyYear,
+            declaredEndYear: item.declaredEndYear ?? item.declaredStartYear ?? legacyYear,
+            championship: championship
         )
 
-        championship.seasons.append(
-            season
-        )
+        modelContext.insert(season)
+        championship.seasons.append(season)
 
         return season
     }
@@ -533,6 +643,8 @@ enum SeedDataImporter {
             try findStage(
                 seriesName:
                     schedule.seriesName,
+                seasonName:
+                    schedule.seasonName,
                 seasonYear:
                     schedule.seasonYear,
                 stageName:
@@ -784,7 +896,8 @@ enum SeedDataImporter {
 
     private static func findStage(
         seriesName: String,
-        seasonYear: Int,
+        seasonName: String?,
+        seasonYear: Int?,
         stageName: String,
         modelContext: ModelContext
     ) throws -> Stage? {
@@ -797,39 +910,35 @@ enum SeedDataImporter {
         guard let championship =
             championships.first(
                 where: {
-                    normalized(
-                        $0.name
-                    )
-                    ==
-                    normalized(
-                        seriesName
-                    )
+                    normalized($0.name) ==
+                    normalized(seriesName)
                 }
             )
         else {
             return nil
         }
 
-        guard let season =
-            championship.seasons.first(
-                where: {
-                    $0.year ==
-                    seasonYear
-                }
-            )
-        else {
+        let season = championship.seasons.first { candidate in
+            if let seasonName,
+               normalized(candidate.displayName) == normalized(seasonName) {
+                return true
+            }
+
+            if let seasonYear, candidate.year == seasonYear {
+                return true
+            }
+
+            return false
+        }
+
+        guard let season else {
             return nil
         }
 
         return season.stages.first(
             where: {
-                normalized(
-                    $0.name
-                )
-                ==
-                normalized(
-                    stageName
-                )
+                normalized($0.name) ==
+                normalized(stageName)
             }
         )
     }
@@ -1032,13 +1141,29 @@ private struct SeedSeries:
 }
 
 
-private struct SeedSeason:
-    Decodable {
+private struct SeedSeason: Decodable {
+    let name: String?
+    let declaredStartYear: Int?
+    let declaredEndYear: Int?
+    let year: Int?
+    let stages: [SeedStage]
 
-    let year: Int
+    var resolvedName: String {
+        if let name = name?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !name.isEmpty {
+            return name
+        }
 
-    let stages:
-        [SeedStage]
+        if let year {
+            return String(year)
+        }
+
+        return "Сезон"
+    }
+
+    var resolvedLegacyYear: Int? {
+        year ?? declaredStartYear
+    }
 }
 
 
@@ -1050,18 +1175,20 @@ private struct SeedStage:
     let circuitName: String
     let startDate: String
     let endDate: String
+
+    // Резервируем поле в формате seed уже сейчас.
+    // В SwiftData начнём сохранять его после добавления
+    // streamURL в модель Stage и UI.
+    let streamURL: String?
 }
 
 
-private struct SeedScheduleImport:
-    Decodable {
-
+private struct SeedScheduleImport: Decodable {
     let seriesName: String
-    let seasonYear: Int
+    let seasonName: String?
+    let seasonYear: Int?
     let stageName: String
-
-    let events:
-        [SeedScheduleEvent]
+    let events: [SeedScheduleEvent]
 }
 
 

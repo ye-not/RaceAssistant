@@ -9,6 +9,15 @@ struct AddStageView: View {
     private var circuits: [Circuit]
 
     let season: Season
+    let onCreated: (Stage) -> Void
+
+    init(
+        season: Season,
+        onCreated: @escaping (Stage) -> Void = { _ in }
+    ) {
+        self.season = season
+        self.onCreated = onCreated
+    }
 
     @State private var name = ""
     @State private var startDate = Date()
@@ -89,6 +98,7 @@ struct AddStageView: View {
         do {
             try modelContext.save()
             dismiss()
+            onCreated(stage)
         } catch {
             print("Ошибка сохранения этапа: \(error)")
         }

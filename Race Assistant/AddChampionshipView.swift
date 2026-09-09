@@ -2,6 +2,11 @@ import SwiftUI
 import SwiftData
 
 struct AddChampionshipView: View {
+    let onCreated: (Championship) -> Void
+
+    init(onCreated: @escaping (Championship) -> Void = { _ in }) {
+        self.onCreated = onCreated
+    }
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
@@ -50,6 +55,13 @@ struct AddChampionshipView: View {
         )
 
         modelContext.insert(championship)
-        dismiss()
+
+        do {
+            try modelContext.save()
+            dismiss()
+            onCreated(championship)
+        } catch {
+            print("Ошибка сохранения чемпионата: \(error)")
+        }
     }
 }
