@@ -27,8 +27,16 @@ struct SeasonDetailView: View {
                         StageDetailView(stage: stage)
                     } label: {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(stage.name)
-                                .font(.headline)
+                            HStack(spacing: 7) {
+                                Text(stage.name)
+                                    .font(.headline)
+
+                                if stage.scheduleUpdatedAt != nil {
+                                    Text("ОБНОВЛЕНО")
+                                        .font(.caption2.weight(.semibold))
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
 
                             if let circuit = stage.circuit {
                                 Text(circuit.name)

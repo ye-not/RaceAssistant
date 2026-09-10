@@ -1247,3 +1247,222 @@ private enum SeedImportError:
         }
     }
 }
+
+// MARK: - External JSON exchange
+
+extension SeedDataImporter {
+
+    struct ExternalImportResult {
+        let stageCount: Int
+        let eventCount: Int
+    }
+
+    /// Imports an operational JSON selected by the user.
+    /// Only schedules explicitly present in `scheduleImports` are replaced.
+    /// Stage settings (role, notification mode, reminder offsets) are preserved.
+    static func importExternalJSON(
+        from url: URL,
+        modelContext: ModelContext
+    ) throws -> ExternalImportResult {
+        let access = url.startAccessingSecurityScopedResource()
+        defer {
+            if access { url.stopAccessingSecurityScopedResource() }
+        }
+
+        let data = try Data(contentsOf: url)
+        let file = try JSONDecoder().decode(ExternalScheduleFile.self, from: data)
+
+        // Optional reference data lets an operational file introduce classes
+        // such as F1/F2/F3 without touching unrelated dictionaries.
+        if let referenceData = file.referenceData {
+            try importRoles(referenceData.roles ?? [], modelContext: modelContext)
+            try importRaceClasses(referenceData.raceClasses ?? [], modelContext: modelContext)
+            try importCircuits(referenceData.circuits ?? [], modelContext: modelContext)
+        }
+
+        var importedEvents = 0
+        var affectedStages: [Stage] = []
+
+        for schedule in file.scheduleImports {
+            guard let stage = try findStage(
+                seriesName: schedule.seriesName,
+                seasonName: schedule.seasonName,
+                seasonYear: schedule.seasonYear,
+                stageName: schedule.stageName,
+                modelContext: modelContext
+            ) else {
+                throw ExternalScheduleError.stageNotFound(
+                    "\(schedule.seriesName) / \(schedule.seasonName ?? String(schedule.seasonYear ?? 0)) / \(schedule.stageName)"
+                )
+            }
+
+            // Remove pending notifications belonging to the old schedule first.
+            for event in stage.scheduleEvents {
+                NotificationManager.shared.removeNotifications(for: event)
+            }
+
+            // Cascade rules remove EventRole/EventClass/SafetyCarPeriod.
+            let oldEvents = stage.scheduleEvents
+            stage.scheduleEvents.removeAll()
+            for event in oldEvents {
+                modelContext.delete(event)
+            }
+
+            // Reuse the normal importer now that the stage is empty.
+            try importSchedule(schedule.asSeedScheduleImport, modelContext: modelContext)
+            stage.scheduleUpdatedAt = Date()
+
+            importedEvents += schedule.events.count
+            affectedStages.append(stage)
+        }
+
+        try modelContext.save()
+
+        // Refresh phone notifications and Watch data for affected stages.
+        for stage in affectedStages {
+            Task { @MainActor in
+                await NotificationManager.shared.rescheduleNotifications(for: stage)
+                PhoneWatchConnectivityManager.shared.send(stage: stage)
+            }
+        }
+
+        return ExternalImportResult(
+            stageCount: affectedStages.count,
+            eventCount: importedEvents
+        )
+    }
+
+    /// Exports the current stored schedules, not the bundled seed.
+    static func exportCurrentJSON(modelContext: ModelContext) throws -> Data {
+        let championships = try modelContext.fetch(FetchDescriptor<Championship>())
+        let roles = try modelContext.fetch(FetchDescriptor<Role>())
+        let classes = try modelContext.fetch(FetchDescriptor<RaceClass>())
+        let circuits = try modelContext.fetch(FetchDescriptor<Circuit>())
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: .gregorian)
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+        let timeFormatter = DateFormatter()
+        timeFormatter.calendar = Calendar(identifier: .gregorian)
+        timeFormatter.locale = Locale(identifier: "en_US_POSIX")
+        timeFormatter.timeZone = TimeZone.current
+        timeFormatter.dateFormat = "HH:mm:ss"
+
+        func cleanTime(_ date: Date) -> String {
+            let value = timeFormatter.string(from: date)
+            return value.hasSuffix(":00") ? String(value.dropLast(3)) : value
+        }
+
+        var scheduleImports: [[String: Any]] = []
+
+        for championship in championships.sorted(by: { $0.name < $1.name }) {
+            for season in championship.seasons.sorted(by: { $0.displayName < $1.displayName }) {
+                for stage in season.stages.sorted(by: { $0.startDate < $1.startDate }) {
+                    let events = stage.scheduleEvents.sorted(by: { $0.plannedStart < $1.plannedStart })
+                    guard !events.isEmpty else { continue }
+
+                    let eventJSON: [[String: Any]] = events.enumerated().map { index, event in
+                        var object: [String: Any] = [
+                            "sourceRow": index + 1,
+                            "date": dateFormatter.string(from: event.plannedStart),
+                            "startTime": cleanTime(event.plannedStart),
+                            "durationMinutes": event.plannedDuration,
+                            "title": event.title,
+                            "type": event.isRace ? "race" : "schedule",
+                            "isRace": event.isRace,
+                            "classShortNames": event.eventClasses.compactMap { $0.raceClass?.shortName }.sorted(),
+                            "roleShortNames": event.eventRoles.compactMap { $0.role?.shortName }.sorted(),
+                            "remind10Minutes": event.remind10Minutes,
+                            "remind5Minutes": event.remind5Minutes,
+                            "remind1Minute": event.remind1Minute
+                        ]
+
+                        if let groupID = event.groupID { object["groupID"] = groupID }
+                        else { object["groupID"] = NSNull() }
+
+                        if event.plannedDuration > 0,
+                           let end = Calendar.current.date(byAdding: .minute, value: event.plannedDuration, to: event.plannedStart) {
+                            object["endTime"] = cleanTime(end)
+                        } else {
+                            object["endTime"] = NSNull()
+                        }
+
+                        object["sourceParticipantsText"] = NSNull()
+                        object["sourceOfficialsText"] = NSNull()
+                        return object
+                    }
+
+                    scheduleImports.append([
+                        "seriesName": championship.name,
+                        "seasonName": season.displayName,
+                        "seasonYear": season.year,
+                        "stageName": stage.name,
+                        "events": eventJSON
+                    ])
+                }
+            }
+        }
+
+        let root: [String: Any] = [
+            "schemaVersion": 1,
+            "generatedFrom": "Race Assistant export",
+            "exportedAt": ISO8601DateFormatter().string(from: Date()),
+            "referenceData": [
+                "roles": roles.map { ["name": $0.name, "shortName": $0.shortName, "active": $0.active] },
+                "raceClasses": classes.map { ["name": $0.name, "shortName": $0.shortName, "active": $0.active] },
+                "circuits": circuits.map {
+                    ["name": $0.name, "shortName": $0.shortName, "city": $0.city, "country": $0.country]
+                }
+            ],
+            "scheduleImports": scheduleImports
+        ]
+
+        return try JSONSerialization.data(
+            withJSONObject: root,
+            options: [.prettyPrinted, .sortedKeys]
+        )
+    }
+}
+
+private struct ExternalScheduleFile: Decodable {
+    let referenceData: ExternalReferenceData?
+    let scheduleImports: [ExternalScheduleImport]
+}
+
+private struct ExternalReferenceData: Decodable {
+    let roles: [SeedRole]?
+    let raceClasses: [SeedRaceClass]?
+    let circuits: [SeedCircuit]?
+}
+
+private struct ExternalScheduleImport: Decodable {
+    let seriesName: String
+    let seasonName: String?
+    let seasonYear: Int?
+    let stageName: String
+    let events: [SeedScheduleEvent]
+
+    var asSeedScheduleImport: SeedScheduleImport {
+        SeedScheduleImport(
+            seriesName: seriesName,
+            seasonName: seasonName,
+            seasonYear: seasonYear,
+            stageName: stageName,
+            events: events
+        )
+    }
+}
+
+private enum ExternalScheduleError: LocalizedError {
+    case stageNotFound(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .stageNotFound(let value):
+            return "Этап не найден: \(value)"
+        }
+    }
+}

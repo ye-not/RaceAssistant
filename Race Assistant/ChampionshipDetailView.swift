@@ -151,6 +151,12 @@ struct ChampionshipDetailView: View {
                                 ? Color.secondary
                                 : Color.primary
                         )
+
+                    if stage.scheduleUpdatedAt != nil {
+                        Text("ОБНОВЛЕНО")
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 HStack(spacing: 6) {

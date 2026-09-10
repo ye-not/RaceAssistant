@@ -29,6 +29,9 @@ final class Stage {
     var season: Season?
     var circuit: Circuit?
 
+    // Последний внешний импорт расписания для этапа.
+    var scheduleUpdatedAt: Date?
+
     // Роль пользователя на конкретном этапе
     var myRole: Role?
 
@@ -79,6 +82,7 @@ final class Stage {
         self.endDate = endDate
         self.season = season
         self.circuit = circuit
+        self.scheduleUpdatedAt = nil
         self.myRole = myRole
 
         self.notificationModeRawValue =
