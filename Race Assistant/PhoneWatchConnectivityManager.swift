@@ -266,6 +266,9 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
                             }
                             .sorted(),
 
+                    isRace:
+                        event.isRace,
+
                     // Флаги теперь формируются
                     // из настроек всего этапа.
 

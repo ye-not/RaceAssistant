@@ -371,22 +371,40 @@ struct ContentView: View {
                 for: now
             )
 
-        return stages.first { stage in
+        let currentStages =
+            stages.filter { stage in
 
-            let start =
-                calendar.startOfDay(
-                    for: stage.startDate
-                )
+                let start =
+                    calendar.startOfDay(
+                        for: stage.startDate
+                    )
 
-            let end =
-                calendar.startOfDay(
-                    for: stage.endDate
-                )
+                let end =
+                    calendar.startOfDay(
+                        for: stage.endDate
+                    )
 
-            return
-                today >= start &&
-                today <= end
-        }
+                return
+                    today >= start &&
+                    today <= end
+            }
+
+        // Рабочий этап всегда важнее этапа,
+        // где роль не выбрана. Это не скрывает
+        // остальные чемпионаты из приложения,
+        // а только выбирает главный блок «Сегодня».
+        return currentStages
+            .sorted { lhs, rhs in
+                let lhsHasRole = lhs.myRole != nil
+                let rhsHasRole = rhs.myRole != nil
+
+                if lhsHasRole != rhsHasRole {
+                    return lhsHasRole && !rhsHasRole
+                }
+
+                return lhs.startDate < rhs.startDate
+            }
+            .first
     }
 
     // MARK: - Upcoming Stages
@@ -746,11 +764,9 @@ struct ContentView: View {
             // Время
 
             Text(
-                event.plannedStart
-                    .formatted(
-                        date: .omitted,
-                        time: .shortened
-                    )
+                displayTime(
+                    event.plannedStart
+                )
             )
             .font(
                 past
@@ -1073,4 +1089,26 @@ struct ContentView: View {
             )
         }
     }
+    private func displayTime(
+        _ date: Date
+    ) -> String {
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
+            )
+
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
+        )
+    }
+
 }

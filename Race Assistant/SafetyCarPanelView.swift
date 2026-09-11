@@ -102,7 +102,7 @@ struct SafetyCarPanelView: View {
                             )
 
                         ForEach(raceEvents) { event in
-                            Text(eventTitle(event))
+                            Text(eventPickerTitle(event))
                                 .tag(
                                     event as ScheduleEvent?
                                 )
@@ -135,7 +135,9 @@ struct SafetyCarPanelView: View {
                         LabeledContent(
                             "Заезд",
                             value:
-                                selectedEvent.title
+                                eventSummary(
+                                    selectedEvent
+                                )
                         )
 
                         LabeledContent(
@@ -573,17 +575,67 @@ struct SafetyCarPanelView: View {
 
     // MARK: - Helpers
 
-    private func eventTitle(
+    private func eventPickerTitle(
         _ event: ScheduleEvent
     ) -> String {
+        let summary = eventSummary(event)
 
-        let time =
-            event.plannedStart.formatted(
-                date: .omitted,
-                time: .shortened
+        if event === currentRaceEvent {
+            return "● СЕЙЧАС · \(summary)"
+        }
+
+        return summary
+    }
+
+    private func eventSummary(
+        _ event: ScheduleEvent
+    ) -> String {
+        let classes =
+            event.eventClasses
+                .compactMap {
+                    $0.raceClass
+                }
+                .map {
+                    $0.shortName.isEmpty
+                        ? $0.name
+                        : $0.shortName
+                }
+                .sorted()
+                .joined(
+                    separator: ", "
+                )
+
+        let time = displayTime(
+            event.plannedStart
+        )
+
+        if classes.isEmpty {
+            return time
+        }
+
+        return "\(classes) · \(time)"
+    }
+
+    private func displayTime(
+        _ date: Date
+    ) -> String {
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
             )
 
-        return "\(time) · \(event.title)"
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
+        )
     }
 
     private func periodSortDate(

@@ -8,6 +8,10 @@ struct WatchScheduleItem: Codable, Identifiable {
     let classes: [String]
     let roles: [String]
 
+    // Optional keeps decoding compatible with a schedule payload
+    // that was sent by the previous iPhone build.
+    let isRace: Bool?
+
     let remind10Minutes: Bool
     let remind5Minutes: Bool
     let remind1Minute: Bool

@@ -856,9 +856,8 @@ struct StageDetailView: View {
             ) {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(
-                        event.plannedStart.formatted(
-                            date: .omitted,
-                            time: .shortened
+                        displayTime(
+                            event.plannedStart
                         )
                     )
                     .font(foreign ? .subheadline : .headline)
@@ -872,9 +871,8 @@ struct StageDetailView: View {
 
                     if event.plannedDuration > 10 {
                         Text(
-                            eventEnd(event).formatted(
-                                date: .omitted,
-                                time: .shortened
+                            displayTime(
+                                eventEnd(event)
                             )
                         )
                         .font(.caption2)
@@ -1298,4 +1296,26 @@ struct StageDetailView: View {
             print("Ошибка удаления события: \(error)")
         }
     }
+    private func displayTime(
+        _ date: Date
+    ) -> String {
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
+            )
+
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
+        )
+    }
+
 }

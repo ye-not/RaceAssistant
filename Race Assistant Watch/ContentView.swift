@@ -762,12 +762,29 @@ struct ContentView: View {
             return sorted
         }
 
-        return sorted.filter {
-            event in
+        let normalizedRole =
+            schedule.myRole
+                .trimmingCharacters(
+                    in: .whitespacesAndNewlines
+                )
+                .lowercased()
 
-            event.roles.contains(
+        return sorted.filter { event in
+            if event.roles.contains(
                 schedule.myRole
-            )
+            ) {
+                return true
+            }
+
+            // Safety Car должен видеть текущую гонку,
+            // даже если у самой строки гонки в исходном
+            // расписании указан только Medical Car.
+            if normalizedRole == "sc",
+               event.isRace == true {
+                return true
+            }
+
+            return false
         }
     }
 
@@ -899,11 +916,22 @@ struct ContentView: View {
         _ date: Date
     ) -> String {
 
-        date.formatted(
-            date:
-                .omitted,
-            time:
-                .shortened
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
+            )
+
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
         )
     }
 
