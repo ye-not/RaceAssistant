@@ -1,0 +1,5065 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "26_rskg_MRW 3_timetable_19_20_09_v3.pdf; Версия 3 от 12.09.2026; время Москва UTC+3",
+  "referenceData": {
+    "roles": [
+      {
+        "name": "Техническая инспекция",
+        "shortName": "TI",
+        "active": true
+      },
+      {
+        "name": "Race Director",
+        "shortName": "RD",
+        "active": true
+      },
+      {
+        "name": "Race Control",
+        "shortName": "RC",
+        "active": true
+      },
+      {
+        "name": "Спортивные комиссары",
+        "shortName": "КСК",
+        "active": true
+      },
+      {
+        "name": "Safety car",
+        "shortName": "SC",
+        "active": true
+      },
+      {
+        "name": "Leading car",
+        "shortName": "LC",
+        "active": true
+      },
+      {
+        "name": "Medical car",
+        "shortName": "MC",
+        "active": true
+      },
+      {
+        "name": "Медицинский делегат",
+        "shortName": "MD",
+        "active": true
+      },
+      {
+        "name": "Руководитель гонки",
+        "shortName": "CoC",
+        "active": true
+      },
+      {
+        "name": "Питлейн",
+        "shortName": "Pit Lane",
+        "active": true
+      },
+      {
+        "name": "Маршалы на трассе",
+        "shortName": "Track",
+        "active": true
+      },
+      {
+        "name": "Комиссар по безопасности",
+        "shortName": "SD",
+        "active": true
+      },
+      {
+        "name": "Главный врач",
+        "shortName": "Doc",
+        "active": true
+      },
+      {
+        "name": "Судья при участниках",
+        "shortName": "CRO",
+        "active": true
+      }
+    ],
+    "raceClasses": [
+      {
+        "name": "SMP TCR Russia",
+        "shortName": "TCR",
+        "active": true
+      },
+      {
+        "name": "GT4",
+        "shortName": "GT4",
+        "active": true
+      },
+      {
+        "name": "Touring-lite",
+        "shortName": "TL",
+        "active": true
+      },
+      {
+        "name": "Super Production",
+        "shortName": "SP",
+        "active": true
+      },
+      {
+        "name": "S1600",
+        "shortName": "S1600",
+        "active": true
+      },
+      {
+        "name": "SMP F4",
+        "shortName": "F4",
+        "active": true
+      },
+      {
+        "name": "Open-Class CT",
+        "shortName": "Classic Open",
+        "active": true
+      },
+      {
+        "name": "ТурингКлассик 80",
+        "shortName": "Classic 80",
+        "active": true
+      },
+      {
+        "name": "ТурингКлассик90",
+        "shortName": "Classic 90",
+        "active": true
+      },
+      {
+        "name": "Туризм 1600",
+        "shortName": "Classic 1600",
+        "active": true
+      },
+      {
+        "name": "GT3",
+        "shortName": "GT3",
+        "active": true
+      },
+      {
+        "name": "GT4 Trophy",
+        "shortName": "GT4T",
+        "active": true
+      },
+      {
+        "name": "GTC",
+        "shortName": "GTC",
+        "active": true
+      },
+      {
+        "name": "Кубок Cayman GT4",
+        "shortName": "Cayman Cup",
+        "active": true
+      },
+      {
+        "name": "CN Pro",
+        "shortName": "CN Pro",
+        "active": true
+      },
+      {
+        "name": "GT",
+        "shortName": "GT",
+        "active": true
+      },
+      {
+        "name": "GT Light",
+        "shortName": "GT Light",
+        "active": true
+      },
+      {
+        "name": "GT Pro",
+        "shortName": "GT Pro",
+        "active": true
+      },
+      {
+        "name": "TCE",
+        "shortName": "TCE",
+        "active": true
+      },
+      {
+        "name": "Туринг",
+        "shortName": "Touring",
+        "active": true
+      },
+      {
+        "name": "Группа F",
+        "shortName": "Proto",
+        "active": true
+      },
+      {
+        "name": "HYPERCAR",
+        "shortName": "HYPERCAR",
+        "active": true
+      },
+      {
+        "name": "LMGT3",
+        "shortName": "LMGT3",
+        "active": true
+      },
+      {
+        "name": "Formula 1",
+        "shortName": "F1",
+        "active": true
+      },
+      {
+        "name": "Formula 2",
+        "shortName": "F2",
+        "active": true
+      },
+      {
+        "name": "Formula 3",
+        "shortName": "F3",
+        "active": true
+      },
+      {
+        "name": "Shortcut 527",
+        "shortName": "Shortcut 527",
+        "active": true
+      },
+      {
+        "name": "Legends EVO + 600",
+        "shortName": "Legends",
+        "active": true
+      },
+      {
+        "name": "Mitjet 2,0",
+        "shortName": "Mitjet 2.0",
+        "active": true
+      },
+      {
+        "name": "Mitjet 1300",
+        "shortName": "Mitjet 1300",
+        "active": true
+      },
+      {
+        "name": "Мазда",
+        "shortName": "Mazda",
+        "active": true
+      },
+      {
+        "name": "S1600 юниоры",
+        "shortName": "S1600 Jr",
+        "active": true
+      }
+    ],
+    "circuits": [
+      {
+        "name": "ADM Raceway",
+        "shortName": "ADM",
+        "city": "Мячково",
+        "country": "Россия",
+        "lengthMeters": 3240
+      },
+      {
+        "name": "Igora Drive",
+        "shortName": "Igora",
+        "city": "Санкт-Петербург",
+        "country": "Россия",
+        "lengthMeters": 5183
+      },
+      {
+        "name": "KazanRing Canyon",
+        "shortName": "KazanRing",
+        "city": "Казань",
+        "country": "Россия",
+        "lengthMeters": 3476
+      },
+      {
+        "name": "Moscow Raceway",
+        "shortName": "MRW",
+        "city": "Волоколамск",
+        "country": "Россия",
+        "lengthMeters": 3955
+      },
+      {
+        "name": "Smolensk Ring",
+        "shortName": "Smolensk",
+        "city": "Дорогобуж",
+        "country": "Россия",
+        "lengthMeters": 3357
+      },
+      {
+        "name": "Sochi Autodrom",
+        "shortName": "Sochi",
+        "city": "Сириус",
+        "country": "Россия",
+        "lengthMeters": 2312
+      },
+      {
+        "name": "Крепость Грозная",
+        "shortName": "Groznyi",
+        "city": "Грозный",
+        "country": "Россия",
+        "lengthMeters": 3086
+      },
+      {
+        "name": "NRing Circuit",
+        "shortName": "NRing",
+        "city": "Нижний Новгород",
+        "country": "Россия",
+        "lengthMeters": 3222
+      },
+      {
+        "name": "Autodromo Internazionale Enzo e Dino Ferrari",
+        "shortName": "Imola",
+        "city": "Имола",
+        "country": "Италия",
+        "lengthMeters": 4909
+      },
+      {
+        "name": "Circuit de Spa-Francorchamps",
+        "shortName": "Spa",
+        "city": "Спа",
+        "country": "Бельгия",
+        "lengthMeters": 7004
+      },
+      {
+        "name": "Circuit de la Sarthe",
+        "shortName": "Le Mans",
+        "city": "Ле-Ман",
+        "country": "Франция",
+        "lengthMeters": 13626
+      },
+      {
+        "name": "Autódromo José Carlos Pace",
+        "shortName": "Interlagos",
+        "city": "Сан-Паулу",
+        "country": "Бразилия",
+        "lengthMeters": 4309
+      },
+      {
+        "name": "Circuit of the Americas",
+        "shortName": "COTA",
+        "city": "Остин",
+        "country": "США",
+        "lengthMeters": 5513
+      },
+      {
+        "name": "Fuji Speedway",
+        "shortName": "Fuji",
+        "city": "Ояма",
+        "country": "Япония",
+        "lengthMeters": 4563
+      },
+      {
+        "name": "Circuit de Barcelona-Catalunya",
+        "shortName": "Barcelona",
+        "city": "Монмело",
+        "country": "Испания",
+        "lengthMeters": 4657
+      },
+      {
+        "name": "Autodromo Nazionale Monza",
+        "shortName": "Monza",
+        "city": "Монца",
+        "country": "Италия",
+        "lengthMeters": 5793
+      },
+      {
+        "name": "Albert Park Grand Prix Circuit",
+        "shortName": "Albert Park",
+        "city": "Мельбурн",
+        "country": "Австралия",
+        "lengthMeters": 5278
+      },
+      {
+        "name": "Shanghai International Circuit",
+        "shortName": "Shanghai",
+        "city": "Шанхай",
+        "country": "Китай",
+        "lengthMeters": 5451
+      },
+      {
+        "name": "Suzuka International Racing Course",
+        "shortName": "Suzuka",
+        "city": "Судзука",
+        "country": "Япония",
+        "lengthMeters": 5807
+      },
+      {
+        "name": "Miami International Autodrome",
+        "shortName": "Miami",
+        "city": "Майами-Гарденс",
+        "country": "США",
+        "lengthMeters": 5412
+      },
+      {
+        "name": "Circuit Gilles-Villeneuve",
+        "shortName": "Montreal",
+        "city": "Монреаль",
+        "country": "Канада",
+        "lengthMeters": 4361
+      },
+      {
+        "name": "Circuit de Monaco",
+        "shortName": "Monaco",
+        "city": "Монте-Карло",
+        "country": "Монако",
+        "lengthMeters": 3337
+      },
+      {
+        "name": "Red Bull Ring",
+        "shortName": "Spielberg",
+        "city": "Шпильберг",
+        "country": "Австрия",
+        "lengthMeters": 4318
+      },
+      {
+        "name": "Silverstone Circuit",
+        "shortName": "Silverstone",
+        "city": "Сильверстоун",
+        "country": "Великобритания",
+        "lengthMeters": 5891
+      },
+      {
+        "name": "Hungaroring",
+        "shortName": "Hungaroring",
+        "city": "Модьород",
+        "country": "Венгрия",
+        "lengthMeters": 4381
+      },
+      {
+        "name": "Circuit Zandvoort",
+        "shortName": "Zandvoort",
+        "city": "Зандворт",
+        "country": "Нидерланды",
+        "lengthMeters": 4259
+      },
+      {
+        "name": "Madring",
+        "shortName": "Madrid",
+        "city": "Мадрид",
+        "country": "Испания",
+        "lengthMeters": null
+      },
+      {
+        "name": "Baku City Circuit",
+        "shortName": "Baku",
+        "city": "Баку",
+        "country": "Азербайджан",
+        "lengthMeters": 6003
+      },
+      {
+        "name": "Sepang International Circuit",
+        "shortName": "Sepang",
+        "city": "Сепанг",
+        "country": "Малайзия",
+        "lengthMeters": 5543
+      },
+      {
+        "name": "Marina Bay Street Circuit",
+        "shortName": "Singapore",
+        "city": "Сингапур",
+        "country": "Сингапур",
+        "lengthMeters": 4940
+      },
+      {
+        "name": "Autódromo Hermanos Rodríguez",
+        "shortName": "Mexico City",
+        "city": "Мехико",
+        "country": "Мексика",
+        "lengthMeters": 4304
+      },
+      {
+        "name": "Las Vegas Strip Circuit",
+        "shortName": "Las Vegas",
+        "city": "Лас-Вегас",
+        "country": "США",
+        "lengthMeters": 6201
+      },
+      {
+        "name": "Lusail International Circuit",
+        "shortName": "Lusail",
+        "city": "Лусаил",
+        "country": "Катар",
+        "lengthMeters": 5419
+      },
+      {
+        "name": "Yas Marina Circuit",
+        "shortName": "Yas Marina",
+        "city": "Абу-Даби",
+        "country": "ОАЭ",
+        "lengthMeters": 5281
+      }
+    ]
+  },
+  "scheduleImports": [
+    {
+      "seriesName": "СМП РСКГ",
+      "seasonYear": 2026,
+      "stageName": "Спринт 7",
+      "events": [
+        {
+          "sourceRow": 1,
+          "date": "2026-09-18",
+          "startTime": "09:30",
+          "endTime": "14:30",
+          "durationMinutes": 300,
+          "title": "Тесты промоутера публикуется дополнительно",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 2,
+          "date": "2026-09-18",
+          "startTime": "10:00",
+          "endTime": "13:30",
+          "durationMinutes": 210,
+          "title": "Административные проверки",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300",
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 3,
+          "date": "2026-09-18",
+          "startTime": "10:00",
+          "endTime": "13:30",
+          "durationMinutes": 210,
+          "title": "Входная техническая инспекция",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300",
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 4,
+          "date": "2026-09-18",
+          "startTime": "14:00",
+          "endTime": "15:10",
+          "durationMinutes": 70,
+          "title": "Медицинский осмотр",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300",
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": "Doc",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 5,
+          "date": "2026-09-18",
+          "startTime": "14:00",
+          "endTime": "14:20",
+          "durationMinutes": 20,
+          "title": "Коллегия спортивных комиссаров",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Утверждение списков спортсменов и команд",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 6,
+          "date": "2026-09-18",
+          "startTime": "14:30",
+          "endTime": "14:40",
+          "durationMinutes": 10,
+          "title": "Регистрация спортсменов на брифинг",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Зачётная группа Спортпрототип",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 7,
+          "date": "2026-09-18",
+          "startTime": "14:40",
+          "endTime": "15:00",
+          "durationMinutes": 20,
+          "title": "Брифинг спортсменов",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Зачётная группа Спортпрототип",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 8,
+          "date": "2026-09-18",
+          "startTime": "14:50",
+          "endTime": "15:00",
+          "durationMinutes": 10,
+          "title": "Регистрация спортсменов на брифинг",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Зачётная группа Мазда, S1600 юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 9,
+          "date": "2026-09-18",
+          "startTime": "15:00",
+          "endTime": "15:20",
+          "durationMinutes": 20,
+          "title": "Брифинг спортсменов",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Зачётная группа Мазда, S1600 юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 10,
+          "date": "2026-09-18",
+          "startTime": "15:20",
+          "endTime": "15:25",
+          "durationMinutes": 5,
+          "title": "Закрытие трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 11,
+          "date": "2026-09-18",
+          "startTime": "15:25",
+          "endTime": "15:30",
+          "durationMinutes": 5,
+          "title": "Ознакомительный круг КСК",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "КСК"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 12,
+          "date": "2026-09-18",
+          "startTime": "15:30",
+          "endTime": "15:35",
+          "durationMinutes": 5,
+          "title": "Медицинская инспекция трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC",
+            "MD"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 13,
+          "date": "2026-09-18",
+          "startTime": "15:35",
+          "endTime": "15:40",
+          "durationMinutes": 5,
+          "title": "Инспекция трассы, все службы на местах",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC, SC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 14,
+          "date": "2026-09-18",
+          "startTime": "15:40",
+          "endTime": "16:00",
+          "durationMinutes": 20,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 15,
+          "date": "2026-09-18",
+          "startTime": "16:00",
+          "endTime": "16:10",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 16,
+          "date": "2026-09-18",
+          "startTime": "16:10",
+          "endTime": "16:30",
+          "durationMinutes": 20,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 17,
+          "date": "2026-09-18",
+          "startTime": "16:30",
+          "endTime": "16:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 18,
+          "date": "2026-09-18",
+          "startTime": "16:40",
+          "endTime": "17:00",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 19,
+          "date": "2026-09-18",
+          "startTime": "17:00",
+          "endTime": "17:10",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 20,
+          "date": "2026-09-18",
+          "startTime": "17:10",
+          "endTime": "17:30",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 21,
+          "date": "2026-09-18",
+          "startTime": "17:30",
+          "endTime": "17:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 22,
+          "date": "2026-09-18",
+          "startTime": "17:40",
+          "endTime": "18:00",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 2.0"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 23,
+          "date": "2026-09-18",
+          "startTime": "18:00",
+          "endTime": "18:10",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 24,
+          "date": "2026-09-18",
+          "startTime": "18:10",
+          "endTime": "18:30",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 25,
+          "date": "2026-09-18",
+          "startTime": "18:30",
+          "endTime": "18:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 26,
+          "date": "2026-09-19",
+          "startTime": "08:00",
+          "endTime": "12:30",
+          "durationMinutes": 270,
+          "title": "Медицинский осмотр",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300",
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Все зачётные группы по расписанию",
+          "sourceOfficialsText": "Doc",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 27,
+          "date": "2026-09-19",
+          "startTime": "08:45",
+          "endTime": "08:50",
+          "durationMinutes": 5,
+          "title": "Медицинская инспекция трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC",
+            "MD"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 28,
+          "date": "2026-09-19",
+          "startTime": "08:50",
+          "endTime": "09:00",
+          "durationMinutes": 10,
+          "title": "Инспекция трассы, все службы на местах",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC, SC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 29,
+          "date": "2026-09-19",
+          "startTime": "09:00",
+          "endTime": "09:20",
+          "durationMinutes": 20,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 30,
+          "date": "2026-09-19",
+          "startTime": "09:20",
+          "endTime": "09:30",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 31,
+          "date": "2026-09-19",
+          "startTime": "09:30",
+          "endTime": "09:45",
+          "durationMinutes": 15,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 32,
+          "date": "2026-09-19",
+          "startTime": "09:45",
+          "endTime": "09:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 33,
+          "date": "2026-09-19",
+          "startTime": "09:55",
+          "endTime": "10:15",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 34,
+          "date": "2026-09-19",
+          "startTime": "10:15",
+          "endTime": "10:25",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 35,
+          "date": "2026-09-19",
+          "startTime": "10:25",
+          "endTime": "10:40",
+          "durationMinutes": 15,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 36,
+          "date": "2026-09-19",
+          "startTime": "10:40",
+          "endTime": "10:50",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 37,
+          "date": "2026-09-19",
+          "startTime": "10:45",
+          "endTime": "10:50",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 38,
+          "date": "2026-09-19",
+          "startTime": "10:48",
+          "endTime": "10:48",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 39,
+          "date": "2026-09-19",
+          "startTime": "10:50",
+          "endTime": "10:55",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 40,
+          "date": "2026-09-19",
+          "startTime": "10:53",
+          "endTime": "10:53",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 41,
+          "date": "2026-09-19",
+          "startTime": "10:55",
+          "endTime": "10:55",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 42,
+          "date": "2026-09-19",
+          "startTime": "11:05",
+          "endTime": "11:05",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 43,
+          "date": "2026-09-19",
+          "startTime": "11:07",
+          "endTime": "11:07",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 44,
+          "date": "2026-09-19",
+          "startTime": "11:09",
+          "endTime": "11:09",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 45,
+          "date": "2026-09-19",
+          "startTime": "11:09:45",
+          "endTime": "11:09:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 46,
+          "date": "2026-09-19",
+          "startTime": "11:10",
+          "endTime": "11:45",
+          "durationMinutes": 35,
+          "title": "Гонка 1 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 47,
+          "date": "2026-09-19",
+          "startTime": "11:45",
+          "endTime": "12:00",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 48,
+          "date": "2026-09-19",
+          "startTime": "11:45",
+          "endTime": "11:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 49,
+          "date": "2026-09-19",
+          "startTime": "11:55",
+          "endTime": "12:00",
+          "durationMinutes": 5,
+          "title": "Leading car на линии старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 50,
+          "date": "2026-09-19",
+          "startTime": "11:58",
+          "endTime": "11:58",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 51,
+          "date": "2026-09-19",
+          "startTime": "12:00",
+          "endTime": "12:05",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 52,
+          "date": "2026-09-19",
+          "startTime": "12:03",
+          "endTime": "12:03",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 53,
+          "date": "2026-09-19",
+          "startTime": "12:05",
+          "endTime": "12:05",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 54,
+          "date": "2026-09-19",
+          "startTime": "12:05",
+          "endTime": "12:05",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 55,
+          "date": "2026-09-19",
+          "startTime": "12:07",
+          "endTime": "12:07",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 56,
+          "date": "2026-09-19",
+          "startTime": "12:09",
+          "endTime": "12:09",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 57,
+          "date": "2026-09-19",
+          "startTime": "12:09:45",
+          "endTime": "12:09:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 58,
+          "date": "2026-09-19",
+          "startTime": "12:10",
+          "endTime": "12:35",
+          "durationMinutes": 25,
+          "title": "Гонка 1 (7 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 59,
+          "date": "2026-09-19",
+          "startTime": "12:35",
+          "endTime": "12:50",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 1",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 60,
+          "date": "2026-09-19",
+          "startTime": "12:35",
+          "endTime": "12:45",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 61,
+          "date": "2026-09-19",
+          "startTime": "12:45",
+          "endTime": "12:50",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 62,
+          "date": "2026-09-19",
+          "startTime": "12:48",
+          "endTime": "12:48",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 63,
+          "date": "2026-09-19",
+          "startTime": "12:50",
+          "endTime": "12:55",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 64,
+          "date": "2026-09-19",
+          "startTime": "12:53",
+          "endTime": "12:53",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 65,
+          "date": "2026-09-19",
+          "startTime": "12:55",
+          "endTime": "12:55",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 66,
+          "date": "2026-09-19",
+          "startTime": "13:05",
+          "endTime": "13:05",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 67,
+          "date": "2026-09-19",
+          "startTime": "13:07",
+          "endTime": "13:07",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 68,
+          "date": "2026-09-19",
+          "startTime": "13:09",
+          "endTime": "13:09",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 69,
+          "date": "2026-09-19",
+          "startTime": "13:09:45",
+          "endTime": "13:09:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 70,
+          "date": "2026-09-19",
+          "startTime": "13:10",
+          "endTime": "13:45",
+          "durationMinutes": 35,
+          "title": "Гонка 1 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 71,
+          "date": "2026-09-19",
+          "startTime": "13:45",
+          "endTime": "14:00",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 72,
+          "date": "2026-09-19",
+          "startTime": "13:45",
+          "endTime": "13:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 73,
+          "date": "2026-09-19",
+          "startTime": "14:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Автомобили на пит-лейн под 45 градусов на рабочей зоне",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 74,
+          "date": "2026-09-19",
+          "startTime": "14:00",
+          "endTime": "14:40",
+          "durationMinutes": 40,
+          "title": "Прогулка зрителей по Пит-лейн",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 75,
+          "date": "2026-09-19",
+          "startTime": "14:00",
+          "endTime": "14:35",
+          "durationMinutes": 35,
+          "title": "Гоночное такси — посадка/высадка у ворот",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 76,
+          "date": "2026-09-19",
+          "startTime": "14:35",
+          "endTime": "14:35",
+          "durationMinutes": 0,
+          "title": "Закрытие доступа на Пит-лейн для зрителей",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 77,
+          "date": "2026-09-19",
+          "startTime": "14:40",
+          "endTime": "14:40",
+          "durationMinutes": 0,
+          "title": "Окончание прогулки по Пит-лейн для зрителей",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 78,
+          "date": "2026-09-19",
+          "startTime": "14:40",
+          "endTime": "14:45",
+          "durationMinutes": 5,
+          "title": "Закрытие трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 79,
+          "date": "2026-09-19",
+          "startTime": "14:40",
+          "endTime": "14:45",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 80,
+          "date": "2026-09-19",
+          "startTime": "14:43",
+          "endTime": "14:43",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 81,
+          "date": "2026-09-19",
+          "startTime": "14:45",
+          "endTime": "14:50",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 82,
+          "date": "2026-09-19",
+          "startTime": "14:48",
+          "endTime": "14:48",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 83,
+          "date": "2026-09-19",
+          "startTime": "14:50",
+          "endTime": "14:50",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 84,
+          "date": "2026-09-19",
+          "startTime": "15:00",
+          "endTime": "15:00",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 85,
+          "date": "2026-09-19",
+          "startTime": "15:02",
+          "endTime": "15:02",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 86,
+          "date": "2026-09-19",
+          "startTime": "15:04",
+          "endTime": "15:04",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 87,
+          "date": "2026-09-19",
+          "startTime": "15:04:45",
+          "endTime": "15:04:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 88,
+          "date": "2026-09-19",
+          "startTime": "15:05",
+          "endTime": "15:40",
+          "durationMinutes": 35,
+          "title": "Гонка 2 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 89,
+          "date": "2026-09-19",
+          "startTime": "15:40",
+          "endTime": "15:55",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 90,
+          "date": "2026-09-19",
+          "startTime": "15:40",
+          "endTime": "15:50",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 91,
+          "date": "2026-09-19",
+          "startTime": "15:50",
+          "endTime": "15:55",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 92,
+          "date": "2026-09-19",
+          "startTime": "15:53",
+          "endTime": "15:53",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 93,
+          "date": "2026-09-19",
+          "startTime": "15:55",
+          "endTime": "16:00",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 94,
+          "date": "2026-09-19",
+          "startTime": "15:58",
+          "endTime": "15:58",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 95,
+          "date": "2026-09-19",
+          "startTime": "16:00",
+          "endTime": "16:00",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 96,
+          "date": "2026-09-19",
+          "startTime": "16:05",
+          "endTime": "16:05",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 97,
+          "date": "2026-09-19",
+          "startTime": "16:07",
+          "endTime": "16:07",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 98,
+          "date": "2026-09-19",
+          "startTime": "16:09",
+          "endTime": "16:09",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 99,
+          "date": "2026-09-19",
+          "startTime": "16:09:45",
+          "endTime": "16:09:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 100,
+          "date": "2026-09-19",
+          "startTime": "16:10",
+          "endTime": "16:45",
+          "durationMinutes": 35,
+          "title": "Гонка 1 (13 кругов, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 101,
+          "date": "2026-09-19",
+          "startTime": "16:45",
+          "endTime": "17:00",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 1",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 102,
+          "date": "2026-09-19",
+          "startTime": "16:45",
+          "endTime": "16:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 103,
+          "date": "2026-09-19",
+          "startTime": "16:55",
+          "endTime": "17:00",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 104,
+          "date": "2026-09-19",
+          "startTime": "16:58",
+          "endTime": "16:58",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 105,
+          "date": "2026-09-19",
+          "startTime": "17:00",
+          "endTime": "17:05",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 106,
+          "date": "2026-09-19",
+          "startTime": "17:03",
+          "endTime": "17:03",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 107,
+          "date": "2026-09-19",
+          "startTime": "17:05",
+          "endTime": "17:05",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 108,
+          "date": "2026-09-19",
+          "startTime": "17:15",
+          "endTime": "17:15",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 109,
+          "date": "2026-09-19",
+          "startTime": "17:17",
+          "endTime": "17:17",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 110,
+          "date": "2026-09-19",
+          "startTime": "17:19",
+          "endTime": "17:19",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 111,
+          "date": "2026-09-19",
+          "startTime": "17:19:45",
+          "endTime": "17:19:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 112,
+          "date": "2026-09-19",
+          "startTime": "17:20",
+          "endTime": "17:55",
+          "durationMinutes": 35,
+          "title": "Гонка 2 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 113,
+          "date": "2026-09-19",
+          "startTime": "17:55",
+          "endTime": "18:10",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 114,
+          "date": "2026-09-19",
+          "startTime": "17:55",
+          "endTime": "18:05",
+          "durationMinutes": 10,
+          "title": "Открытие трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 115,
+          "date": "2026-09-20",
+          "startTime": "08:00",
+          "endTime": "12:30",
+          "durationMinutes": 270,
+          "title": "Медицинский осмотр",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends",
+            "Mitjet 2.0",
+            "Mitjet 1300",
+            "Mazda",
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Все зачётные группы по расписанию",
+          "sourceOfficialsText": "Doc",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 116,
+          "date": "2026-09-20",
+          "startTime": "08:45",
+          "endTime": "08:50",
+          "durationMinutes": 5,
+          "title": "Медицинская инспекция трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC",
+            "MD"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 117,
+          "date": "2026-09-20",
+          "startTime": "08:50",
+          "endTime": "09:00",
+          "durationMinutes": 10,
+          "title": "Инспекция трассы, все службы на местах",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC, SC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 118,
+          "date": "2026-09-20",
+          "startTime": "09:00",
+          "endTime": "09:20",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 119,
+          "date": "2026-09-20",
+          "startTime": "09:20",
+          "endTime": "09:30",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 120,
+          "date": "2026-09-20",
+          "startTime": "09:30",
+          "endTime": "09:50",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 121,
+          "date": "2026-09-20",
+          "startTime": "09:50",
+          "endTime": "10:00",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 122,
+          "date": "2026-09-20",
+          "startTime": "10:00",
+          "endTime": "10:10",
+          "durationMinutes": 10,
+          "title": "Разминка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 123,
+          "date": "2026-09-20",
+          "startTime": "10:10",
+          "endTime": "10:20",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 124,
+          "date": "2026-09-20",
+          "startTime": "10:15",
+          "endTime": "10:20",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 125,
+          "date": "2026-09-20",
+          "startTime": "10:18",
+          "endTime": "10:18",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 126,
+          "date": "2026-09-20",
+          "startTime": "10:20",
+          "endTime": "10:25",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 127,
+          "date": "2026-09-20",
+          "startTime": "10:23",
+          "endTime": "10:23",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 128,
+          "date": "2026-09-20",
+          "startTime": "10:25",
+          "endTime": "10:25",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 129,
+          "date": "2026-09-20",
+          "startTime": "10:35",
+          "endTime": "10:35",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 130,
+          "date": "2026-09-20",
+          "startTime": "10:37",
+          "endTime": "10:37",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 131,
+          "date": "2026-09-20",
+          "startTime": "10:39",
+          "endTime": "10:39",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 132,
+          "date": "2026-09-20",
+          "startTime": "10:39:45",
+          "endTime": "10:39:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 133,
+          "date": "2026-09-20",
+          "startTime": "10:40",
+          "endTime": "11:10",
+          "durationMinutes": 30,
+          "title": "Гонка 1 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 134,
+          "date": "2026-09-20",
+          "startTime": "11:10",
+          "endTime": "11:25",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 1",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 135,
+          "date": "2026-09-20",
+          "startTime": "11:10",
+          "endTime": "11:20",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 136,
+          "date": "2026-09-20",
+          "startTime": "11:20",
+          "endTime": "11:25",
+          "durationMinutes": 5,
+          "title": "Leading car на линии старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 137,
+          "date": "2026-09-20",
+          "startTime": "11:23",
+          "endTime": "11:23",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 138,
+          "date": "2026-09-20",
+          "startTime": "11:25",
+          "endTime": "11:30",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 139,
+          "date": "2026-09-20",
+          "startTime": "11:28",
+          "endTime": "11:28",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 140,
+          "date": "2026-09-20",
+          "startTime": "11:30",
+          "endTime": "11:30",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 141,
+          "date": "2026-09-20",
+          "startTime": "11:30",
+          "endTime": "11:30",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 142,
+          "date": "2026-09-20",
+          "startTime": "11:32",
+          "endTime": "11:32",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 143,
+          "date": "2026-09-20",
+          "startTime": "11:34",
+          "endTime": "11:34",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 144,
+          "date": "2026-09-20",
+          "startTime": "11:34:45",
+          "endTime": "11:34:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 145,
+          "date": "2026-09-20",
+          "startTime": "11:35",
+          "endTime": "12:00",
+          "durationMinutes": 25,
+          "title": "Гонка 2 (8 кругов, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 146,
+          "date": "2026-09-20",
+          "startTime": "12:00",
+          "endTime": "12:15",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "S1600 Jr · Гонка 2",
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600 Юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 147,
+          "date": "2026-09-20",
+          "startTime": "12:00",
+          "endTime": "12:10",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 148,
+          "date": "2026-09-20",
+          "startTime": "12:10",
+          "endTime": "12:15",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 149,
+          "date": "2026-09-20",
+          "startTime": "12:13",
+          "endTime": "12:13",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 150,
+          "date": "2026-09-20",
+          "startTime": "12:15",
+          "endTime": "12:20",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 151,
+          "date": "2026-09-20",
+          "startTime": "12:18",
+          "endTime": "12:18",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 152,
+          "date": "2026-09-20",
+          "startTime": "12:20",
+          "endTime": "12:20",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 153,
+          "date": "2026-09-20",
+          "startTime": "12:30",
+          "endTime": "12:30",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 154,
+          "date": "2026-09-20",
+          "startTime": "12:32",
+          "endTime": "12:32",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 155,
+          "date": "2026-09-20",
+          "startTime": "12:34",
+          "endTime": "12:34",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 156,
+          "date": "2026-09-20",
+          "startTime": "12:34:45",
+          "endTime": "12:34:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 157,
+          "date": "2026-09-20",
+          "startTime": "12:35",
+          "endTime": "13:05",
+          "durationMinutes": 30,
+          "title": "Гонка 1 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 158,
+          "date": "2026-09-20",
+          "startTime": "13:05",
+          "endTime": "13:20",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 1",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 159,
+          "date": "2026-09-20",
+          "startTime": "13:05",
+          "endTime": "13:15",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 160,
+          "date": "2026-09-20",
+          "startTime": "13:20",
+          "endTime": "13:30",
+          "durationMinutes": 10,
+          "title": "Разминка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 161,
+          "date": "2026-09-20",
+          "startTime": "13:30",
+          "endTime": "13:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 162,
+          "date": "2026-09-20",
+          "startTime": "13:40",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Автомобили на пит-лейн под 45 градусов на рабочей зоне",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 163,
+          "date": "2026-09-20",
+          "startTime": "13:40",
+          "endTime": "14:15",
+          "durationMinutes": 35,
+          "title": "Прогулка зрителей по Пит-лейн",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 164,
+          "date": "2026-09-20",
+          "startTime": "13:40",
+          "endTime": "14:15",
+          "durationMinutes": 35,
+          "title": "Гоночное такси — посадка/высадка у ворот",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 165,
+          "date": "2026-09-20",
+          "startTime": "14:10",
+          "endTime": "14:10",
+          "durationMinutes": 0,
+          "title": "Закрытие доступа на Пит-лейн для зрителей",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 166,
+          "date": "2026-09-20",
+          "startTime": "14:15",
+          "endTime": "14:15",
+          "durationMinutes": 0,
+          "title": "Окончание прогулки по Пит-лейн для зрителей",
+          "type": "Организация",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 167,
+          "date": "2026-09-20",
+          "startTime": "14:15",
+          "endTime": "14:20",
+          "durationMinutes": 5,
+          "title": "Закрытие трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 168,
+          "date": "2026-09-20",
+          "startTime": "14:15",
+          "endTime": "14:20",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 169,
+          "date": "2026-09-20",
+          "startTime": "14:18",
+          "endTime": "14:18",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 170,
+          "date": "2026-09-20",
+          "startTime": "14:20",
+          "endTime": "14:25",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 171,
+          "date": "2026-09-20",
+          "startTime": "14:23",
+          "endTime": "14:23",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 172,
+          "date": "2026-09-20",
+          "startTime": "14:25",
+          "endTime": "14:25",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 173,
+          "date": "2026-09-20",
+          "startTime": "14:35",
+          "endTime": "14:35",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 174,
+          "date": "2026-09-20",
+          "startTime": "14:37",
+          "endTime": "14:37",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 175,
+          "date": "2026-09-20",
+          "startTime": "14:39",
+          "endTime": "14:39",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 176,
+          "date": "2026-09-20",
+          "startTime": "14:39:45",
+          "endTime": "14:39:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 177,
+          "date": "2026-09-20",
+          "startTime": "14:40",
+          "endTime": "15:10",
+          "durationMinutes": 30,
+          "title": "Гонка 2 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 178,
+          "date": "2026-09-20",
+          "startTime": "15:10",
+          "endTime": "15:25",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Shortcut 527 + Legends · Гонка 2",
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 179,
+          "date": "2026-09-20",
+          "startTime": "15:10",
+          "endTime": "15:20",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 180,
+          "date": "2026-09-20",
+          "startTime": "15:20",
+          "endTime": "15:25",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 181,
+          "date": "2026-09-20",
+          "startTime": "15:23",
+          "endTime": "15:23",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 182,
+          "date": "2026-09-20",
+          "startTime": "15:25",
+          "endTime": "15:30",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 183,
+          "date": "2026-09-20",
+          "startTime": "15:28",
+          "endTime": "15:28",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 184,
+          "date": "2026-09-20",
+          "startTime": "15:30",
+          "endTime": "15:30",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 185,
+          "date": "2026-09-20",
+          "startTime": "15:35",
+          "endTime": "15:35",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 186,
+          "date": "2026-09-20",
+          "startTime": "15:37",
+          "endTime": "15:37",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 187,
+          "date": "2026-09-20",
+          "startTime": "15:39",
+          "endTime": "15:39",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 188,
+          "date": "2026-09-20",
+          "startTime": "15:39:45",
+          "endTime": "15:39:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 189,
+          "date": "2026-09-20",
+          "startTime": "15:40",
+          "endTime": "16:50",
+          "durationMinutes": 70,
+          "title": "Гонка 2 (60 мин + 1 круг, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 190,
+          "date": "2026-09-20",
+          "startTime": "16:50",
+          "endTime": "17:05",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Mazda · Гонка 2",
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 191,
+          "date": "2026-09-20",
+          "startTime": "16:50",
+          "endTime": "17:00",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 192,
+          "date": "2026-09-20",
+          "startTime": "17:00",
+          "endTime": "17:05",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 193,
+          "date": "2026-09-20",
+          "startTime": "17:03",
+          "endTime": "17:03",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 194,
+          "date": "2026-09-20",
+          "startTime": "17:05",
+          "endTime": "17:10",
+          "durationMinutes": 5,
+          "title": "Пит-лейн открыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 195,
+          "date": "2026-09-20",
+          "startTime": "17:08",
+          "endTime": "17:08",
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 196,
+          "date": "2026-09-20",
+          "startTime": "17:10",
+          "endTime": "17:10",
+          "durationMinutes": 0,
+          "title": "Пит-лейн закрыт",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "Pit",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 197,
+          "date": "2026-09-20",
+          "startTime": "17:20",
+          "endTime": "17:20",
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 198,
+          "date": "2026-09-20",
+          "startTime": "17:22",
+          "endTime": "17:22",
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 199,
+          "date": "2026-09-20",
+          "startTime": "17:24",
+          "endTime": "17:24",
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 200,
+          "date": "2026-09-20",
+          "startTime": "17:24:45",
+          "endTime": "17:24:45",
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 201,
+          "date": "2026-09-20",
+          "startTime": "17:25",
+          "endTime": "17:55",
+          "durationMinutes": 30,
+          "title": "Гонка 2 (13 кругов, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "MC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": "MC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 202,
+          "date": "2026-09-20",
+          "startTime": "17:55",
+          "endTime": "18:10",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": "Mitjet 2.0 + Mitjet 1300 · Гонка 2",
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 203,
+          "date": "2026-09-20",
+          "startTime": "17:55",
+          "endTime": "18:05",
+          "durationMinutes": 10,
+          "title": "Открытие трассы",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": "LC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 204,
+          "date": "2026-09-18",
+          "startTime": "13:00",
+          "endTime": "13:30",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 205,
+          "date": "2026-09-18",
+          "startTime": "13:30",
+          "endTime": "14:00",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 206,
+          "date": "2026-09-19",
+          "startTime": "08:00",
+          "endTime": "08:30",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "S1600 юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 207,
+          "date": "2026-09-19",
+          "startTime": "08:30",
+          "endTime": "09:00",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 208,
+          "date": "2026-09-19",
+          "startTime": "09:50",
+          "endTime": "10:20",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 209,
+          "date": "2026-09-19",
+          "startTime": "12:00",
+          "endTime": "12:30",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 210,
+          "date": "2026-09-20",
+          "startTime": "08:00",
+          "endTime": "08:30",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Shortcut 527",
+            "Legends"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Shortcut 527 Legends EVO + 600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 211,
+          "date": "2026-09-20",
+          "startTime": "08:30",
+          "endTime": "09:00",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mitjet 2.0",
+            "Mitjet 1300"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Спортпрототипы CN Mitjet 2,0 + Mitjet 1300",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 212,
+          "date": "2026-09-20",
+          "startTime": "09:00",
+          "endTime": "09:30",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600 Jr"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "S1600 юниоры",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 213,
+          "date": "2026-09-20",
+          "startTime": "11:35",
+          "endTime": "12:05",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка по классам",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "Mazda"
+          ],
+          "roleShortNames": [
+            "Doc"
+          ],
+          "sourceParticipantsText": "Мазда",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        }
+      ],
+      "timeZoneIdentifier": "Europe/Moscow"
+    }
+  ],
+  "sourceVersion": 3,
+  "sourceDate": "2026-09-12",
+  "timeZone": "Europe/Moscow",
+  "sourceNotes": [
+    "Световой день не включён как рабочее событие.",
+    "Для сигналов с одинаковым началом и концом длительность 0; колонка Интервал не используется как длительность.",
+    "Пятница: общий медосмотр 14:00–15:10, приложение указывает явку 13:00–14:00. Обе строки сохранены как в PDF; расхождение требует уточнения у организатора."
+  ],
+  "operationalRevision": 1,
+  "operationalNotes": [
+    "Рабочие поправки пользователя поверх официального PDF v3.",
+    "Leading car перед/на линии старта: роли LC и SC, 5 минут с окончанием в исходное время.",
+    "5 минут: добавлены SC и MC.",
+    "1 минута: для старта с хода добавлены LC и MC; старт с места не изменён.",
+    "Для всех гонок добавлена SC с сохранением MC."
+  ]
+}

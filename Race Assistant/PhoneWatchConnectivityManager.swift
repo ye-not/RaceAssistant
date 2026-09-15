@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData
 import Combine
 import WatchConnectivity
 import UserNotifications
@@ -165,11 +166,17 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
             watchNotificationsActive =
                 false
 
-            try session
-                .updateApplicationContext([
-                    "schedule": data,
-                    "syncToken": syncToken
-                ])
+            let payload: [String: Any] = [
+                "schedule": data,
+                "syncToken": syncToken,
+                "sentAt": Date().timeIntervalSince1970
+            ]
+            try session.updateApplicationContext(payload)
+            if session.isReachable {
+                session.sendMessage(payload, replyHandler: nil) { error in
+                    print("Instant schedule delivery: \(error)")
+                }
+            }
 
             print(
                 "Расписание отправлено на Watch: \(schedule.events.count) событий"
@@ -198,11 +205,30 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
         }
     }
 
+    @MainActor
+    func sendPreferredStage() {
+        let stages = (try? AppModelContainer.shared.mainContext.fetch(FetchDescriptor<Stage>())) ?? []
+        let now = Date()
+        let nonempty = stages.filter { !$0.scheduleEvents.isEmpty }
+        let upcoming = nonempty.filter { $0.endDate >= Calendar.current.startOfDay(for: now) }.sorted {
+            if ($0.myRole != nil) != ($1.myRole != nil) { return $0.myRole != nil }
+            return $0.startDate < $1.startDate
+        }
+        if let stage = SchedulePresentation.workingStage(nonempty, now: now)
+            ?? SchedulePresentation.todayStages(nonempty, now: now).first ?? upcoming.first {
+            send(stage: stage)
+        } else if let data = WCSession.default.applicationContext["schedule"] as? Data,
+                  let schedule = try? JSONDecoder().decode(WatchScheduleData.self, from: data) {
+            send(schedule: schedule)
+        }
+    }
+
     // MARK: - Send Stage
 
-    func send(
-        stage: Stage
-    ) {
+    @MainActor
+    func send(stage requestedStage: Stage) {
+        let stages = (try? AppModelContainer.shared.mainContext.fetch(FetchDescriptor<Stage>())) ?? []
+        let stage = SchedulePresentation.workingStage(stages.filter { !$0.scheduleEvents.isEmpty }, now: .now) ?? requestedStage
 
         // Передаём на Watch всё расписание этапа,
         // а не только сегодняшний день.
@@ -268,6 +294,8 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
 
                     isRace:
                         event.isRace,
+
+                    groupTitle: SchedulePresentation.groupTitle(event),
 
                     // Флаги теперь формируются
                     // из настроек всего этапа.
@@ -495,6 +523,9 @@ extension PhoneWatchConnectivityManager:
             }
         }
 
+        if activationState == .activated {
+            Task { @MainActor in self.sendPreferredStage() }
+        }
         if let error {
             print(
                 "iPhone WatchConnectivity activation error: \(error)"
@@ -513,6 +544,10 @@ extension PhoneWatchConnectivityManager:
         didReceiveMessage message:
             [String: Any]
     ) {
+        if message["requestSchedule"] as? Bool == true {
+            Task { @MainActor in self.sendPreferredStage() }
+            return
+        }
         guard let token =
             message[
                 "scheduleAcknowledged"
@@ -550,12 +585,14 @@ extension PhoneWatchConnectivityManager:
         _ session: WCSession
     ) {
         refreshStatus()
+        if session.isReachable { Task { @MainActor in self.sendPreferredStage() } }
     }
 
     func sessionWatchStateDidChange(
         _ session: WCSession
     ) {
         refreshStatus()
+        Task { @MainActor in self.sendPreferredStage() }
     }
 
     func sessionDidBecomeInactive(

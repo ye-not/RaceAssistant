@@ -116,7 +116,7 @@ struct ReferenceDataView: View {
     }
 }
 
-private struct JSONExportDocument: FileDocument {
+struct JSONExportDocument: FileDocument {
     static var readableContentTypes: [UTType] { [.json] }
 
     var data: Data

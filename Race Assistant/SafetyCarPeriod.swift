@@ -5,6 +5,8 @@ import SwiftData
 final class SafetyCarPeriod {
     var startedAt: Date?
     var endedAt: Date?
+    // nil preserves the active state of pre-0.1.2 records during migration.
+    var isRunning: Bool? = nil
     var lapCount: Int
     var notes: String
 
@@ -25,6 +27,6 @@ final class SafetyCarPeriod {
     }
 
     var isActive: Bool {
-        startedAt != nil && endedAt == nil
+        isRunning ?? (startedAt != nil && endedAt == nil)
     }
 }

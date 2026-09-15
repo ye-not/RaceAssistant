@@ -4,344 +4,91 @@ import SwiftData
 struct EditSafetyCarPeriodView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
-
     let stage: Stage
     let period: SafetyCarPeriod?
-
     @State private var selectedEvent: ScheduleEvent?
     @State private var lapCount: Int
     @State private var notes: String
-
-    @State private var hasStartTime: Bool
     @State private var startedAt: Date
-
-    @State private var hasEndTime: Bool
-    @State private var endedAt: Date
+    @State private var errorMessage: String?
 
     private var raceEvents: [ScheduleEvent] {
-        stage.scheduleEvents
-            .filter { $0.isRace }
-            .sorted {
-                $0.plannedStart
-                    < $1.plannedStart
-            }
+        stage.scheduleEvents.filter { $0.isRace }.sorted { $0.plannedStart < $1.plannedStart }
     }
 
-    init(
-        stage: Stage,
-        period: SafetyCarPeriod? = nil
-    ) {
+    init(stage: Stage, period: SafetyCarPeriod? = nil, selectedEvent: ScheduleEvent? = nil) {
         self.stage = stage
         self.period = period
+        let events = stage.scheduleEvents.filter { $0.isRace }.sorted { $0.plannedStart < $1.plannedStart }
+        let event = period?.scheduleEvent ?? selectedEvent ?? SchedulePresentation.current(events, now: .now)
+        _selectedEvent = State(initialValue: event)
+        _lapCount = State(initialValue: period?.lapCount ?? 0)
+        _notes = State(initialValue: period?.notes ?? "")
+        _startedAt = State(initialValue: period?.startedAt ?? Self.defaultStart(event))
+    }
 
-        let now = Date()
-
-        let currentRace =
-            stage.scheduleEvents
-                .filter { $0.isRace }
-                .sorted {
-                    $0.plannedStart
-                        < $1.plannedStart
-                }
-                .first { event in
-
-                    let start =
-                        event.actualStart
-                        ?? event.plannedStart
-
-                    let duration =
-                        event.actualDuration
-                        ?? event.plannedDuration
-
-                    let end =
-                        start.addingTimeInterval(
-                            TimeInterval(
-                                duration * 60
-                            )
-                        )
-
-                    return now >= start
-                        && now < end
-                }
-
-        _selectedEvent = State(
-            initialValue:
-                period?.scheduleEvent
-                ?? currentRace
-        )
-
-        _lapCount = State(
-            initialValue:
-                period?.lapCount
-                ?? 0
-        )
-
-        _notes = State(
-            initialValue:
-                period?.notes
-                ?? ""
-        )
-
-        _startedAt = State(
-            initialValue:
-                period?.startedAt
-                ?? now
-        )
-
-        _hasStartTime = State(
-            initialValue:
-                period?.startedAt
-                != nil
-        )
-
-        _endedAt = State(
-            initialValue:
-                period?.endedAt
-                ?? now
-        )
-
-        _hasEndTime = State(
-            initialValue:
-                period?.endedAt
-                != nil
-        )
+    private static func defaultStart(_ event: ScheduleEvent?) -> Date {
+        guard let event else { return .now }
+        let start = event.actualStart ?? event.plannedStart
+        let end = start.addingTimeInterval(TimeInterval(event.actualDuration ?? event.plannedDuration) * 60)
+        return event.status == "finished" || end <= .now ? start : .now
     }
 
     var body: some View {
         NavigationStack {
             Form {
-
-                // MARK: - Race
-
-                Section("Заезд") {
-                    Picker(
-                        "Заезд",
-                        selection:
-                            $selectedEvent
-                    ) {
-                        Text(
-                            "Выберите заезд"
-                        )
-                        .tag(
-                            nil as ScheduleEvent?
-                        )
-
-                        ForEach(
-                            raceEvents
-                        ) { event in
-                            Text(
-                                eventTitle(event)
-                            )
-                            .tag(
-                                event
-                                    as ScheduleEvent?
-                            )
+                Section("Гонка") {
+                    Picker("Гонка", selection: $selectedEvent) {
+                        Text("Выберите гонку").tag(nil as ScheduleEvent?)
+                        ForEach(raceEvents) { event in
+                            Text(SchedulePresentation.raceLabel(event)).tag(event as ScheduleEvent?)
                         }
                     }
-
-                    if let selectedEvent {
-                        let classes =
-                            selectedEvent
-                                .eventClasses
-                                .compactMap {
-                                    $0
-                                        .raceClass?
-                                        .name
-                                }
-                                .joined(
-                                    separator:
-                                        " · "
-                                )
-
-                        if !classes.isEmpty {
-                            Text(classes)
-                                .font(.caption)
-                                .foregroundStyle(
-                                    .secondary
-                                )
-                        }
+                    .onChange(of: selectedEvent?.persistentModelID) { _, _ in
+                        // Selecting a past race pre-fills its start, but it remains editable.
+                        startedAt = Self.defaultStart(selectedEvent)
                     }
                 }
-
-                // MARK: - Laps
-
                 Section("Круги") {
-                    Stepper(
-                        value:
-                            $lapCount,
-                        in: 0...999
-                    ) {
-                        HStack {
-                            Text(
-                                "Кругов под SC"
-                            )
-
-                            Spacer()
-
-                            Text(
-                                "\(lapCount)"
-                            )
-                            .fontWeight(
-                                .semibold
-                            )
-                        }
-                    }
+                    Stepper("Кругов под SC: \(lapCount)", value: $lapCount, in: 0...999)
                 }
-
-                // MARK: - Time
-
-                Section("Время") {
-
-                    Toggle(
-                        "Указать начало",
-                        isOn:
-                            $hasStartTime
-                    )
-
-                    if hasStartTime {
-                        DatePicker(
-                            "Начало",
-                            selection:
-                                $startedAt,
-                            displayedComponents: [
-                                .date,
-                                .hourAndMinute
-                            ]
-                        )
-                    }
-
-                    Toggle(
-                        "Указать окончание",
-                        isOn:
-                            $hasEndTime
-                    )
-
-                    if hasEndTime {
-                        DatePicker(
-                            "Окончание",
-                            selection:
-                                $endedAt,
-                            displayedComponents: [
-                                .date,
-                                .hourAndMinute
-                            ]
-                        )
-                    }
+                Section("Начало SC") {
+                    DatePicker("Начало", selection: $startedAt, displayedComponents: [.date, .hourAndMinute])
                 }
-
-                // MARK: - Notes
-
                 Section("Причина / заметки") {
-                    TextEditor(
-                        text: $notes
-                    )
-                    .frame(
-                        minHeight: 120
-                    )
+                    TextEditor(text: $notes).frame(minHeight: 100)
                 }
             }
-            .navigationTitle(
-                period == nil
-                    ? "Новая нейтрализация"
-                    : "Редактирование SC"
-            )
-            .navigationBarTitleDisplayMode(
-                .inline
-            )
+            .navigationTitle(period == nil ? "Добавить выезд SC" : "Редактирование SC")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-
-                ToolbarItem(
-                    placement:
-                        .cancellationAction
-                ) {
-                    Button("Отмена") {
-                        dismiss()
-                    }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Отмена") { dismiss() }
                 }
-
-                ToolbarItem(
-                    placement:
-                        .confirmationAction
-                ) {
-                    Button("Сохранить") {
-                        save()
-                    }
-                    .disabled(
-                        selectedEvent == nil
-                    )
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Сохранить") { save() }.disabled(selectedEvent == nil)
                 }
             }
+            .alert("Не удалось сохранить", isPresented: Binding(
+                get: { errorMessage != nil }, set: { if !$0 { errorMessage = nil } }
+            )) {
+                Button("OK") { errorMessage = nil }
+            } message: { Text(errorMessage ?? "") }
         }
     }
-
-    // MARK: - Helpers
-
-    private func eventTitle(
-        _ event: ScheduleEvent
-    ) -> String {
-
-        let time =
-            event.plannedStart
-                .formatted(
-                    date: .omitted,
-                    time: .shortened
-                )
-
-        return
-            "\(time) · \(event.title)"
-    }
-
-    // MARK: - Save
 
     private func save() {
-        guard let selectedEvent else {
-            return
-        }
-
-        let targetPeriod:
-            SafetyCarPeriod
-
-        if let period {
-            targetPeriod =
-                period
-        } else {
-            targetPeriod =
-                SafetyCarPeriod()
-
-            modelContext.insert(
-                targetPeriod
-            )
-        }
-
-        targetPeriod.scheduleEvent =
-            selectedEvent
-
-        targetPeriod.lapCount =
-            lapCount
-
-        targetPeriod.notes =
-            notes.trimmingCharacters(
-                in:
-                    .whitespacesAndNewlines
-            )
-
-        targetPeriod.startedAt =
-            hasStartTime
-                ? startedAt
-                : nil
-
-        targetPeriod.endedAt =
-            hasEndTime
-                ? endedAt
-                : nil
-
-        do {
-            try modelContext.save()
-            dismiss()
-        } catch {
-            print(
-                "Ошибка сохранения SC: \(error)"
-            )
-        }
+        guard let selectedEvent else { return }
+        let target = period ?? SafetyCarPeriod()
+        if period == nil { modelContext.insert(target) }
+        target.scheduleEvent = selectedEvent
+        target.lapCount = lapCount
+        target.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+        target.startedAt = startedAt
+        // Manual entry is a completed record, never a live deployment.
+        // Historical endedAt remains untouched for compatibility with the existing store.
+        if period == nil { target.isRunning = false }
+        do { try modelContext.save(); dismiss() }
+        catch { modelContext.rollback(); errorMessage = error.localizedDescription }
     }
 }

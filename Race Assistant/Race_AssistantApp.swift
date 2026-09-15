@@ -28,6 +28,9 @@ struct Race_AssistantApp: App {
                     SeedDataImporter.importIfNeeded(
                         modelContext: context
                     )
+                    SeedDataImporter.fillEmptyBundledSchedules(modelContext: context)
+                    ChampionshipClassSetup.configure(context)
+                    PhoneWatchConnectivityManager.shared.sendPreferredStage()
                 }
         }
         .modelContainer(sharedModelContainer)

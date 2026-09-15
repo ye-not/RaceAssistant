@@ -5,469 +5,261 @@ import SwiftData
 @MainActor
 @objc(CarPlaySceneDelegate)
 final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
-
     private weak var interfaceController: CPInterfaceController?
-    private var rootTemplate: CPListTemplate?
-    private var refreshTimer: Timer?
+    private var overview: CPListTemplate?
+    private var upcoming: CPListTemplate?
+    private var scTemplate: CPListTemplate?
+    private var timer: Timer?
+    private var overviewItems: [CPListItem] = []
+    private var futureItems: [CPListItem] = []
+    private var futureSignature: [UUID] = []
+    private var scItems: [String: CPListItem] = [:]
+    private var scSignature = ""
+    private var stageSignature = ""
+    private var transitionPending = false
 
-    func templateApplicationScene(
-        _ templateApplicationScene: CPTemplateApplicationScene,
-        didConnect interfaceController: CPInterfaceController
-    ) {
-        self.interfaceController = interfaceController
+    private var context: ModelContext { AppModelContainer.shared.mainContext }
+    private var workingStage: Stage? {
+        let stages = (try? context.fetch(FetchDescriptor<Stage>())) ?? []
+        let now = Date()
 
-        let template = makeRootTemplate()
-        rootTemplate = template
+        if let current = SchedulePresentation.workingStage(stages, now: now) {
+            return current
+        }
 
-        interfaceController.setRootTemplate(
-            template,
-            animated: true,
-            completion: nil
-        )
+        let today = Calendar.current.startOfDay(for: now)
 
-        startRefreshTimer()
+        return stages
+            .filter { stage in
+                stage.myRole != nil &&
+                !stage.scheduleEvents.isEmpty &&
+                Calendar.current.startOfDay(for: stage.startDate) > today
+            }
+            .sorted {
+                if $0.startDate != $1.startDate {
+                    return $0.startDate < $1.startDate
+                }
+
+                return $0.name < $1.name
+            }
+            .first
     }
 
-    func templateApplicationScene(
-        _ templateApplicationScene: CPTemplateApplicationScene,
-        didDisconnectInterfaceController interfaceController: CPInterfaceController
-    ) {
-        refreshTimer?.invalidate()
-        refreshTimer = nil
-        rootTemplate = nil
+    func templateApplicationScene(_ scene: CPTemplateApplicationScene,
+                                  didConnect interfaceController: CPInterfaceController) {
+        self.interfaceController = interfaceController
+        let template = CPListTemplate(title: "Race Assistant", sections: [])
+        template.trailingNavigationBarButtons = [
+            CPBarButton(title: "Далее") { [weak self] _ in self?.openUpcoming() },
+            CPBarButton(title: "SC") { [weak self] _ in self?.openSC() }
+        ]
+        overview = template
+        refresh()
+        interfaceController.setRootTemplate(template, animated: false, completion: nil)
+        timer?.invalidate()
+        let timer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
+            Task { @MainActor in self?.refresh() }
+        }
+        timer.tolerance = 0.05
+        RunLoop.main.add(timer, forMode: .common)
+        self.timer = timer
+    }
+
+    func templateApplicationScene(_ scene: CPTemplateApplicationScene,
+                                  didDisconnectInterfaceController interfaceController: CPInterfaceController) {
+        timer?.invalidate(); timer = nil
+        overview = nil; upcoming = nil; scTemplate = nil
+        overviewItems = []; futureItems = []; futureSignature = []
+        scItems = [:]; scSignature = ""; stageSignature = ""
+        transitionPending = false
         self.interfaceController = nil
     }
 
-    // MARK: - Auto refresh
-
-    private func startRefreshTimer() {
-        refreshTimer?.invalidate()
-
-        refreshTimer = Timer.scheduledTimer(
-            withTimeInterval: 10,
-            repeats: true
-        ) { [weak self] _ in
-            Task { @MainActor in
-                self?.refreshContent()
-            }
-        }
+    private func update(_ item: CPListItem, text: String, detail: String) {
+        if item.text != text { item.setText(text) }
+        if item.detailText != detail { item.setDetailText(detail) }
     }
 
-    private func refreshContent() {
-        guard let rootTemplate else { return }
-
-        let snapshot = makeRootTemplate()
-        rootTemplate.updateSections(snapshot.sections)
-    }
-
-    // MARK: - Root
-
-    private func makeRootTemplate() -> CPListTemplate {
+    private func refresh() {
+        guard let overview else { return }
         let now = Date()
-
-        guard let stage = workingStage(now: now),
-              let role = stage.myRole else {
-
-            let item = CPListItem(
-                text: "Рабочий этап не выбран",
-                detailText: "Выберите роль на текущем этапе в Race Assistant"
-            )
-
-            return CPListTemplate(
-                title: "Race Assistant",
-                sections: [
-                    CPListSection(
-                        items: [item],
-                        header: "Сейчас",
-                        sectionIndexTitle: nil
-                    )
-                ]
-            )
+        let stage = workingStage
+        let heading = stage.map { stage in
+            [stage.myRole.map(SchedulePresentation.roleName) ?? "", stage.name,
+             stage.circuit.map { $0.shortName.isEmpty ? $0.name : $0.shortName } ?? ""]
+                .filter { !$0.isEmpty }.joined(separator: " · ")
+        } ?? "Рабочий этап не выбран"
+        if overviewItems.isEmpty || heading != stageSignature {
+            overviewItems = [CPListItem(text: "Сейчас", detailText: ""),
+                             CPListItem(text: "Следующее", detailText: "")]
+            for item in overviewItems { item.handler = { _, completion in completion() } }
+            overview.updateSections([CPListSection(items: overviewItems, header: heading, sectionIndexTitle: nil)])
+            stageSignature = heading
         }
-
-        let events = relevantEvents(
-            stage: stage,
-            role: role
-        )
-
-        let current = currentEvent(
-            events,
-            now: now
-        )
-
-        let future = events.filter {
-            $0.plannedStart > now
-        }
-
-        let next = future.first
-        let later = Array(future.dropFirst().prefix(8))
-
-        var sections: [CPListSection] = []
-
+        let events = stage.map(SchedulePresentation.events) ?? []
+        let current = SchedulePresentation.current(events, now: now)
+        let future = events.filter { $0.plannedStart > now }
         if let current {
-            sections.append(
-                CPListSection(
-                    items: [
-                        CPListItem(
-                            text: current.title,
-                            detailText: currentEventDetail(
-                                current,
-                                now: now
-                            )
-                        )
-                    ],
-                    header: "Сейчас · \(roleText(role))",
-                    sectionIndexTitle: nil
-                )
-            )
+            let progress = Int(min(1, max(0, now.timeIntervalSince(current.plannedStart) /
+                max(1, Double(current.plannedDuration) * 60))) * 100)
+            update(overviewItems[0], text: "Сейчас · \(label(current))", detail:
+                "\(current.title) · \(RaceClock.duration(minutes: current.plannedDuration)) · \(progress)% · осталось \(RaceClock.countdown(until: SchedulePresentation.end(current), now: now))")
+        } else if let next = future.first {
+            update(overviewItems[0], text: "Следующее · \(label(next))", detail:
+                "\(next.title) · через \(RaceClock.countdown(until: next.plannedStart, now: now))")
         } else {
-            sections.append(
-                CPListSection(
-                    items: [
-                        CPListItem(
-                            text: "Нет активного события",
-                            detailText: next == nil
-                                ? "На сегодня больше событий нет"
-                                : "Ближайшее событие ниже"
-                        )
-                    ],
-                    header: "Сейчас · \(roleText(role))",
-                    sectionIndexTitle: nil
-                )
-            )
+            update(overviewItems[0], text: stage == nil ? "Выберите рабочую роль на iPhone" : "Работа на этапе завершена",
+                   detail: stage == nil ? "CarPlay показывает только этап, где вы официальное лицо" : "Предстоящих событий для роли нет")
         }
-
-        if let next {
-            sections.append(
-                CPListSection(
-                    items: [
-                        CPListItem(
-                            text: next.title,
-                            detailText: nextEventDetail(
-                                next,
-                                now: now
-                            )
-                        )
-                    ],
-                    header: "Следующее",
-                    sectionIndexTitle: nil
-                )
-            )
+        let following = current == nil ? future.dropFirst().first : future.first
+        if let following {
+            update(overviewItems[1], text: "\(current == nil ? "Затем" : "Следующее") · \(label(following))", detail:
+                "\(following.title) · \(time(following, now: now)) · через \(RaceClock.countdown(until: following.plannedStart, now: now)) · \(RaceClock.duration(minutes: following.plannedDuration))")
+        } else {
+            update(overviewItems[1], text: "Далее событий нет", detail: "")
         }
-
-        if !later.isEmpty {
-            let laterItems = later.map { event in
-                CPListItem(
-                    text: event.title,
-                    detailText: upcomingEventDetail(event)
-                )
-            }
-
-            sections.append(
-                CPListSection(
-                    items: laterItems,
-                    header: "Далее",
-                    sectionIndexTitle: nil
-                )
-            )
-        }
-
-        let template = CPListTemplate(
-            title: title(for: stage),
-            sections: sections
-        )
-
-        template.emptyViewTitleVariants = ["Нет ближайших событий"]
-        template.emptyViewSubtitleVariants = [
-            "Расписание появится после синхронизации"
-        ]
-
-        return template
-    }
-
-    // MARK: - Working stage
-
-    private func workingStage(now: Date) -> Stage? {
-        let context = AppModelContainer.shared.mainContext
-        let stages = (try? context.fetch(FetchDescriptor<Stage>())) ?? []
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: now)
-
-        let candidates = stages.filter { stage in
-            guard stage.myRole != nil else { return false }
-
-            let start = calendar.startOfDay(for: stage.startDate)
-            let end = calendar.startOfDay(for: stage.endDate)
-
-            return today >= start && today <= end
-        }
-
-        return candidates.sorted { lhs, rhs in
-            let lhsDistance = nextRelevantDistance(stage: lhs, now: now)
-            let rhsDistance = nextRelevantDistance(stage: rhs, now: now)
-
-            if lhsDistance != rhsDistance {
-                return lhsDistance < rhsDistance
-            }
-
-            return lhs.startDate < rhs.startDate
-        }.first
-    }
-
-    private func nextRelevantDistance(
-        stage: Stage,
-        now: Date
-    ) -> TimeInterval {
-        guard let role = stage.myRole else {
-            return .greatestFiniteMagnitude
-        }
-
-        let events = relevantEvents(stage: stage, role: role)
-
-        if currentEvent(events, now: now) != nil {
-            return 0
-        }
-
-        guard let next = events.first(where: { $0.plannedStart > now }) else {
-            return .greatestFiniteMagnitude
-        }
-
-        return next.plannedStart.timeIntervalSince(now)
-    }
-
-    // MARK: - Role filtering
-
-    private func relevantEvents(
-        stage: Stage,
-        role: Role
-    ) -> [ScheduleEvent] {
-        let roleName = roleText(role)
-        let isSafetyCar = normalized(roleName) == "sc"
-
-        return stage.scheduleEvents
-            .filter { event in
-                if event.status == "finished" {
-                    return false
+        if let upcoming {
+            let visible = Array(future.prefix(CPListTemplate.maximumItemCount))
+            let signature = visible.map(\.notificationID)
+            if signature != futureSignature || futureItems.isEmpty {
+                futureItems = visible.map { event in
+                    let item = CPListItem(text: label(event), detailText: "")
+                    item.handler = { _, completion in completion() }
+                    return item
                 }
+                let items = futureItems.isEmpty ? [CPListItem(text: "Предстоящих событий нет", detailText: nil)] : futureItems
+                upcoming.updateSections([CPListSection(items: items, header: nil, sectionIndexTitle: nil)])
+                futureSignature = signature
+            }
+            for (item, event) in zip(futureItems, visible) {
+                update(item, text: label(event), detail: "\(time(event, now: now)) · \(event.title) · \(RaceClock.duration(minutes: event.plannedDuration))")
+            }
+        }
+        refreshSC(stage: stage)
+    }
 
-                let matchesRole = event.eventRoles.contains { eventRole in
-                    guard let eventRoleValue = eventRole.role else {
-                        return false
-                    }
+    private func label(_ event: ScheduleEvent) -> String {
+        let group = SchedulePresentation.groupTitle(event) ?? SchedulePresentation.classes(event)
+        return group.isEmpty ? event.title : group
+    }
 
-                    return normalized(roleText(eventRoleValue)) == normalized(roleName)
+    private func time(_ event: ScheduleEvent, now: Date) -> String {
+        let value = RaceClock.time(event.plannedStart)
+        return Calendar.current.isDate(event.plannedStart, inSameDayAs: now)
+            ? value : "\(event.plannedStart.formatted(.dateTime.day().month())) · \(value)"
+    }
+
+    private func push(_ template: CPTemplate) {
+        guard let interfaceController, !transitionPending, interfaceController.topTemplate !== template else { return }
+        transitionPending = true
+        interfaceController.pushTemplate(template, animated: true) { [weak self] _, _ in
+            Task { @MainActor in self?.transitionPending = false }
+        }
+    }
+
+    private func openUpcoming() {
+        if upcoming == nil { upcoming = CPListTemplate(title: "Далее", sections: []) }
+        refresh()
+        if let upcoming { push(upcoming) }
+    }
+
+    private func openSC() {
+        if scTemplate == nil { scTemplate = CPListTemplate(title: "Safety Car", sections: []) }
+        refresh()
+        if let scTemplate { push(scTemplate) }
+    }
+
+    private func periods(_ stage: Stage) -> [SafetyCarPeriod] {
+        ((try? context.fetch(FetchDescriptor<SafetyCarPeriod>())) ?? [])
+            .filter { $0.scheduleEvent?.stage === stage }
+    }
+
+    private func refreshSC(stage: Stage?) {
+        guard let scTemplate else { return }
+        guard let stage, SchedulePresentation.isSafetyCar(stage.myRole) else {
+            if scSignature != "unavailable" {
+                scTemplate.updateSections([CPListSection(items: [CPListItem(text: "Выберите роль SC на рабочем этапе", detailText: "Настройте роль на iPhone")], header: nil, sectionIndexTitle: nil)])
+                scSignature = "unavailable"; scItems = [:]
+            }
+            return
+        }
+        let active = periods(stage).first { $0.isActive }
+        let race = active?.scheduleEvent ?? SchedulePresentation.current(stage.scheduleEvents.filter { $0.isRace }, now: .now)
+        let signature = "\(stage.persistentModelID)|\(race?.notificationID.uuidString ?? "none")|\(active.map { String(describing: $0.persistentModelID) } ?? "idle")"
+        if signature != scSignature {
+            scItems = [:]
+            var items: [CPListItem] = []
+            func add(_ key: String, _ title: String, action: (() -> Void)? = nil) {
+                let item = CPListItem(text: title, detailText: "")
+                item.handler = { _, completion in
+                    completion()
+                    action?()
                 }
-
-                // Во время работы Safety Car сама гонка тоже является
-                // рабочим текущим событием, даже если в расписании
-                // у строки гонки указан только Medical Car.
-                if isSafetyCar && event.isRace {
-                    return true
+                scItems[key] = item; items.append(item)
+            }
+            add("state", active == nil ? "SC не активен" : "SC АКТИВЕН")
+            if let race {
+                // Capture stable identifiers, then resolve current models on every tap.
+                let id = race.notificationID
+                let periodID = active?.persistentModelID
+                if active == nil {
+                    add("start", "НАЧАТЬ SC") { [weak self] in self?.performSC("start", raceID: id) }
+                } else {
+                    add("plus", "+ КРУГ") { [weak self] in self?.performSC("plus", raceID: id, periodID: periodID) }
+                    add("minus", "− КРУГ") { [weak self] in self?.performSC("minus", raceID: id, periodID: periodID) }
+                    add("finish", "ЗАВЕРШИТЬ SC") { [weak self] in self?.performSC("finish", raceID: id, periodID: periodID) }
+                    add("cancel", "ОТМЕНИТЬ ВЫЕЗД") { [weak self] in self?.confirmCancel(raceID: id, periodID: periodID) }
                 }
-
-                return matchesRole
             }
-            .sorted {
-                if $0.plannedStart != $1.plannedStart {
-                    return $0.plannedStart < $1.plannedStart
-                }
-
-                return $0.title < $1.title
-            }
-    }
-
-    private func normalized(_ value: String) -> String {
-        value
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .lowercased()
-    }
-
-    private func roleText(_ role: Role) -> String {
-        role.shortName.isEmpty ? role.name : role.shortName
-    }
-
-    // MARK: - Event state
-
-    private func eventEnd(_ event: ScheduleEvent) -> Date {
-        event.plannedStart.addingTimeInterval(
-            TimeInterval(event.plannedDuration * 60)
-        )
-    }
-
-    private func currentEvent(
-        _ events: [ScheduleEvent],
-        now: Date
-    ) -> ScheduleEvent? {
-        events.first { event in
-            guard event.plannedDuration > 0 else { return false }
-
-            return event.plannedStart <= now && now < eventEnd(event)
+            scTemplate.updateSections([CPListSection(items: items, header: nil, sectionIndexTitle: nil)])
+            scSignature = signature
+        }
+        if let item = scItems["state"] {
+            update(item, text: active.map { "SC АКТИВЕН · \($0.lapCount) кругов" } ?? "SC не активен",
+                   detail: race.map { SchedulePresentation.raceLabel($0) } ?? "Сейчас нет текущей гонки. Историю можно внести на iPhone.")
         }
     }
 
-    // MARK: - Text
+    private func confirmCancel(raceID: UUID, periodID: PersistentIdentifier?) {
+        let alert = CPAlertTemplate(titleVariants: ["Удалить текущий выезд SC?"], actions: [
+            CPAlertAction(title: "Удалить выезд", style: .destructive) { [weak self] _ in
+                self?.interfaceController?.dismissTemplate(animated: true, completion: nil)
+                self?.performSC("cancel", raceID: raceID, periodID: periodID)
+            },
+            CPAlertAction(title: "Вернуться", style: .cancel) { [weak self] _ in
+                self?.interfaceController?.dismissTemplate(animated: true, completion: nil)
+            }
+        ])
+        interfaceController?.presentTemplate(alert, animated: true, completion: nil)
+    }
 
-    private func title(for stage: Stage) -> String {
-        if let circuit = stage.circuit {
-            let circuitName = circuit.shortName.isEmpty
-                ? circuit.name
-                : circuit.shortName
-
-            if !circuitName.isEmpty {
-                return "\(stage.name) · \(circuitName)"
+    private func performSC(_ action: String, raceID: UUID, periodID: PersistentIdentifier? = nil) {
+        guard let stage = workingStage, SchedulePresentation.isSafetyCar(stage.myRole),
+              let race = stage.scheduleEvents.first(where: { $0.notificationID == raceID }) else { refresh(); return }
+        let active = periods(stage).first { $0.isActive }
+        if action == "start" {
+            guard active == nil, SchedulePresentation.current(stage.scheduleEvents.filter { $0.isRace }, now: .now) === race else { refresh(); return }
+            let period = SafetyCarPeriod(startedAt: .now, scheduleEvent: race)
+            period.isRunning = true
+            context.insert(period)
+        } else {
+            guard let active, active.scheduleEvent === race, active.persistentModelID == periodID else { refresh(); return }
+            switch action {
+            case "plus": active.lapCount += 1
+            case "minus": active.lapCount = max(0, active.lapCount - 1)
+            case "finish": active.isRunning = false
+            case "cancel": context.delete(active)
+            default: return
             }
         }
-
-        return stage.name
-    }
-
-    private func currentEventDetail(
-        _ event: ScheduleEvent,
-        now: Date
-    ) -> String {
-        var parts: [String] = []
-
-        if let classes = classesText(for: event) {
-            parts.append(classes)
+        do { try context.save() }
+        catch {
+            context.rollback()
+            let alert = CPAlertTemplate(titleVariants: ["Не удалось сохранить SC", error.localizedDescription], actions: [
+                CPAlertAction(title: "OK", style: .default) { [weak self] _ in self?.interfaceController?.dismissTemplate(animated: true, completion: nil) }
+            ])
+            interfaceController?.presentTemplate(alert, animated: true, completion: nil)
         }
-
-        if event.plannedDuration > 0 {
-            parts.append(durationText(minutes: event.plannedDuration))
-            parts.append("осталось \(remainingText(event: event, now: now))")
-        }
-
-        if event.isRace, event.plannedDuration > 0 {
-            parts.append("\(progressPercent(event: event, now: now))%")
-        }
-
-        return parts.joined(separator: " · ")
-    }
-
-    private func nextEventDetail(
-        _ event: ScheduleEvent,
-        now: Date
-    ) -> String {
-        var parts: [String] = [
-            "через \(untilText(event: event, now: now))",
-            displayTime(event.plannedStart)
-        ]
-
-        if event.plannedDuration > 0 {
-            parts.append(durationText(minutes: event.plannedDuration))
-        }
-
-        if let classes = classesText(for: event) {
-            parts.append(classes)
-        }
-
-        return parts.joined(separator: " · ")
-    }
-
-    private func upcomingEventDetail(
-        _ event: ScheduleEvent
-    ) -> String {
-        var parts: [String] = [displayTime(event.plannedStart)]
-
-        if event.plannedDuration > 0 {
-            parts.append(durationText(minutes: event.plannedDuration))
-        }
-
-        if let classes = classesText(for: event) {
-            parts.append(classes)
-        }
-
-        return parts.joined(separator: " · ")
-    }
-
-    private func classesText(
-        for event: ScheduleEvent
-    ) -> String? {
-        let classes = event.eventClasses
-            .compactMap { $0.raceClass }
-            .map {
-                $0.shortName.isEmpty
-                    ? $0.name
-                    : $0.shortName
-            }
-            .filter { !$0.isEmpty }
-            .sorted()
-
-        return classes.isEmpty
-            ? nil
-            : classes.joined(separator: ", ")
-    }
-
-    private func progressPercent(
-        event: ScheduleEvent,
-        now: Date
-    ) -> Int {
-        guard event.plannedDuration > 0 else { return 0 }
-
-        let total = TimeInterval(event.plannedDuration * 60)
-        let elapsed = max(0, now.timeIntervalSince(event.plannedStart))
-        let progress = min(1, elapsed / total)
-
-        return Int((progress * 100).rounded())
-    }
-
-    private func remainingText(
-        event: ScheduleEvent,
-        now: Date
-    ) -> String {
-        let seconds = max(0, Int(eventEnd(event).timeIntervalSince(now)))
-        return compactInterval(seconds: seconds)
-    }
-
-    private func untilText(
-        event: ScheduleEvent,
-        now: Date
-    ) -> String {
-        let seconds = max(0, Int(event.plannedStart.timeIntervalSince(now)))
-        return compactInterval(seconds: seconds)
-    }
-
-    private func compactInterval(seconds: Int) -> String {
-        if seconds < 60 {
-            return "\(seconds) сек"
-        }
-
-        let minutes = seconds / 60
-        let remainder = seconds % 60
-
-        if minutes < 2, remainder > 0 {
-            return "\(minutes) мин \(remainder) сек"
-        }
-
-        if minutes < 60 {
-            return "\(minutes) мин"
-        }
-
-        let hours = minutes / 60
-        let mins = minutes % 60
-
-        return mins == 0
-            ? "\(hours) ч"
-            : "\(hours) ч \(mins) мин"
-    }
-
-    private func durationText(minutes: Int) -> String {
-        guard minutes >= 60 else {
-            return "\(minutes) мин"
-        }
-
-        let hours = minutes / 60
-        let remainder = minutes % 60
-
-        return remainder == 0
-            ? "\(hours) ч"
-            : "\(hours) ч \(remainder) мин"
-    }
-
-    private func displayTime(_ date: Date) -> String {
-        let seconds = Calendar.current.component(.second, from: date)
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
-        formatter.dateFormat = seconds == 0 ? "HH:mm" : "HH:mm:ss"
-        return formatter.string(from: date)
+        refresh()
     }
 }
