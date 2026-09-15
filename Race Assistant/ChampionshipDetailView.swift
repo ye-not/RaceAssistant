@@ -24,6 +24,16 @@ struct ChampionshipDetailView: View {
                     seasonSection(season)
                 }
             }
+            Section("Настройки") {
+                NavigationLink("Классы соревнования") { ChampionshipClassesView(championship: championship) }
+            }
+            if championship.seasons.contains(where: { $0.stages.contains { SchedulePresentation.isSafetyCar($0.myRole) || !$0.scheduleEvents.flatMap(\.safetyCarPeriods).isEmpty } }) {
+                Section("Статистика SC") {
+                    ForEach(sortedSeasons) { season in
+                        NavigationLink(season.displayName) { SafetyCarSeasonStatisticsView(season: season) }
+                    }
+                }
+            }
         }
         .navigationTitle(championship.name)
         .toolbar {

@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "Formula1.com official Azerbaijan GP 2026 full timetable; retrieved 2026-09-15",
+  "sourceURL": "https://www.formula1.com/en/latest/article/formula-1-qatar-airways-azerbaijan-grand-prix-2026.EsMvgTyba8dZZ6RynZXv7",
+  "timeZone": "Europe/Moscow",
+  "sourceTimeZone": "Asia/Baku",
+  "referenceData": {
+    "raceClasses": [
+      {
+        "name": "Formula 1",
+        "shortName": "F1",
+        "active": true
+      },
+      {
+        "name": "Formula 2",
+        "shortName": "F2",
+        "active": true
+      }
+    ]
+  },
+  "scheduleImports": [
+    {
+      "seriesName": "Formula 1",
+      "seasonYear": 2026,
+      "stageName": "Azerbaijan Grand Prix",
+      "events": [
+        {
+          "sourceRow": 1,
+          "date": "2026-09-24",
+          "startTime": "09:00",
+          "endTime": "09:45",
+          "durationMinutes": 45,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 2,
+          "date": "2026-09-24",
+          "startTime": "10:00",
+          "endTime": "11:00",
+          "durationMinutes": 60,
+          "title": "Презентация автомобилей",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 3,
+          "date": "2026-09-24",
+          "startTime": "11:30",
+          "endTime": "12:30",
+          "durationMinutes": 60,
+          "title": "Практика 1",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 4,
+          "date": "2026-09-24",
+          "startTime": "13:00",
+          "endTime": "13:20",
+          "durationMinutes": 20,
+          "title": "Квалификация 1",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 5,
+          "date": "2026-09-24",
+          "startTime": "13:30",
+          "endTime": "13:50",
+          "durationMinutes": 20,
+          "title": "Квалификация 2",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 6,
+          "date": "2026-09-24",
+          "startTime": "13:30",
+          "endTime": "14:30",
+          "durationMinutes": 60,
+          "title": "Пресс-конференция команд",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 7,
+          "date": "2026-09-24",
+          "startTime": "14:30",
+          "endTime": "14:55",
+          "durationMinutes": 25,
+          "title": "Пресс-конференция",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 8,
+          "date": "2026-09-24",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "durationMinutes": 60,
+          "title": "Практика 2",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 9,
+          "date": "2026-09-25",
+          "startTime": "07:15",
+          "endTime": "08:05",
+          "durationMinutes": 50,
+          "title": "Спринт (21 круг или 45 мин + 1 круг)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 10,
+          "date": "2026-09-25",
+          "startTime": "08:25",
+          "endTime": "08:45",
+          "durationMinutes": 20,
+          "title": "Пресс-конференция",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 11,
+          "date": "2026-09-25",
+          "startTime": "11:30",
+          "endTime": "12:30",
+          "durationMinutes": 60,
+          "title": "Практика 3",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 12,
+          "date": "2026-09-25",
+          "startTime": "13:15",
+          "endTime": "14:20",
+          "durationMinutes": 65,
+          "title": "Основная гонка 1 (29 кругов или 60 мин + 1 круг)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 13,
+          "date": "2026-09-25",
+          "startTime": "14:40",
+          "endTime": "14:55",
+          "durationMinutes": 15,
+          "title": "Пресс-конференция",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 14,
+          "date": "2026-09-25",
+          "startTime": "15:00",
+          "endTime": "16:00",
+          "durationMinutes": 60,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 15,
+          "date": "2026-09-25",
+          "startTime": "16:00",
+          "endTime": "17:00",
+          "durationMinutes": 60,
+          "title": "Пресс-конференция",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 16,
+          "date": "2026-09-26",
+          "startTime": "10:00",
+          "endTime": "11:05",
+          "durationMinutes": 65,
+          "title": "Основная гонка 2 (29 кругов или 60 мин + 1 круг)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 17,
+          "date": "2026-09-26",
+          "startTime": "11:25",
+          "endTime": "11:55",
+          "durationMinutes": 30,
+          "title": "Пресс-конференция",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F2"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F2",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 18,
+          "date": "2026-09-26",
+          "startTime": "12:00",
+          "endTime": "12:30",
+          "durationMinutes": 30,
+          "title": "Представление пилотов",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 19,
+          "date": "2026-09-26",
+          "startTime": "13:44",
+          "endTime": "13:46",
+          "durationMinutes": 2,
+          "title": "Государственный гимн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 20,
+          "date": "2026-09-26",
+          "startTime": "14:00",
+          "endTime": "16:00",
+          "durationMinutes": 120,
+          "title": "Гран-при Азербайджана (51 круг или 120 мин)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "F1",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        }
+      ],
+      "timeZoneIdentifier": "Europe/Moscow"
+    }
+  ]
+}

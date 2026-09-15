@@ -1,0 +1,2066 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "Приложение_v3.xlsx + WEC/F1 2026 + Lone Star Le Mans TIMETABLE V2 (17/08/2026) + test day 2026-09-09",
+  "referenceData": {
+    "roles": [
+      {
+        "name": "Техническая инспекция",
+        "shortName": "TI",
+        "active": true
+      },
+      {
+        "name": "Race Director",
+        "shortName": "RD",
+        "active": true
+      },
+      {
+        "name": "Race Control",
+        "shortName": "RC",
+        "active": true
+      },
+      {
+        "name": "Спортивные комиссары",
+        "shortName": "КСК",
+        "active": true
+      },
+      {
+        "name": "Safety car",
+        "shortName": "SC",
+        "active": true
+      },
+      {
+        "name": "Leading car",
+        "shortName": "LC",
+        "active": true
+      },
+      {
+        "name": "Medical car",
+        "shortName": "MC",
+        "active": true
+      },
+      {
+        "name": "Медицинский делегат",
+        "shortName": "MD",
+        "active": true
+      },
+      {
+        "name": "Руководитель гонки",
+        "shortName": "CoC",
+        "active": true
+      },
+      {
+        "name": "Питлейн",
+        "shortName": "Pit Lane",
+        "active": true
+      },
+      {
+        "name": "Маршалы на трассе",
+        "shortName": "Track",
+        "active": true
+      },
+      {
+        "name": "Комиссар по безопасности",
+        "shortName": "SD",
+        "active": true
+      },
+      {
+        "name": "Главный врач",
+        "shortName": "Doc",
+        "active": true
+      },
+      {
+        "name": "Судья при участниках",
+        "shortName": "CRO",
+        "active": true
+      }
+    ],
+    "raceClasses": [
+      {
+        "name": "SMP TCR Russia",
+        "shortName": "TCR",
+        "active": true
+      },
+      {
+        "name": "GT4",
+        "shortName": "GT4",
+        "active": true
+      },
+      {
+        "name": "Touring-lite",
+        "shortName": "TL",
+        "active": true
+      },
+      {
+        "name": "Super Production",
+        "shortName": "SP",
+        "active": true
+      },
+      {
+        "name": "S1600",
+        "shortName": "S1600",
+        "active": true
+      },
+      {
+        "name": "SMP F4",
+        "shortName": "F4",
+        "active": true
+      },
+      {
+        "name": "Open-Class CT",
+        "shortName": "Classic Open",
+        "active": true
+      },
+      {
+        "name": "ТурингКлассик 80",
+        "shortName": "Classic 80",
+        "active": true
+      },
+      {
+        "name": "ТурингКлассик90",
+        "shortName": "Classic 90",
+        "active": true
+      },
+      {
+        "name": "Туризм 1600",
+        "shortName": "Classic 1600",
+        "active": true
+      },
+      {
+        "name": "GT3",
+        "shortName": "GT3",
+        "active": true
+      },
+      {
+        "name": "GT4 Trophy",
+        "shortName": "GT4T",
+        "active": true
+      },
+      {
+        "name": "GTC",
+        "shortName": "GTC",
+        "active": true
+      },
+      {
+        "name": "Кубок Cayman GT4",
+        "shortName": "Cayman Cup",
+        "active": true
+      },
+      {
+        "name": "CN Pro",
+        "shortName": "CN Pro",
+        "active": true
+      },
+      {
+        "name": "GT",
+        "shortName": "GT",
+        "active": true
+      },
+      {
+        "name": "GT Light",
+        "shortName": "GT Light",
+        "active": true
+      },
+      {
+        "name": "GT Pro",
+        "shortName": "GT Pro",
+        "active": true
+      },
+      {
+        "name": "TCE",
+        "shortName": "TCE",
+        "active": true
+      },
+      {
+        "name": "Туринг",
+        "shortName": "Touring",
+        "active": true
+      },
+      {
+        "name": "Группа F",
+        "shortName": "Proto",
+        "active": true
+      },
+      {
+        "name": "HYPERCAR",
+        "shortName": "HYPERCAR",
+        "active": true
+      },
+      {
+        "name": "LMGT3",
+        "shortName": "LMGT3",
+        "active": true
+      },
+      {
+        "name": "Formula 1",
+        "shortName": "F1",
+        "active": true
+      },
+      {
+        "name": "Formula 2",
+        "shortName": "F2",
+        "active": true
+      },
+      {
+        "name": "Formula 3",
+        "shortName": "F3",
+        "active": true
+      },
+      {
+        "name": "Shortcut 527",
+        "shortName": "Shortcut 527",
+        "active": true
+      },
+      {
+        "name": "Legends EVO + 600",
+        "shortName": "Legends",
+        "active": true
+      },
+      {
+        "name": "Mitjet 2,0",
+        "shortName": "Mitjet 2.0",
+        "active": true
+      },
+      {
+        "name": "Mitjet 1300",
+        "shortName": "Mitjet 1300",
+        "active": true
+      },
+      {
+        "name": "Мазда",
+        "shortName": "Mazda",
+        "active": true
+      },
+      {
+        "name": "S1600 юниоры",
+        "shortName": "S1600 Jr",
+        "active": true
+      }
+    ],
+    "circuits": [
+      {
+        "name": "ADM Raceway",
+        "shortName": "ADM",
+        "city": "Мячково",
+        "country": "Россия",
+        "lengthMeters": 3240
+      },
+      {
+        "name": "Igora Drive",
+        "shortName": "Igora",
+        "city": "Санкт-Петербург",
+        "country": "Россия",
+        "lengthMeters": 5183
+      },
+      {
+        "name": "KazanRing Canyon",
+        "shortName": "KazanRing",
+        "city": "Казань",
+        "country": "Россия",
+        "lengthMeters": 3476
+      },
+      {
+        "name": "Moscow Raceway",
+        "shortName": "MRW",
+        "city": "Волоколамск",
+        "country": "Россия",
+        "lengthMeters": 3955
+      },
+      {
+        "name": "Smolensk Ring",
+        "shortName": "Smolensk",
+        "city": "Дорогобуж",
+        "country": "Россия",
+        "lengthMeters": 3357
+      },
+      {
+        "name": "Sochi Autodrom",
+        "shortName": "Sochi",
+        "city": "Сириус",
+        "country": "Россия",
+        "lengthMeters": 2312
+      },
+      {
+        "name": "Крепость Грозная",
+        "shortName": "Groznyi",
+        "city": "Грозный",
+        "country": "Россия",
+        "lengthMeters": 3086
+      },
+      {
+        "name": "NRing Circuit",
+        "shortName": "NRing",
+        "city": "Нижний Новгород",
+        "country": "Россия",
+        "lengthMeters": 3222
+      },
+      {
+        "name": "Autodromo Internazionale Enzo e Dino Ferrari",
+        "shortName": "Imola",
+        "city": "Имола",
+        "country": "Италия",
+        "lengthMeters": 4909
+      },
+      {
+        "name": "Circuit de Spa-Francorchamps",
+        "shortName": "Spa",
+        "city": "Спа",
+        "country": "Бельгия",
+        "lengthMeters": 7004
+      },
+      {
+        "name": "Circuit de la Sarthe",
+        "shortName": "Le Mans",
+        "city": "Ле-Ман",
+        "country": "Франция",
+        "lengthMeters": 13626
+      },
+      {
+        "name": "Autódromo José Carlos Pace",
+        "shortName": "Interlagos",
+        "city": "Сан-Паулу",
+        "country": "Бразилия",
+        "lengthMeters": 4309
+      },
+      {
+        "name": "Circuit of the Americas",
+        "shortName": "COTA",
+        "city": "Остин",
+        "country": "США",
+        "lengthMeters": 5513
+      },
+      {
+        "name": "Fuji Speedway",
+        "shortName": "Fuji",
+        "city": "Ояма",
+        "country": "Япония",
+        "lengthMeters": 4563
+      },
+      {
+        "name": "Circuit de Barcelona-Catalunya",
+        "shortName": "Barcelona",
+        "city": "Монмело",
+        "country": "Испания",
+        "lengthMeters": 4657
+      },
+      {
+        "name": "Autodromo Nazionale Monza",
+        "shortName": "Monza",
+        "city": "Монца",
+        "country": "Италия",
+        "lengthMeters": 5793
+      },
+      {
+        "name": "Albert Park Grand Prix Circuit",
+        "shortName": "Albert Park",
+        "city": "Мельбурн",
+        "country": "Австралия",
+        "lengthMeters": 5278
+      },
+      {
+        "name": "Shanghai International Circuit",
+        "shortName": "Shanghai",
+        "city": "Шанхай",
+        "country": "Китай",
+        "lengthMeters": 5451
+      },
+      {
+        "name": "Suzuka International Racing Course",
+        "shortName": "Suzuka",
+        "city": "Судзука",
+        "country": "Япония",
+        "lengthMeters": 5807
+      },
+      {
+        "name": "Miami International Autodrome",
+        "shortName": "Miami",
+        "city": "Майами-Гарденс",
+        "country": "США",
+        "lengthMeters": 5412
+      },
+      {
+        "name": "Circuit Gilles-Villeneuve",
+        "shortName": "Montreal",
+        "city": "Монреаль",
+        "country": "Канада",
+        "lengthMeters": 4361
+      },
+      {
+        "name": "Circuit de Monaco",
+        "shortName": "Monaco",
+        "city": "Монте-Карло",
+        "country": "Монако",
+        "lengthMeters": 3337
+      },
+      {
+        "name": "Red Bull Ring",
+        "shortName": "Spielberg",
+        "city": "Шпильберг",
+        "country": "Австрия",
+        "lengthMeters": 4318
+      },
+      {
+        "name": "Silverstone Circuit",
+        "shortName": "Silverstone",
+        "city": "Сильверстоун",
+        "country": "Великобритания",
+        "lengthMeters": 5891
+      },
+      {
+        "name": "Hungaroring",
+        "shortName": "Hungaroring",
+        "city": "Модьород",
+        "country": "Венгрия",
+        "lengthMeters": 4381
+      },
+      {
+        "name": "Circuit Zandvoort",
+        "shortName": "Zandvoort",
+        "city": "Зандворт",
+        "country": "Нидерланды",
+        "lengthMeters": 4259
+      },
+      {
+        "name": "Madring",
+        "shortName": "Madrid",
+        "city": "Мадрид",
+        "country": "Испания",
+        "lengthMeters": null
+      },
+      {
+        "name": "Baku City Circuit",
+        "shortName": "Baku",
+        "city": "Баку",
+        "country": "Азербайджан",
+        "lengthMeters": 6003
+      },
+      {
+        "name": "Sepang International Circuit",
+        "shortName": "Sepang",
+        "city": "Сепанг",
+        "country": "Малайзия",
+        "lengthMeters": 5543
+      },
+      {
+        "name": "Marina Bay Street Circuit",
+        "shortName": "Singapore",
+        "city": "Сингапур",
+        "country": "Сингапур",
+        "lengthMeters": 4940
+      },
+      {
+        "name": "Autódromo Hermanos Rodríguez",
+        "shortName": "Mexico City",
+        "city": "Мехико",
+        "country": "Мексика",
+        "lengthMeters": 4304
+      },
+      {
+        "name": "Las Vegas Strip Circuit",
+        "shortName": "Las Vegas",
+        "city": "Лас-Вегас",
+        "country": "США",
+        "lengthMeters": 6201
+      },
+      {
+        "name": "Lusail International Circuit",
+        "shortName": "Lusail",
+        "city": "Лусаил",
+        "country": "Катар",
+        "lengthMeters": 5419
+      },
+      {
+        "name": "Yas Marina Circuit",
+        "shortName": "Yas Marina",
+        "city": "Абу-Даби",
+        "country": "ОАЭ",
+        "lengthMeters": 5281
+      }
+    ]
+  },
+  "scheduleImports": [
+    {
+      "seriesName": "FIA WEC",
+      "seasonYear": 2026,
+      "stageName": "Lone Star Le Mans",
+      "events": [
+        {
+          "sourceRow": 1,
+          "date": "2026-09-03",
+          "startTime": "07:00",
+          "endTime": "15:00",
+          "durationMinutes": 480,
+          "title": "SCRUTINEERING AND ADMINISTRATIVE CHECKS",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 2,
+          "date": "2026-09-03",
+          "startTime": "08:30",
+          "endTime": "13:00",
+          "durationMinutes": 270,
+          "title": "ADMINISTRATIVE CHECKS",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 3,
+          "date": "2026-09-03",
+          "startTime": "08:30",
+          "endTime": "19:00",
+          "durationMinutes": 630,
+          "title": "SCRUTINEERING",
+          "type": "Техническая инспекция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 4,
+          "date": "2026-09-03",
+          "startTime": "12:00",
+          "endTime": "16:00",
+          "durationMinutes": 240,
+          "title": "SCRUTINEERING AND ADMINISTRATIVE CHECKS",
+          "type": "Административка",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 5,
+          "date": "2026-09-03",
+          "startTime": "14:00",
+          "endTime": "14:30",
+          "durationMinutes": 30,
+          "title": "TEAM MANAGERS' BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 6,
+          "date": "2026-09-03",
+          "startTime": "14:15",
+          "endTime": "14:45",
+          "durationMinutes": 30,
+          "title": "TEAM MANAGERS' BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 7,
+          "date": "2026-09-03",
+          "startTime": "15:00",
+          "endTime": "15:30",
+          "durationMinutes": 30,
+          "title": "DRIVERS' BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 8,
+          "date": "2026-09-03",
+          "startTime": "15:00",
+          "endTime": "17:00",
+          "durationMinutes": 120,
+          "title": "TRACK WALK",
+          "type": "Активность трассы",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 9,
+          "date": "2026-09-03",
+          "startTime": "17:30",
+          "endTime": "18:00",
+          "durationMinutes": 30,
+          "title": "TIMEKEEPING & MARSHALLING CHECKS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RC",
+            "Track"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RC, Track",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 10,
+          "date": "2026-09-03",
+          "startTime": "18:00",
+          "endTime": "18:45",
+          "durationMinutes": 45,
+          "title": "SAFETY CAR HIGH SPEED TEST",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "SC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 11,
+          "date": "2026-09-03",
+          "startTime": "19:00",
+          "endTime": "20:00",
+          "durationMinutes": 60,
+          "title": "MARSHALS PIT WALK",
+          "type": "Организационное",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "Track"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "Track",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 12,
+          "date": "2026-09-04",
+          "startTime": "08:30",
+          "endTime": "09:00",
+          "durationMinutes": 30,
+          "title": "OPERATIONAL E-SAFETY BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 13,
+          "date": "2026-09-04",
+          "startTime": "08:30",
+          "endTime": "09:00",
+          "durationMinutes": 30,
+          "title": "TIMEKEEPING & MARSHALLING CHECKS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RC",
+            "Track"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RC, Track",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 14,
+          "date": "2026-09-04",
+          "startTime": "09:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "FIA MEDICAL INSPECTION LAPS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC",
+            "MD"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "MC, MD",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 15,
+          "date": "2026-09-04",
+          "startTime": "09:00",
+          "endTime": "09:40",
+          "durationMinutes": 40,
+          "title": "PIT LANE MARSHALS MEETING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "Pit Lane",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 16,
+          "date": "2026-09-04",
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "durationMinutes": 60,
+          "title": "SCRUTINEERING OPENED (Free slot)",
+          "type": "Техническая инспекция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 17,
+          "date": "2026-09-04",
+          "startTime": "09:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "FIA RACE DIRECTOR TRACK INSPECTION LAPS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RD"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RD",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 18,
+          "date": "2026-09-04",
+          "startTime": "10:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "DRIVERS' BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 19,
+          "date": "2026-09-04",
+          "startTime": "10:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "TEAM MANAGERS' BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 20,
+          "date": "2026-09-04",
+          "startTime": "10:00",
+          "endTime": "10:30",
+          "durationMinutes": 30,
+          "title": "FREE PRACTICE 1",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 21,
+          "date": "2026-09-04",
+          "startTime": "10:45",
+          "endTime": "11:15",
+          "durationMinutes": 30,
+          "title": "FREE PRACTICE 1",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 22,
+          "date": "2026-09-04",
+          "startTime": "11:30",
+          "endTime": "13:00",
+          "durationMinutes": 90,
+          "title": "FREE PRACTICE 1",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 23,
+          "date": "2026-09-04",
+          "startTime": "13:05",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "RED CAR EXERCISE",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RC"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 24,
+          "date": "2026-09-04",
+          "startTime": "13:45",
+          "endTime": "14:15",
+          "durationMinutes": 30,
+          "title": "FREE PRACTICE 2",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 25,
+          "date": "2026-09-04",
+          "startTime": "14:30",
+          "endTime": "15:00",
+          "durationMinutes": 30,
+          "title": "FREE PRACTICE 2",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 26,
+          "date": "2026-09-04",
+          "startTime": "14:30",
+          "endTime": "15:00",
+          "durationMinutes": 20,
+          "title": "PRE EVENT PRESS CONFERENCE",
+          "type": "Пресс-конференция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 27,
+          "date": "2026-09-04",
+          "startTime": "15:00",
+          "endTime": "15:25",
+          "durationMinutes": 25,
+          "title": "TRACK BREAK",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 28,
+          "date": "2026-09-04",
+          "startTime": "15:25",
+          "endTime": "15:55",
+          "durationMinutes": 30,
+          "title": "SAFETY CAR EXERCISE",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "SC",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 29,
+          "date": "2026-09-04",
+          "startTime": "16:00",
+          "endTime": "17:30",
+          "durationMinutes": 90,
+          "title": "FREE PRACTICE 2",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 30,
+          "date": "2026-09-04",
+          "startTime": "17:45",
+          "endTime": "18:10",
+          "durationMinutes": 25,
+          "title": "QUALIFYING SESSION",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 31,
+          "date": "2026-09-04",
+          "startTime": "18:30",
+          "endTime": "20:00",
+          "durationMinutes": 90,
+          "title": "SCRUTINEERING OPENED (Allocated slot)",
+          "type": "Техническая инспекция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 32,
+          "date": "2026-09-04",
+          "startTime": "18:30",
+          "endTime": "20:30",
+          "durationMinutes": 120,
+          "title": "TRACK WALK",
+          "type": "Активность трассы",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 33,
+          "date": "2026-09-05",
+          "startTime": "08:30",
+          "endTime": "10:00",
+          "durationMinutes": 90,
+          "title": "SCRUTINEERING OPENED (Allocated slot / Activity in Pit Lane)",
+          "type": "Техническая инспекция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 34,
+          "date": "2026-09-05",
+          "startTime": "07:45",
+          "endTime": "08:15",
+          "durationMinutes": 30,
+          "title": "TIMEKEEPING & MARSHALLING CHECKS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RC",
+            "Track"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RC, Track",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 35,
+          "date": "2026-09-05",
+          "startTime": "08:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "FIA MEDICAL INSPECTION LAPS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC",
+            "MD"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "MC, MD",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 36,
+          "date": "2026-09-05",
+          "startTime": "08:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "FIA RACE DIRECTOR TRACK INSPECTION LAPS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RD"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RD",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 37,
+          "date": "2026-09-05",
+          "startTime": "09:30",
+          "endTime": "10:10",
+          "durationMinutes": 40,
+          "title": "RACE 1",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 38,
+          "date": "2026-09-05",
+          "startTime": "10:30",
+          "endTime": "10:45",
+          "durationMinutes": 15,
+          "title": "QUALIFYING SESSION",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 39,
+          "date": "2026-09-05",
+          "startTime": "11:00",
+          "endTime": "12:00",
+          "durationMinutes": 60,
+          "title": "FREE PRACTICE 3",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 40,
+          "date": "2026-09-05",
+          "startTime": "12:15",
+          "endTime": "12:45",
+          "durationMinutes": 30,
+          "title": "HOT LAPS",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 41,
+          "date": "2026-09-05",
+          "startTime": "12:15",
+          "endTime": "13:15",
+          "durationMinutes": 60,
+          "title": "DRIVERS' BRIEFING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 42,
+          "date": "2026-09-05",
+          "startTime": "12:30",
+          "endTime": "13:30",
+          "durationMinutes": 60,
+          "title": "PIT WALK",
+          "type": "Публичное мероприятие",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 43,
+          "date": "2026-09-05",
+          "startTime": "12:35",
+          "endTime": "13:05",
+          "durationMinutes": 30,
+          "title": "AUTOGRAPH SESSION",
+          "type": "Публичное мероприятие",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 44,
+          "date": "2026-09-05",
+          "startTime": "12:50",
+          "endTime": "13:20",
+          "durationMinutes": 30,
+          "title": "MEDIA HOT LAPS",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 45,
+          "date": "2026-09-05",
+          "startTime": "13:30",
+          "endTime": "14:00",
+          "durationMinutes": 30,
+          "title": "AUTOGRAPH SESSION",
+          "type": "Публичное мероприятие",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 46,
+          "date": "2026-09-05",
+          "startTime": "13:30",
+          "endTime": "14:00",
+          "durationMinutes": 30,
+          "title": "AUTOGRAPH SESSION",
+          "type": "Публичное мероприятие",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 47,
+          "date": "2026-09-05",
+          "startTime": "13:30",
+          "endTime": "14:45",
+          "durationMinutes": 75,
+          "title": "Parade Laps",
+          "type": "Парад",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Car Corral",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 48,
+          "date": "2026-09-05",
+          "startTime": "15:00",
+          "endTime": "15:12",
+          "durationMinutes": 12,
+          "title": "QUALIFYING - LMGT3",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 49,
+          "date": "2026-09-05",
+          "startTime": "15:20",
+          "endTime": "15:30",
+          "durationMinutes": 10,
+          "title": "QUALIFYING - LMGT3 HYPERPOLE",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 50,
+          "date": "2026-09-05",
+          "startTime": "15:40",
+          "endTime": "15:52",
+          "durationMinutes": 12,
+          "title": "QUALIFYING - HYPERCAR",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 51,
+          "date": "2026-09-05",
+          "startTime": "16:00",
+          "endTime": "16:10",
+          "durationMinutes": 10,
+          "title": "QUALIFYING - HYPERCAR HYPERPOLE",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 52,
+          "date": "2026-09-05",
+          "startTime": "16:20",
+          "endTime": "16:50",
+          "durationMinutes": 30,
+          "title": "FORD HOT LAPS",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 53,
+          "date": "2026-09-05",
+          "startTime": "16:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "QUALIFYING PRESS CONFERENCE",
+          "type": "Пресс-конференция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 54,
+          "date": "2026-09-05",
+          "startTime": "16:50",
+          "endTime": "17:05",
+          "durationMinutes": 15,
+          "title": "MIXED ZONE INTERVIEW LMGT3",
+          "type": "Медиа",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 55,
+          "date": "2026-09-05",
+          "startTime": "17:05",
+          "endTime": "17:20",
+          "durationMinutes": 15,
+          "title": "MIXED ZONE INTERVIEW HYPERCAR",
+          "type": "Медиа",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 56,
+          "date": "2026-09-05",
+          "startTime": "17:20",
+          "endTime": "18:00",
+          "durationMinutes": 40,
+          "title": "RACE 2",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 57,
+          "date": "2026-09-05",
+          "startTime": "18:10",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "TOP 4 HYPERCAR & LMGT3 STARTING DRIVERS MEETING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 58,
+          "date": "2026-09-05",
+          "startTime": "18:30",
+          "endTime": "19:15",
+          "durationMinutes": 45,
+          "title": "RACE 1",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 59,
+          "date": "2026-09-05",
+          "startTime": "19:30",
+          "endTime": "20:30",
+          "durationMinutes": 60,
+          "title": "SCRUTINEERING OPENED (By apppointment)",
+          "type": "Техническая инспекция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 60,
+          "date": "2026-09-05",
+          "startTime": "19:30",
+          "endTime": "21:00",
+          "durationMinutes": 90,
+          "title": "TRACK WALK",
+          "type": "Активность трассы",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 61,
+          "date": "2026-09-06",
+          "startTime": "07:45",
+          "endTime": "08:30",
+          "durationMinutes": 45,
+          "title": "PIT LANE MARSHALS MEETING",
+          "type": "Брифинг",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "Pit Lane"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "Pit Lane",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 62,
+          "date": "2026-09-06",
+          "startTime": "08:00",
+          "endTime": "09:30",
+          "durationMinutes": 90,
+          "title": "SCRUTINEERING OPENED (By appointment / Activity in Pit Lane)",
+          "type": "Техническая инспекция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "TI"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "TI",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 63,
+          "date": "2026-09-06",
+          "startTime": "06:55",
+          "endTime": "07:25",
+          "durationMinutes": 30,
+          "title": "TIMEKEEPING & MARSHALLING CHECKS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RC",
+            "Track"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RC, Track",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 64,
+          "date": "2026-09-06",
+          "startTime": "07:25",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "FIA MEDICAL INSPECTION LAPS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC",
+            "MD"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "MC, MD",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 65,
+          "date": "2026-09-06",
+          "startTime": "07:40",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "FIA RACE DIRECTOR TRACK INSPECTION LAPS",
+          "type": "Процедура RC",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "RD"
+          ],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": "RD",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 66,
+          "date": "2026-09-06",
+          "startTime": "08:40",
+          "endTime": "09:20",
+          "durationMinutes": 40,
+          "title": "RACE 3",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Radical Motorsport",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 67,
+          "date": "2026-09-06",
+          "startTime": "09:50",
+          "endTime": "10:35",
+          "durationMinutes": 45,
+          "title": "RACE 2",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Mustang Challenge",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 68,
+          "date": "2026-09-06",
+          "startTime": "10:45",
+          "endTime": "11:15",
+          "durationMinutes": 30,
+          "title": "HOT LAPS",
+          "type": "Спортивная активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 69,
+          "date": "2026-09-06",
+          "startTime": "10:45",
+          "endTime": "11:45",
+          "durationMinutes": 60,
+          "title": "PIT WALK",
+          "type": "Публичное мероприятие",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 70,
+          "date": "2026-09-06",
+          "startTime": "10:50",
+          "endTime": "11:20",
+          "durationMinutes": 30,
+          "title": "AUTOGRAPH SESSION",
+          "type": "Публичное мероприятие",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 71,
+          "date": "2026-09-06",
+          "startTime": "11:20",
+          "endTime": "11:40",
+          "durationMinutes": 20,
+          "title": "Parade",
+          "type": "Парад",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Exotic Car Parade",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 72,
+          "date": "2026-09-06",
+          "startTime": "11:44",
+          "endTime": "11:50",
+          "durationMinutes": 6,
+          "title": "LAP OF HONOUR",
+          "type": "Церемония",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 73,
+          "date": "2026-09-06",
+          "startTime": "12:00",
+          "endTime": null,
+          "durationMinutes": 10,
+          "title": "PITS OPEN",
+          "type": "Стартовая процедура",
+          "isRace": false,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 74,
+          "date": "2026-09-06",
+          "startTime": "12:10",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "PITS CLOSED",
+          "type": "Стартовая процедура",
+          "isRace": false,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 75,
+          "date": "2026-09-06",
+          "startTime": "12:15",
+          "endTime": null,
+          "durationMinutes": 10,
+          "title": "GRID WALK opening",
+          "type": "Стартовая процедура",
+          "isRace": false,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 76,
+          "date": "2026-09-06",
+          "startTime": "12:25",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "GRID WALK gate closing",
+          "type": "Стартовая процедура",
+          "isRace": false,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 77,
+          "date": "2026-09-06",
+          "startTime": "12:43",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "GRID WALK end of evacuation",
+          "type": "Стартовая процедура",
+          "isRace": false,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 78,
+          "date": "2026-09-06",
+          "startTime": "12:54",
+          "endTime": null,
+          "durationMinutes": 6,
+          "title": "GREEN FLAG 2 Formation Laps",
+          "type": "Стартовая процедура",
+          "isRace": false,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 79,
+          "date": "2026-09-06",
+          "startTime": "13:00",
+          "endTime": "19:00",
+          "durationMinutes": 360,
+          "title": "RACE - Rolling Start",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "WEC-COTA-RACE-START",
+          "classShortNames": [
+            "HYPERCAR",
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 80,
+          "date": "2026-09-06",
+          "startTime": "19:30",
+          "endTime": "19:50",
+          "durationMinutes": 20,
+          "title": "PRESS CONFERENCE",
+          "type": "Пресс-конференция",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 81,
+          "date": "2026-09-06",
+          "startTime": "20:00",
+          "endTime": "20:15",
+          "durationMinutes": 15,
+          "title": "MIXED ZONE INTERVIEW LMGT3",
+          "type": "Медиа",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "LMGT3"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 82,
+          "date": "2026-09-06",
+          "startTime": "20:15",
+          "endTime": "20:30",
+          "durationMinutes": 15,
+          "title": "MIXED ZONE INTERVIEW HYPERCAR",
+          "type": "Медиа",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "HYPERCAR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "FIA WEC",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        }
+      ],
+      "seasonName": "2026"
+    }
+  ]
+}

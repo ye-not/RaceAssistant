@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject
     private var connectivity:
         WatchConnectivityManager
@@ -10,7 +11,7 @@ struct ContentView: View {
         TimelineView(
             .periodic(
                 from: .now,
-                by: 5
+                by: 1
             )
         ) { context in
 
@@ -18,6 +19,10 @@ struct ContentView: View {
                 now:
                     context.date
             )
+        }
+        .onAppear { connectivity.refreshStatus() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { connectivity.refreshStatus() }
         }
     }
 
@@ -66,6 +71,9 @@ struct ContentView: View {
                 .multilineTextAlignment(
                     .center
                 )
+                Button("Обновить") { connectivity.refreshStatus() }
+                Text(connectivity.isReachable ? "iPhone на связи" : "Ожидание связи с iPhone")
+                    .font(.caption2).foregroundStyle(.secondary)
             }
         }
     }
@@ -469,6 +477,9 @@ struct ContentView: View {
             alignment: .leading,
             spacing: 6
         ) {
+            if let group = event.groupTitle, !group.isEmpty {
+                Text(group).font(.caption2.weight(.semibold)).foregroundStyle(.orange)
+            }
 
             HStack(
                 spacing: 5
@@ -609,6 +620,9 @@ struct ContentView: View {
             alignment: .leading,
             spacing: 6
         ) {
+            if let group = event.groupTitle, !group.isEmpty {
+                Text(group).font(.caption2.weight(.semibold)).foregroundStyle(.orange)
+            }
 
             if !isToday {
 
@@ -762,12 +776,29 @@ struct ContentView: View {
             return sorted
         }
 
-        return sorted.filter {
-            event in
+        let normalizedRole =
+            schedule.myRole
+                .trimmingCharacters(
+                    in: .whitespacesAndNewlines
+                )
+                .lowercased()
 
-            event.roles.contains(
+        return sorted.filter { event in
+            if event.roles.contains(
                 schedule.myRole
-            )
+            ) {
+                return true
+            }
+
+            // Safety Car должен видеть текущую гонку,
+            // даже если у самой строки гонки в исходном
+            // расписании указан только Medical Car.
+            if normalizedRole == "sc",
+               event.isRace == true {
+                return true
+            }
+
+            return false
         }
     }
 
@@ -845,19 +876,12 @@ struct ContentView: View {
         _ events: [WatchScheduleItem],
         now: Date
     ) -> WatchScheduleItem? {
-
-        events.first {
-            event in
-
-            event.duration > 0
-            &&
-            now >= event.start
-            &&
-            now <
-                eventEnd(
-                    event
-                )
-        }
+        events.filter {
+            $0.duration > 0 && $0.start <= now && now < eventEnd($0)
+        }.sorted {
+            if ($0.isRace == true) != ($1.isRace == true) { return $0.isRace == true }
+            return $0.start > $1.start
+        }.first
     }
 
     // MARK: - Next Event
@@ -899,11 +923,22 @@ struct ContentView: View {
         _ date: Date
     ) -> String {
 
-        date.formatted(
-            date:
-                .omitted,
-            time:
-                .shortened
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
+            )
+
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
         )
     }
 
@@ -963,63 +998,7 @@ struct ContentView: View {
         _ event: WatchScheduleItem,
         now: Date
     ) -> String {
-
-        let seconds =
-            event.start
-                .timeIntervalSince(
-                    now
-                )
-
-        let totalMinutes =
-            max(
-                0,
-                Int(
-                    ceil(
-                        seconds / 60
-                    )
-                )
-            )
-
-        if totalMinutes == 0 {
-            return
-                "сейчас"
-        }
-
-        if totalMinutes < 60 {
-            return
-                "через \(totalMinutes) мин"
-        }
-
-        let totalHours =
-            totalMinutes / 60
-
-        if totalHours < 24 {
-
-            let minutes =
-                totalMinutes % 60
-
-            if minutes == 0 {
-                return
-                    "через \(totalHours) ч"
-            }
-
-            return
-                "через \(totalHours) ч \(minutes) мин"
-        }
-
-        let days =
-            totalHours / 24
-
-        let hours =
-            totalHours % 24
-
-        if hours == 0 {
-            return
-                "через \(days) д"
-        }
-
-        return
-            "через \(days) д \(hours) ч"
+        "через \(RaceClock.countdown(until: event.start, now: now))"
     }
 
     // MARK: - Duration

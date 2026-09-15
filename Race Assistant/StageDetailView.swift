@@ -7,7 +7,10 @@ struct StageDetailView: View {
     @Query(sort: \Role.name)
     private var allRoles: [Role]
 
+    @Query private var storedSafetyCarPeriods: [SafetyCarPeriod]
+    @ScaledMetric(relativeTo: .headline) private var timeColumnWidth: CGFloat = 82
     let stage: Stage
+    @State private var didInitialScroll = false
 
     @State private var showingAddScheduleEvent = false
     @State private var eventToEdit: ScheduleEvent?
@@ -17,12 +20,12 @@ struct StageDetailView: View {
     @State private var manuallyExpandedDays: Set<Date> = []
     @State private var manuallyCollapsedDays: Set<Date> = []
 
-    @State private var showingFullToday = false
+    @State private var showingFullToday = true
     
     @State private var showingSafetyCarPanel = false
 
     private var allSafetyCarPeriods: [SafetyCarPeriod] {
-        stage.scheduleEvents.flatMap { $0.safetyCarPeriods }
+        storedSafetyCarPeriods.filter { $0.scheduleEvent?.stage === stage }
     }
 
     private var activeSafetyCarPeriod: SafetyCarPeriod? {
@@ -91,7 +94,8 @@ struct StageDetailView: View {
     // MARK: - Body
 
     var body: some View {
-        TimelineView(.periodic(from: .now, by: 30)) { context in
+        ScrollViewReader { proxy in
+        TimelineView(.periodic(from: .now, by: 1)) { context in
             List {
                 if stage.myRole?.shortName
                     .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -153,6 +157,20 @@ struct StageDetailView: View {
                     }
                 }
                 
+                Section {
+                    if SchedulePresentation.isSafetyCar(stage.myRole) || !stage.scheduleEvents.flatMap(\.safetyCarPeriods).isEmpty {
+                    NavigationLink { SafetyCarStatisticsView(stage: stage) } label: {
+                        Label("Статистика SC за этап", systemImage: "chart.bar")
+                    }
+                    if let season = stage.season {
+                        NavigationLink("Статистика SC за сезон") { SafetyCarSeasonStatisticsView(season: season) }
+                    }
+                    }
+                    NavigationLink { StageScheduleFilesView(stage: stage) } label: {
+                        Label("Файл расписания этапа", systemImage: "doc")
+                    }
+                }
+
                 Section("Моя роль") {
                     Picker("Роль на этапе", selection: roleBinding) {
                         Text("Не выбрана")
@@ -250,12 +268,21 @@ struct StageDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
+                Button("К сейчас") { scrollToNow(proxy) }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     showingAddScheduleEvent = true
                 } label: {
                     Image(systemName: "plus")
                 }
             }
+        }
+        .task {
+            guard !didInitialScroll else { return }
+            didInitialScroll = true
+            scrollToNow(proxy)
+        }
         }
         .sheet(isPresented: $showingAddScheduleEvent) {
             AddScheduleEventView(stage: stage)
@@ -400,7 +427,7 @@ struct StageDetailView: View {
                         showingFullToday = false
                     } label: {
                         centeredAction(
-                            "Свернуть список",
+                            "Только предстоящие",
                             systemImage: "chevron.up"
                         )
                     }
@@ -583,60 +610,27 @@ struct StageDetailView: View {
     }
     // MARK: - Today Compact List
 
-    private func compactTodayEvents(
-        _ events: [ScheduleEvent],
-        now: Date
-    ) -> [ScheduleEvent] {
-        let past =
-            events
-                .filter { isPast($0, now: now) }
-                .suffix(2)
+    private func compactTodayEvents(_ events: [ScheduleEvent], now: Date) -> [ScheduleEvent] {
+        events.filter { !isPast($0, now: now) }
+    }
 
-        let current =
-            events
-                .filter { isCurrent($0, now: now) }
-
-        let future =
-            events
-                .filter {
-                    !isPast($0, now: now) &&
-                    !isCurrent($0, now: now) &&
-                    $0.plannedStart > now
-                }
-                .prefix(5)
-
-        let raceGroupIDs =
-            Set(
-                events
-                    .filter { $0.isRace }
-                    .compactMap {
-                        normalizedGroupID($0.groupID)
-                    }
-            )
-
-        let races =
-            events.filter { event in
-                if event.isRace &&
-                    normalizedGroupID(event.groupID) == nil {
-                    return true
-                }
-
-                guard let groupID = normalizedGroupID(event.groupID) else {
-                    return false
-                }
-
-                return raceGroupIDs.contains(groupID)
-            }
-
-        var result: [ScheduleEvent] = []
-
-        appendUnique(Array(past), to: &result)
-        appendUnique(current, to: &result)
-        appendUnique(Array(future), to: &result)
-        appendUnique(races, to: &result)
-
-        return result.sorted {
-            $0.plannedStart < $1.plannedStart
+    private func scrollToNow(_ proxy: ScrollViewProxy) {
+        let now = Date()
+        let today = Calendar.current.startOfDay(for: now)
+        manuallyCollapsedDays.remove(today)
+        manuallyExpandedDays.insert(today)
+        showingFullToday = true
+        let relevant = SchedulePresentation.events(stage)
+        let target = SchedulePresentation.current(relevant, now: now)
+            ?? relevant.first { $0.plannedStart > now }
+        guard let target else { return }
+        let day = Calendar.current.startOfDay(for: target.plannedStart)
+        manuallyCollapsedDays.remove(day)
+        manuallyExpandedDays.insert(day)
+        // Wait for the expanded section to enter the view tree, then move once.
+        Task { @MainActor in
+            await Task.yield()
+            withAnimation { proxy.scrollTo(target.notificationID, anchor: .top) }
         }
     }
 
@@ -740,6 +734,7 @@ struct StageDetailView: View {
             )
         }
         .buttonStyle(.plain)
+        .id(event.notificationID)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button(role: .destructive) {
                 deleteEvent(event)
@@ -843,7 +838,7 @@ struct StageDetailView: View {
         let current = isCurrent(event, now: now)
 
         VStack(alignment: .leading, spacing: 6) {
-            if let groupTitle {
+            if let groupTitle = groupTitle ?? (current ? SchedulePresentation.groupTitle(event) : nil) {
                 sessionGroupHeader(
                     title: groupTitle,
                     isRace: groupIsRace
@@ -856,14 +851,15 @@ struct StageDetailView: View {
             ) {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(
-                        event.plannedStart.formatted(
-                            date: .omitted,
-                            time: .shortened
+                        displayTime(
+                            event.plannedStart
                         )
                     )
                     .font(foreign ? .subheadline : .headline)
                     .fontWeight(personal ? .semibold : .regular)
                     .monospacedDigit()
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
                     .foregroundStyle(
                         personal
                         ? Color.orange
@@ -872,13 +868,14 @@ struct StageDetailView: View {
 
                     if event.plannedDuration > 10 {
                         Text(
-                            eventEnd(event).formatted(
-                                date: .omitted,
-                                time: .shortened
+                            displayTime(
+                                eventEnd(event)
                             )
                         )
                         .font(.caption2)
                         .monospacedDigit()
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
                         .foregroundStyle(foreign ? .tertiary : .secondary)
                     }
 
@@ -896,7 +893,8 @@ struct StageDetailView: View {
                             .fixedSize()
                     }
                 }
-                .frame(width: 58, alignment: .leading)
+                .fixedSize(horizontal: true, vertical: false)
+                .frame(width: timeColumnWidth, alignment: .leading)
 
                 VStack(
                     alignment: .leading,
@@ -1298,4 +1296,26 @@ struct StageDetailView: View {
             print("Ошибка удаления события: \(error)")
         }
     }
+    private func displayTime(
+        _ date: Date
+    ) -> String {
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
+            )
+
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
+        )
+    }
+
 }

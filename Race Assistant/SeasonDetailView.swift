@@ -15,6 +15,13 @@ struct SeasonDetailView: View {
 
     var body: some View {
         List {
+            if season.stages.contains(where: { SchedulePresentation.isSafetyCar($0.myRole) || !$0.scheduleEvents.flatMap(\.safetyCarPeriods).isEmpty }) {
+            Section {
+                NavigationLink { SafetyCarSeasonStatisticsView(season: season) } label: {
+                    Label("Статистика SC за сезон", systemImage: "chart.bar")
+                }
+            }
+            }
             if sortedStages.isEmpty {
                 ContentUnavailableView(
                     "Нет этапов",

@@ -10,15 +10,18 @@ struct ContentView: View {
     @Query
     private var stages: [Stage]
 
+    @ScaledMetric(relativeTo: .headline) private var timeColumnWidth: CGFloat = 82
+
     @State private var showingAddChampionship = false
     @State private var eventToEdit: ScheduleEvent?
+    @State private var championshipToOpen: Championship?
 
     var body: some View {
         NavigationStack {
             TimelineView(
                 .periodic(
                     from: .now,
-                    by: 60
+                    by: 1
                 )
             ) { context in
                 mainContent(
@@ -40,8 +43,9 @@ struct ContentView: View {
             .sheet(
                 isPresented: $showingAddChampionship
             ) {
-                AddChampionshipView()
+                AddChampionshipView { championshipToOpen = $0 }
             }
+            .navigationDestination(item: $championshipToOpen) { ChampionshipDetailView(championship: $0) }
             .sheet(
                 item: $eventToEdit
             ) { event in
@@ -67,9 +71,7 @@ struct ContentView: View {
 
                 // MARK: - Сегодня
 
-                if let stage = currentStage(
-                    now: now
-                ) {
+                ForEach(SchedulePresentation.todayStages(stages, now: now).filter { $0.myRole != nil }) { stage in
                     Section {
 
                         // MARK: Информация об этапе
@@ -150,7 +152,7 @@ struct ContentView: View {
                                 } else {
 
                                     Label(
-                                        "Роль не выбрана",
+                                        "Зритель",
                                         systemImage:
                                             "person"
                                     )
@@ -273,6 +275,21 @@ struct ContentView: View {
                     }
                 }
 
+                let otherStages = SchedulePresentation.todayStages(stages, now: now).filter { $0.myRole == nil }
+                if !otherStages.isEmpty {
+                    Section("Сегодня · другие соревнования") {
+                        ForEach(otherStages) { stage in
+                            NavigationLink { StageDetailView(stage: stage) } label: {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("\(stage.season?.championship?.name ?? "") · \(stage.name)")
+                                    Text("Зритель · \(stage.circuit?.shortName ?? "")")
+                                        .font(.caption).foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
+
                 // MARK: - Предстоящие этапы
 
                 Section("Предстоящие этапы") {
@@ -336,7 +353,6 @@ struct ContentView: View {
                 } header: {
                     Text("Управление")
                 }
-            }
 
             // MARK: - Справочники
 
@@ -355,37 +371,7 @@ struct ContentView: View {
                     12
                 )
             }
-        }
-    }
-
-    // MARK: - Current Stage
-
-    private func currentStage(
-        now: Date
-    ) -> Stage? {
-        let calendar =
-            Calendar.current
-
-        let today =
-            calendar.startOfDay(
-                for: now
-            )
-
-        return stages.first { stage in
-
-            let start =
-                calendar.startOfDay(
-                    for: stage.startDate
-                )
-
-            let end =
-                calendar.startOfDay(
-                    for: stage.endDate
-                )
-
-            return
-                today >= start &&
-                today <= end
+            }
         }
     }
 
@@ -550,39 +536,9 @@ struct ContentView: View {
         stage: Stage,
         now: Date
     ) -> [ScheduleEvent] {
-        let calendar =
-            Calendar.current
-
-        let events =
-            stage.scheduleEvents
-                .filter {
-                    calendar.isDate(
-                        $0.plannedStart,
-                        inSameDayAs: now
-                    )
-                }
-                .sorted {
-                    $0.plannedStart <
-                    $1.plannedStart
-                }
-
-        guard let myRole =
-            stage.myRole
-        else {
-            return events
-        }
-
-        return events.filter { event in
-
-            if event.eventRoles.isEmpty {
-                return true
-            }
-
-            return event.eventRoles
-                .contains { eventRole in
-                    eventRole.role
-                        === myRole
-                }
+        SchedulePresentation.events(stage).filter {
+            Calendar.current.isDate($0.plannedStart, inSameDayAs: now) ||
+            ($0.plannedStart <= now && SchedulePresentation.end($0) > now)
         }
     }
 
@@ -652,12 +608,7 @@ struct ContentView: View {
         events: [ScheduleEvent],
         now: Date
     ) -> ScheduleEvent? {
-        events.first {
-            isCurrent(
-                $0,
-                now: now
-            )
-        }
+        SchedulePresentation.current(events, now: now)
     }
 
     private func nextEvent(
@@ -746,11 +697,9 @@ struct ContentView: View {
             // Время
 
             Text(
-                event.plannedStart
-                    .formatted(
-                        date: .omitted,
-                        time: .shortened
-                    )
+                displayTime(
+                    event.plannedStart
+                )
             )
             .font(
                 past
@@ -758,6 +707,8 @@ struct ContentView: View {
                     : .headline
             )
             .monospacedDigit()
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
             .strikethrough(past)
             .foregroundStyle(
                 past
@@ -765,7 +716,7 @@ struct ContentView: View {
                     : .primary
             )
             .frame(
-                width: 58,
+                width: timeColumnWidth,
                 alignment: .leading
             )
 
@@ -774,6 +725,10 @@ struct ContentView: View {
                 spacing:
                     past ? 2 : 4
             ) {
+
+                if (isCurrent || isNext), let group = SchedulePresentation.groupTitle(event) {
+                    Text(group).font(.caption.weight(.semibold)).foregroundStyle(.orange)
+                }
 
                 // Текущее событие
 
@@ -926,43 +881,7 @@ struct ContentView: View {
         event: ScheduleEvent,
         now: Date
     ) -> String {
-
-        let seconds =
-            event.plannedStart
-                .timeIntervalSince(now)
-
-        let minutes =
-            max(
-                0,
-                Int(
-                    ceil(
-                        seconds / 60
-                    )
-                )
-            )
-
-        if minutes == 0 {
-            return "сейчас"
-        }
-
-        if minutes < 60 {
-            return
-                "через \(minutes) мин"
-        }
-
-        let hours =
-            minutes / 60
-
-        let remainingMinutes =
-            minutes % 60
-
-        if remainingMinutes == 0 {
-            return
-                "через \(hours) ч"
-        }
-
-        return
-            "через \(hours) ч \(remainingMinutes) мин"
+        "через \(RaceClock.countdown(until: event.plannedStart, now: now))"
     }
 
     private func timeRemainingText(
@@ -1073,4 +992,26 @@ struct ContentView: View {
             )
         }
     }
+    private func displayTime(
+        _ date: Date
+    ) -> String {
+        let seconds =
+            Calendar.current.component(
+                .second,
+                from: date
+            )
+
+        let formatter = DateFormatter()
+        formatter.locale =
+            Locale(identifier: "ru_RU")
+        formatter.dateFormat =
+            seconds == 0
+                ? "HH:mm"
+                : "HH:mm:ss"
+
+        return formatter.string(
+            from: date
+        )
+    }
+
 }

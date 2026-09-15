@@ -27,7 +27,10 @@ struct EditScheduleEventView: View {
     }
 
     private var activeRaceClasses: [RaceClass] {
-        allRaceClasses.filter { $0.active }
+        let allowed = event.stage?.season?.championship?.raceClasses ?? []
+        return allRaceClasses.filter { item in
+            (item.active && allowed.contains { $0 === item }) || selectedRaceClasses.contains { $0 === item }
+        }
     }
 
     private var minimumEventDate: Date {
@@ -168,6 +171,7 @@ struct EditScheduleEventView: View {
 
                 // MARK: - Классы
 
+                if !activeRaceClasses.isEmpty {
                 Section("Классы соревнований") {
                     NavigationLink {
                         EditRaceClassSelectionView(
@@ -187,6 +191,7 @@ struct EditScheduleEventView: View {
                     }
                 }
 
+                }
                 // MARK: - Роли
 
                 Section("Роли") {

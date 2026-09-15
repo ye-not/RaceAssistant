@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import UserNotifications
 
 enum SeedDataImporter {
 
@@ -57,6 +58,42 @@ enum SeedDataImporter {
         }
     }
 
+    @MainActor
+    static func fillEmptyBundledSchedules(modelContext: ModelContext) {
+        guard let seed = loadSeed() else { return }
+        do {
+            let existingClasses = try modelContext.fetch(FetchDescriptor<RaceClass>())
+            try importRaceClasses(seed.referenceData.raceClasses.filter { item in
+                !existingClasses.contains { normalized($0.shortName) == normalized(item.shortName) }
+            }, modelContext: modelContext)
+            for schedule in seed.scheduleImports {
+                if try findStage(seriesName: schedule.seriesName, seasonName: schedule.seasonName,
+                    seasonYear: schedule.seasonYear, stageName: schedule.stageName, modelContext: modelContext) == nil,
+                   let series = seed.series.first(where: { normalized($0.name) == normalized(schedule.seriesName) }),
+                   let seasonItem = series.seasons.first(where: {
+                       (schedule.seasonName == nil || $0.resolvedName == schedule.seasonName)
+                       && (schedule.seasonYear == nil || $0.resolvedLegacyYear == schedule.seasonYear)
+                       && $0.stages.contains { normalized($0.name) == normalized(schedule.stageName) }
+                   }),
+                   let stageItem = seasonItem.stages.first(where: { normalized($0.name) == normalized(schedule.stageName) }) {
+                    let championship = try findOrCreateChampionship(name: series.name, organizer: series.organizer, modelContext: modelContext)
+                    let season = try findOrCreateSeason(item: seasonItem, championship: championship, modelContext: modelContext)
+                    if try findCircuit(name: stageItem.circuitName, modelContext: modelContext) == nil,
+                       let circuit = seed.referenceData.circuits.first(where: { normalized($0.name) == normalized(stageItem.circuitName) }) {
+                        try importCircuits([circuit], modelContext: modelContext)
+                    }
+                    try findOrCreateStage(item: stageItem, season: season, modelContext: modelContext)
+                }
+                guard let stage = try findStage(seriesName: schedule.seriesName,
+                    seasonName: schedule.seasonName, seasonYear: schedule.seasonYear,
+                    stageName: schedule.stageName, modelContext: modelContext),
+                    stage.scheduleEvents.isEmpty else { continue }
+                try importSchedule(schedule, modelContext: modelContext)
+            }
+            try modelContext.save()
+        } catch { modelContext.rollback(); print("Заполнение пустых расписаний: \(error)") }
+    }
+
     // MARK: - Load JSON
 
     private static func loadSeed()
@@ -85,10 +122,15 @@ enum SeedDataImporter {
             let decoder =
                 JSONDecoder()
 
-            return try decoder.decode(
-                RaceAssistantSeed.self,
-                from: data
-            )
+            var seed = try decoder.decode(RaceAssistantSeed.self, from: data)
+            for name in seed.scheduleFiles ?? [] {
+                guard let url = Bundle.main.url(forResource: name, withExtension: "json") else {
+                    throw ExternalScheduleError.invalidSchedule("Не найден файл \(name).json")
+                }
+                let file = try decoder.decode(ExternalScheduleFile.self, from: Data(contentsOf: url))
+                seed.scheduleImports.append(contentsOf: file.scheduleImports.map { $0.asSeedScheduleImport })
+            }
+            return seed
 
         } catch {
             print(
@@ -697,7 +739,8 @@ enum SeedDataImporter {
                     dateString:
                         item.date,
                     timeString:
-                        startTime
+                        startTime,
+                    timeZoneIdentifier: schedule.timeZoneIdentifier
                 )
             let plannedDuration: Int
 
@@ -706,7 +749,8 @@ enum SeedDataImporter {
                 let plannedEnd =
                     try combine(
                         dateString: item.date,
-                        timeString: endTime
+                        timeString: endTime,
+                        timeZoneIdentifier: schedule.timeZoneIdentifier
                     )
 
                 let calculatedDuration =
@@ -1010,7 +1054,8 @@ enum SeedDataImporter {
 
     private static func combine(
         dateString: String,
-        timeString: String
+        timeString: String,
+        timeZoneIdentifier: String? = nil
     ) throws -> Date {
 
         let formatter =
@@ -1028,8 +1073,14 @@ enum SeedDataImporter {
                     "en_US_POSIX"
             )
 
-        formatter.timeZone =
-            TimeZone.current
+        if let identifier = timeZoneIdentifier {
+            guard let zone = TimeZone(identifier: identifier) else {
+                throw ExternalScheduleError.invalidSchedule("Неизвестный часовой пояс: \(identifier)")
+            }
+            formatter.timeZone = zone
+        } else {
+            formatter.timeZone = TimeZone.current
+        }
 
         if timeString.count > 5 {
             formatter.dateFormat =
@@ -1082,7 +1133,8 @@ private struct RaceAssistantSeed: Decodable {
 
     let series: [SeedSeries]
 
-    let scheduleImports: [SeedScheduleImport]
+    var scheduleImports: [SeedScheduleImport]
+    let scheduleFiles: [String]?
 }
 
 
@@ -1188,6 +1240,7 @@ private struct SeedScheduleImport: Decodable {
     let seasonName: String?
     let seasonYear: Int?
     let stageName: String
+    let timeZoneIdentifier: String?
     let events: [SeedScheduleEvent]
 }
 
@@ -1260,80 +1313,126 @@ extension SeedDataImporter {
     /// Imports an operational JSON selected by the user.
     /// Only schedules explicitly present in `scheduleImports` are replaced.
     /// Stage settings (role, notification mode, reminder offsets) are preserved.
+    @MainActor
     static func importExternalJSON(
         from url: URL,
-        modelContext: ModelContext
+        modelContext: ModelContext,
+        expectedStage: Stage? = nil,
+        updateReminders: Bool = true
     ) throws -> ExternalImportResult {
         let access = url.startAccessingSecurityScopedResource()
-        defer {
-            if access { url.stopAccessingSecurityScopedResource() }
-        }
-
+        defer { if access { url.stopAccessingSecurityScopedResource() } }
         let data = try Data(contentsOf: url)
         let file = try JSONDecoder().decode(ExternalScheduleFile.self, from: data)
-
-        // Optional reference data lets an operational file introduce classes
-        // such as F1/F2/F3 without touching unrelated dictionaries.
-        if let referenceData = file.referenceData {
-            try importRoles(referenceData.roles ?? [], modelContext: modelContext)
-            try importRaceClasses(referenceData.raceClasses ?? [], modelContext: modelContext)
-            try importCircuits(referenceData.circuits ?? [], modelContext: modelContext)
+        if file.scheduleImports.isEmpty {
+            throw ExternalScheduleError.invalidSchedule("Файл не содержит расписания")
         }
-
-        var importedEvents = 0
-        var affectedStages: [Stage] = []
-
+        var plans: [(schedule: ExternalScheduleImport, stage: Stage, protected: [(ScheduleEvent, Int)])] = []
+        var seenStages = Set<PersistentIdentifier>()
+        let storedSC = try modelContext.fetch(FetchDescriptor<SafetyCarPeriod>())
+        // Validate the full batch BEFORE deleting any event or notification.
         for schedule in file.scheduleImports {
-            guard let stage = try findStage(
-                seriesName: schedule.seriesName,
-                seasonName: schedule.seasonName,
-                seasonYear: schedule.seasonYear,
-                stageName: schedule.stageName,
-                modelContext: modelContext
-            ) else {
-                throw ExternalScheduleError.stageNotFound(
-                    "\(schedule.seriesName) / \(schedule.seasonName ?? String(schedule.seasonYear ?? 0)) / \(schedule.stageName)"
-                )
+            guard let stage = try findStage(seriesName: schedule.seriesName,
+                seasonName: schedule.seasonName, seasonYear: schedule.seasonYear,
+                stageName: schedule.stageName, modelContext: modelContext) else {
+                throw ExternalScheduleError.stageNotFound(schedule.stageName)
             }
-
-            // Remove pending notifications belonging to the old schedule first.
-            for event in stage.scheduleEvents {
-                NotificationManager.shared.removeNotifications(for: event)
+            if let expectedStage, stage !== expectedStage {
+                throw ExternalScheduleError.invalidSchedule("Выбран файл другого этапа: \(schedule.stageName)")
             }
-
-            // Cascade rules remove EventRole/EventClass/SafetyCarPeriod.
-            let oldEvents = stage.scheduleEvents
-            stage.scheduleEvents.removeAll()
-            for event in oldEvents {
-                modelContext.delete(event)
+            guard seenStages.insert(stage.persistentModelID).inserted else {
+                throw ExternalScheduleError.invalidSchedule("Этап повторяется в файле: \(stage.name)")
             }
-
-            // Reuse the normal importer now that the stage is empty.
-            try importSchedule(schedule.asSeedScheduleImport, modelContext: modelContext)
-            stage.scheduleUpdatedAt = Date()
-
-            importedEvents += schedule.events.count
-            affectedStages.append(stage)
+            var starts: [Date] = []
+            var keys = Set<String>()
+            for item in schedule.events {
+                guard let time = item.startTime, item.durationMinutes >= 0 else {
+                    throw ExternalScheduleError.invalidSchedule("Нет времени или неверная длительность: \(item.title)")
+                }
+                let start = try combine(dateString: item.date, timeString: time, timeZoneIdentifier: schedule.timeZoneIdentifier)
+                starts.append(start)
+                if let end = item.endTime { _ = try combine(dateString: item.date, timeString: end, timeZoneIdentifier: schedule.timeZoneIdentifier) }
+                let key = "\(normalized(item.title))|\(start.timeIntervalSince1970)"
+                guard keys.insert(key).inserted else {
+                    throw ExternalScheduleError.invalidSchedule("Повтор события: \(item.title) · \(time)")
+                }
+            }
+            var protected: [(ScheduleEvent, Int)] = []
+            var usedIndexes = Set<Int>()
+            for old in stage.scheduleEvents where storedSC.contains(where: { $0.scheduleEvent === old }) {
+                let candidates = schedule.events.indices.filter { index in
+                    let item = schedule.events[index]
+                    guard item.isRace == old.isRace,
+                          Calendar.current.isDate(starts[index], inSameDayAs: old.plannedStart) else { return false }
+                    return normalized(item.title) == normalized(old.title) &&
+                        Set(item.classShortNames) == Set(old.eventClasses.compactMap { $0.raceClass?.shortName })
+                }
+                let exact = candidates.filter { abs(starts[$0].timeIntervalSince(old.plannedStart)) < 1 }
+                let matches = exact.isEmpty ? candidates : exact
+                guard matches.count == 1, let index = matches.first, usedIndexes.insert(index).inserted else {
+                    throw ExternalScheduleError.invalidSchedule(
+                        "Гонка с записями SC не найдена однозначно в новом расписании: \(old.title). Импорт отменён, записи сохранены.")
+                }
+                protected.append((old, index))
+            }
+            plans.append((schedule, stage, protected))
         }
-
         try modelContext.save()
-
-        // Refresh phone notifications and Watch data for affected stages.
-        for stage in affectedStages {
+        var oldNotificationIDs: [UUID] = []
+        do {
+            if let refs = file.referenceData {
+                try importRoles(refs.roles ?? [], modelContext: modelContext)
+                try importRaceClasses(refs.raceClasses ?? [], modelContext: modelContext)
+                try importCircuits(refs.circuits ?? [], modelContext: modelContext)
+            }
+            for plan in plans {
+                let stage = plan.stage
+                var preserved: [(Int, [SafetyCarPeriod], UUID, Date?, Int?, String)] = []
+                for (event, index) in plan.protected {
+                    let periods = storedSC.filter { $0.scheduleEvent === event }
+                    preserved.append((index, periods, event.notificationID, event.actualStart, event.actualDuration, event.status))
+                    event.safetyCarPeriods.removeAll()
+                    for period in periods { period.scheduleEvent = nil }
+                }
+                let oldEvents = stage.scheduleEvents
+                oldNotificationIDs.append(contentsOf: oldEvents.map { $0.notificationID })
+                stage.scheduleEvents.removeAll()
+                for event in oldEvents { modelContext.delete(event) }
+                try importSchedule(plan.schedule.asSeedScheduleImport, modelContext: modelContext)
+                for (index, periods, id, actualStart, actualDuration, status) in preserved {
+                    let item = plan.schedule.events[index]
+                    let start = try combine(dateString: item.date, timeString: item.startTime!, timeZoneIdentifier: plan.schedule.timeZoneIdentifier)
+                    guard let replacement = stage.scheduleEvents.first(where: {
+                        normalized($0.title) == normalized(item.title) && abs($0.plannedStart.timeIntervalSince(start)) < 1
+                    }) else { throw ExternalScheduleError.invalidSchedule("Не удалось восстановить связь SC") }
+                    replacement.notificationID = id
+                    replacement.actualStart = actualStart
+                    replacement.actualDuration = actualDuration
+                    replacement.status = status
+                    for period in periods { period.scheduleEvent = replacement }
+                }
+                stage.scheduleUpdatedAt = Date()
+            }
+            try modelContext.save()
+        } catch {
+            modelContext.rollback()
+            throw error
+        }
+        // Mutate notifications only after the database transaction succeeds.
+        if updateReminders {
+            let ids = oldNotificationIDs.flatMap { id in [10, 5, 1].map { "raceassistant-\(id.uuidString)-\($0)" } }
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ids)
             Task { @MainActor in
-                await NotificationManager.shared.rescheduleNotifications(for: stage)
-                PhoneWatchConnectivityManager.shared.send(stage: stage)
+                for plan in plans { await NotificationManager.shared.rescheduleNotifications(for: plan.stage) }
+                PhoneWatchConnectivityManager.shared.sendPreferredStage()
             }
         }
-
-        return ExternalImportResult(
-            stageCount: affectedStages.count,
-            eventCount: importedEvents
-        )
+        return ExternalImportResult(stageCount: plans.count,
+                                    eventCount: plans.reduce(0) { $0 + $1.stage.scheduleEvents.count })
     }
 
     /// Exports the current stored schedules, not the bundled seed.
-    static func exportCurrentJSON(modelContext: ModelContext) throws -> Data {
+    static func exportCurrentJSON(modelContext: ModelContext, stage selectedStage: Stage? = nil) throws -> Data {
         let championships = try modelContext.fetch(FetchDescriptor<Championship>())
         let roles = try modelContext.fetch(FetchDescriptor<Role>())
         let classes = try modelContext.fetch(FetchDescriptor<RaceClass>())
@@ -1361,8 +1460,9 @@ extension SeedDataImporter {
         for championship in championships.sorted(by: { $0.name < $1.name }) {
             for season in championship.seasons.sorted(by: { $0.displayName < $1.displayName }) {
                 for stage in season.stages.sorted(by: { $0.startDate < $1.startDate }) {
+                    if let selectedStage, stage !== selectedStage { continue }
                     let events = stage.scheduleEvents.sorted(by: { $0.plannedStart < $1.plannedStart })
-                    guard !events.isEmpty else { continue }
+                    guard !events.isEmpty || selectedStage != nil else { continue }
 
                     let eventJSON: [[String: Any]] = events.enumerated().map { index, event in
                         var object: [String: Any] = [
@@ -1400,6 +1500,7 @@ extension SeedDataImporter {
                         "seasonName": season.displayName,
                         "seasonYear": season.year,
                         "stageName": stage.name,
+                "timeZoneIdentifier": TimeZone.current.identifier,
                         "events": eventJSON
                     ])
                 }
@@ -1443,6 +1544,7 @@ private struct ExternalScheduleImport: Decodable {
     let seasonName: String?
     let seasonYear: Int?
     let stageName: String
+    let timeZoneIdentifier: String?
     let events: [SeedScheduleEvent]
 
     var asSeedScheduleImport: SeedScheduleImport {
@@ -1451,6 +1553,7 @@ private struct ExternalScheduleImport: Decodable {
             seasonName: seasonName,
             seasonYear: seasonYear,
             stageName: stageName,
+            timeZoneIdentifier: timeZoneIdentifier,
             events: events
         )
     }
@@ -1458,11 +1561,14 @@ private struct ExternalScheduleImport: Decodable {
 
 private enum ExternalScheduleError: LocalizedError {
     case stageNotFound(String)
+    case invalidSchedule(String)
 
     var errorDescription: String? {
         switch self {
         case .stageNotFound(let value):
             return "Этап не найден: \(value)"
+        case .invalidSchedule(let value):
+            return value
         }
     }
 }

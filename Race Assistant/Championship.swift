@@ -5,6 +5,8 @@ import SwiftData
 final class Championship {
     var name: String
     var organizer: String
+    var raceClasses: [RaceClass] = []
+    var classesConfigured: Bool = false
 
     @Relationship(deleteRule: .cascade, inverse: \Season.championship)
     var seasons: [Season] = []
