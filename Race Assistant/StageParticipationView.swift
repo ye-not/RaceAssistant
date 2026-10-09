@@ -27,6 +27,7 @@ struct StageParticipationSection: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Role.name) private var roles: [Role]
     let stage: Stage
+    @AppStorage("spectatorRaceStartEnabled") private var spectatorRaceStartEnabled = true
 
     private var category: Binding<StageParticipation> {
         Binding(get: { stage.participation }, set: { value in
@@ -67,7 +68,15 @@ struct StageParticipationSection: View {
                     }
                 }
             }
-            if stage.participation == .athlete {
+            if stage.participation == .spectator {
+                Toggle("Уведомлять о начале заездов", isOn: $spectatorRaceStartEnabled)
+                    .onChange(of: spectatorRaceStartEnabled) { _, _ in
+                        Task { await NotificationManager.shared.rescheduleNotifications(for: stage) }
+                    }
+                Text("Уведомление в запланированное время старта. Без выбранных классов — все гонки этапа.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
+            if stage.participation == .athlete || stage.participation == .spectator {
                 ForEach(classes) { value in
                     Toggle(value.shortName.isEmpty ? value.name : value.shortName,
                            isOn: Binding(get: { stage.participationClasses.contains { $0 === value } }, set: { selected in
@@ -77,7 +86,7 @@ struct StageParticipationSection: View {
                     }))
                 }
                 if stage.participationClasses.isEmpty {
-                    Text(classes.isEmpty ? "Классы появятся после добавления расписания или классов чемпионата." : "Выберите классы, в которых участвуете.")
+                    Text(classes.isEmpty ? "Классы появятся после добавления расписания или классов чемпионата." : (stage.participation == .spectator ? "Классы не выбраны: уведомления обо всех гонках этапа." : "Выберите классы, в которых участвуете."))
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }

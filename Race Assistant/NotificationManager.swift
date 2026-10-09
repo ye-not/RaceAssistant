@@ -101,11 +101,13 @@ final class NotificationManager: NSObject {
                 )
         )
 
+        let isSpectatorStart = spectatorStartEnabled(for: event, stage: event.stage)
+
         // Если Watch отвечает
         // за уведомления,
         // iPhone ничего не создаёт.
 
-        if watchOwnsNotifications(for: eventID) {
+        if !isSpectatorStart && watchOwnsNotifications(for: eventID) {
 
             print(
                 "iPhone notification skipped: Watch notifications active"
@@ -123,17 +125,9 @@ final class NotificationManager: NSObject {
         guard event.status == "scheduled",
               !stage.scheduleEvents.contains(where: { $0.isRace && $0.status == "red_flag" }) else { return }
 
-        guard shouldNotify(
-            for: event,
-            stage: stage
-        ) else {
-            return
-        }
+        guard isSpectatorStart || shouldNotify(for: event, stage: stage) else { return }
 
-        let offsets =
-            reminderOffsets(
-                for: stage
-            )
+        let offsets = (isSpectatorStart ? [0] : []) + (shouldNotify(for: event, stage: stage) ? reminderOffsets(for: stage) : [])
 
         guard !offsets.isEmpty else {
             return
@@ -141,6 +135,7 @@ final class NotificationManager: NSObject {
 
         var requests: [UNNotificationRequest] = []
         for minutesBefore in offsets {
+            if minutesBefore != 0 && watchOwnsNotifications(for: eventID) { continue }
 
             guard let notificationDate =
                 Calendar.current.date(
@@ -160,22 +155,17 @@ final class NotificationManager: NSObject {
             let content =
                 UNMutableNotificationContent()
 
-            content.title =
-                title(
-                    minutesBefore:
-                        minutesBefore
-                )
+            content.title = minutesBefore == 0 ? "Начало заезда: \(event.title)" : title(minutesBefore: minutesBefore)
 
-            content.body =
-                body(
-                    for: event
-                )
+            content.body = minutesBefore == 0
+                ? [stage.season?.championship?.name, stage.circuit?.name]
+                    .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
+                : body(for: event)
 
             content.sound =
                 .default
 
-            content.interruptionLevel =
-                .timeSensitive
+            content.interruptionLevel = minutesBefore == 0 ? .active : .timeSensitive
 
             content.categoryIdentifier =
                 categoryIdentifier
@@ -235,7 +225,7 @@ final class NotificationManager: NSObject {
                     center.removePendingNotificationRequests(withIdentifiers: requests.map(\.identifier))
                     return
                 }
-                if watchOwnsNotifications(for: eventID) {
+                if minutesBefore != 0 && watchOwnsNotifications(for: eventID) {
                     center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
                 }
 
@@ -287,8 +277,7 @@ final class NotificationManager: NSObject {
         // После очистки больше
         // ничего создавать не надо.
 
-        guard stage.notificationMode
-            != .none
+        guard stage.notificationMode != .none || spectatorStartEnabledForStage(stage)
         else {
 
             print(
@@ -303,7 +292,7 @@ final class NotificationManager: NSObject {
                 for: stage
             )
 
-        guard !offsets.isEmpty
+        guard !offsets.isEmpty || spectatorStartEnabledForStage(stage)
         else {
 
             print(
@@ -352,6 +341,26 @@ final class NotificationManager: NSObject {
         case .myRole:
             guard stage.isInterested else { return false }
             return SchedulePresentation.relevant(event, stage: stage)
+        }
+    }
+
+    // MARK: - Spectator race start
+
+    @MainActor
+    private func spectatorStartEnabledForStage(_ stage: Stage) -> Bool {
+        stage.participation == .spectator &&
+        UserDefaults.standard.object(forKey: "spectatorRaceStartEnabled") as? Bool != false
+    }
+
+    @MainActor
+    private func spectatorStartEnabled(for event: ScheduleEvent, stage: Stage?) -> Bool {
+        guard let stage, spectatorStartEnabledForStage(stage), event.isRace,
+              event.status == "scheduled" else { return false }
+        let chosen = stage.participationClasses
+        if chosen.isEmpty { return true }
+        return event.eventClasses.contains { link in
+            guard let raceClass = link.raceClass else { return false }
+            return chosen.contains { $0 === raceClass }
         }
     }
 
@@ -418,7 +427,7 @@ final class NotificationManager: NSObject {
         for event: ScheduleEvent
     ) -> [String] {
 
-        [10, 5, 1].map {
+        [10, 5, 1, 0].map {
             identifier(
                 for: event,
                 minutesBefore: $0

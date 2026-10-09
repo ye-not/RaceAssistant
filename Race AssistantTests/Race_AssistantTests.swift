@@ -33,8 +33,10 @@ struct Race_AssistantTests {
     @Test func workingStageAndRaceTakePriority() {
         let now = Date()
         let sc = Role(name: "Safety Car", shortName: "SC")
-        let stage = Stage(name: "РСКГ", startDate: now, endDate: now, myRole: sc)
-        let spectator = Stage(name: "F1", startDate: now, endDate: now)
+        let rskg = Championship(name: "РСКГ")
+        let f1 = Championship(name: "F1")
+        let stage = Stage(name: "РСКГ", startDate: now, endDate: now, season: Season(year: 2026, championship: rskg), myRole: sc)
+        let spectator = Stage(name: "F1", startDate: now, endDate: now, season: Season(year: 2026, championship: f1))
         let race = ScheduleEvent(title: "Гонка", plannedStart: now.addingTimeInterval(-60), plannedDuration: 30, stage: stage, isRace: true)
         stage.scheduleEvents = [race]
         #expect(SchedulePresentation.todayStages([spectator, stage], now: now).count == 2)
