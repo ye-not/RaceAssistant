@@ -225,8 +225,12 @@ final class NotificationManager: NSObject {
                     center.removePendingNotificationRequests(withIdentifiers: requests.map(\.identifier))
                     return
                 }
-                if minutesBefore != 0 && watchOwnsNotifications(for: eventID) {
-                    center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
+                if let minutesBefore = request.content.userInfo["minutesBefore"] as? Int,
+                   minutesBefore != 0,
+                   watchOwnsNotifications(for: eventID) {
+                    center.removePendingNotificationRequests(
+                        withIdentifiers: [request.identifier]
+                    )
                 }
 
                 print(
