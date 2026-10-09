@@ -26,6 +26,9 @@ final class Stage {
     var startDate: Date
     var endDate: Date
 
+    /// Optional until the existing store has been safely migrated.
+    var raceWeekend: RaceWeekend?
+
     var season: Season?
     var circuit: Circuit?
     /// nil inherits the circuit default; does not copy it into every race.

@@ -7,6 +7,7 @@ enum AppModelContainer {
             Championship.self,
             Season.self,
             Stage.self,
+            RaceWeekend.self,
             ScheduleEvent.self,
             Circuit.self,
             CircuitConfiguration.self,
