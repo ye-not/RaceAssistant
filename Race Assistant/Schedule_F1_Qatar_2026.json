@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "Formula1.com official session timetable, checked 2026-10-06",
+  "sourceURL": "https://www.formula1.com/en/racing/2026/qatar",
+  "sourceDate": "2026-10-06",
+  "sourceVersion": 1,
+  "sourceNotes": "Основные сессии F1; серии поддержки не включены. Время в часовом поясе трассы, при импорте переводится во время устройства. Для Гран-при 120 минут — лимит времени, не прогноз финиша. Расписание может обновляться.",
+  "referenceData": {
+    "roles": [],
+    "raceClasses": [
+      {
+        "name": "Formula 1",
+        "shortName": "F1",
+        "active": true
+      }
+    ],
+    "circuits": [
+      {
+        "name": "Lusail International Circuit",
+        "shortName": "Lusail",
+        "city": "Лусаил",
+        "country": "Катар",
+        "lengthMeters": 5419
+      }
+    ]
+  },
+  "scheduleImports": [
+    {
+      "seriesName": "Formula 1",
+      "seasonName": "2026",
+      "seasonYear": 2026,
+      "stageName": "Qatar Grand Prix",
+      "timeZoneIdentifier": "Asia/Qatar",
+      "events": [
+        {
+          "sourceRow": 1,
+          "date": "2026-11-27",
+          "startTime": "16:30",
+          "endTime": "17:30",
+          "durationMinutes": 60,
+          "title": "Тренировка 1",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 2,
+          "date": "2026-11-27",
+          "startTime": "20:00",
+          "endTime": "21:00",
+          "durationMinutes": 60,
+          "title": "Тренировка 2",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 3,
+          "date": "2026-11-28",
+          "startTime": "17:30",
+          "endTime": "18:30",
+          "durationMinutes": 60,
+          "title": "Тренировка 3",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 4,
+          "date": "2026-11-28",
+          "startTime": "21:00",
+          "endTime": "22:00",
+          "durationMinutes": 60,
+          "title": "Квалификация",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 5,
+          "date": "2026-11-29",
+          "startTime": "19:00",
+          "endTime": "21:00",
+          "durationMinutes": 120,
+          "title": "Гран-при · 57 кругов (лимит 120 мин)",
+          "type": "race",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        }
+      ]
+    }
+  ]
+}

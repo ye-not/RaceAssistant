@@ -128,6 +128,12 @@ final class WatchNotificationManager:
         var createdCount = 0
 
         for event in schedule.events {
+            let role = schedule.myRole.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !role.isEmpty && (schedule.participationRawValue == nil || schedule.participationRawValue == "official") {
+                let assigned = event.roles.contains { $0.trimmingCharacters(in: .whitespacesAndNewlines).caseInsensitiveCompare(role) == .orderedSame }
+                let scRace = role.caseInsensitiveCompare("SC") == .orderedSame && event.isRace == true
+                guard assigned || scRace else { continue }
+            }
 
             guard event.start > now
             else {

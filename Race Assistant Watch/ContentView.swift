@@ -34,7 +34,7 @@ struct ContentView: View {
     ) -> some View {
 
         if let schedule =
-            connectivity.scheduleData {
+            connectivity.scheduleData, schedule.stageAvailable != false {
 
             scheduleView(
                 schedule,
@@ -117,7 +117,16 @@ struct ContentView: View {
 
                 Divider()
 
-                if schedule.events.isEmpty {
+                if schedule.stewardMode == true {
+                    stewardIncidentList(schedule, now: now)
+                } else if let redFlagTitle = schedule.redFlagTitle {
+                    Label("КРАСНЫЙ ФЛАГ", systemImage: "flag.fill")
+                        .foregroundStyle(.red)
+                        .font(.headline)
+                    Text(redFlagTitle).font(.caption)
+                    Text("Ожидается решение о продолжении гонки")
+                        .font(.caption2).foregroundStyle(.secondary)
+                } else if schedule.events.isEmpty {
 
                     emptyScheduleView()
 
@@ -197,6 +206,40 @@ struct ContentView: View {
     }
 
     // MARK: - Header
+
+    @ViewBuilder
+    private func stewardIncidentList(_ schedule: WatchScheduleData, now: Date) -> some View {
+        let incidents = schedule.stewardIncidents ?? []
+        Text("КСК · В РАБОТЕ: \(incidents.count)")
+            .font(.headline).foregroundStyle(.orange)
+        if incidents.isEmpty {
+            Text("Нет нерассмотренных инцидентов").font(.caption)
+            Text("Создайте инцидент на iPhone.").font(.caption2).foregroundStyle(.secondary)
+        } else {
+            ForEach(incidents) { incident in
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(incident.title).font(.headline)
+                    Text("\(RaceClock.time(incident.occurredAt)) · \(incident.status)")
+                        .font(.caption).foregroundStyle(.orange)
+                    if !incident.raceClass.isEmpty { Text(incident.raceClass).font(.caption) }
+                    if !incident.driverNumbers.isEmpty {
+                        Text("№ \(incident.driverNumbers)").font(.caption)
+                    }
+                    if !incident.description.isEmpty { Text(incident.description).font(.caption2) }
+                    ForEach(incident.tasks) { task in
+                        Text("○ \(task.title)").font(.caption2)
+                        if let due = task.due {
+                            Text(due, format: .dateTime.day().month().hour().minute())
+                                .font(.caption2).foregroundStyle(due < now ? Color.red : Color.secondary)
+                        }
+                    }
+                }
+                Divider()
+            }
+            Text("Решения и изменение задач — на iPhone.").font(.caption2).foregroundStyle(.secondary)
+        }
+        Button("Обновить") { connectivity.refreshStatus() }
+    }
 
     @ViewBuilder
     private func headerView(
@@ -771,7 +814,8 @@ struct ContentView: View {
             }
 
         guard
-            !schedule.myRole.isEmpty
+            !schedule.myRole.isEmpty,
+            schedule.participationRawValue == nil || schedule.participationRawValue == "official"
         else {
             return sorted
         }
@@ -784,9 +828,10 @@ struct ContentView: View {
                 .lowercased()
 
         return sorted.filter { event in
-            if event.roles.contains(
-                schedule.myRole
-            ) {
+            // Для выбранной должности пустой список ролей не означает «всем».
+            if event.roles.contains(where: {
+                $0.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == normalizedRole
+            }) {
                 return true
             }
 

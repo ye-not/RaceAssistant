@@ -234,6 +234,11 @@
         "name": "S1600 юниоры",
         "shortName": "S1600 Jr",
         "active": true
+      },
+      {
+        "name": "BR03",
+        "shortName": "BR03",
+        "active": true
       }
     ],
     "circuits": [
@@ -263,7 +268,7 @@
         "shortName": "MRW",
         "city": "Волоколамск",
         "country": "Россия",
-        "lengthMeters": 3955
+        "lengthMeters": 3931
       },
       {
         "name": "Smolensk Ring",
@@ -277,7 +282,7 @@
         "shortName": "Sochi",
         "city": "Сириус",
         "country": "Россия",
-        "lengthMeters": 2312
+        "lengthMeters": 2313
       },
       {
         "name": "Крепость Грозная",
@@ -424,7 +429,7 @@
         "shortName": "Madrid",
         "city": "Мадрид",
         "country": "Испания",
-        "lengthMeters": null
+        "lengthMeters": 5414
       },
       {
         "name": "Baku City Circuit",
@@ -445,7 +450,7 @@
         "shortName": "Singapore",
         "city": "Сингапур",
         "country": "Сингапур",
-        "lengthMeters": 4940
+        "lengthMeters": 4927
       },
       {
         "name": "Autódromo Hermanos Rodríguez",
@@ -563,6 +568,14 @@
               "circuitName": "Moscow Raceway",
               "startDate": "2026-09-18",
               "endDate": "2026-09-20",
+              "streamURL": null
+            },
+            {
+              "name": "Финал · Спринт",
+              "format": "Спринт",
+              "circuitName": "Moscow Raceway",
+              "startDate": "2026-10-07",
+              "endDate": "2026-10-10",
               "streamURL": null
             },
             {
@@ -1017,39 +1030,28 @@
           "declaredEndYear": 2026
         }
       ]
-    },
-    {
-      "name": "Race Assistant Test",
-      "organizer": "Race Assistant",
-      "discipline": "Кольцевые (авто)",
-      "seasons": [
-        {
-          "stages": [
-            {
-              "name": "Тестовый день 09.09",
-              "format": "Тест",
-              "circuitName": "ADM Raceway",
-              "startDate": "2026-09-09",
-              "endDate": "2026-09-09",
-              "streamURL": null
-            }
-          ],
-          "name": "2026",
-          "declaredStartYear": 2026,
-          "declaredEndYear": 2026
-        }
-      ]
     }
   ],
   "scheduleImports": [],
   "scheduleFiles": [
     "Schedule_Sprint5",
-    "Schedule_Test_0909",
     "Schedule_LoneStarLeMans",
     "Schedule_Sprint6_Grozny",
     "Schedule_Endurance3_Grozny",
     "Schedule_SpanishGP",
     "Schedule_Sprint7_MRW",
-    "Schedule_AzerbaijanGP"
+    "Schedule_AzerbaijanGP",
+    "Schedule_GT_SportCup_Stage4",
+    "Schedule_RSKG_Finale_Sprint_2026_v2.6",
+    "Schedule_RSKG_Finale_Endurance_2026_v2.6",
+    "Schedule_F1_Singapore_2026",
+    "Schedule_F1_UnitedStates_2026",
+    "Schedule_F1_Mexico_2026",
+    "Schedule_F1_SaoPaulo_2026",
+    "Schedule_F1_LasVegas_2026",
+    "Schedule_F1_Qatar_2026",
+    "Schedule_F1_AbuDhabi_2026",
+    "Schedule_WEC_Barcelona_2026",
+    "Schedule_WEC_Monza_2026"
   ]
 }

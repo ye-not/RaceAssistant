@@ -8,7 +8,13 @@ struct ShiftScheduleView: View {
     let event: ScheduleEvent
 
     @State private var shiftMinutes = 10
-    @State private var shiftFollowingEvents = true
+    @State private var scope: ShiftScope = .group
+
+    private enum ShiftScope: String, CaseIterable {
+        case event = "Только эта строка"
+        case group = "Эта гонка"
+        case day = "Остаток дня"
+    }
 
     private let quickOptions = [
         -10,
@@ -16,7 +22,11 @@ struct ShiftScheduleView: View {
         5,
         10,
         15,
-        30
+        30,
+        45,
+        60,
+        90,
+        120
     ]
 
     var body: some View {
@@ -26,45 +36,31 @@ struct ShiftScheduleView: View {
                 // MARK: - Сдвиг
 
                 Section("Сдвиг") {
-                    Picker(
-                        "Минут",
-                        selection: $shiftMinutes
-                    ) {
-                        ForEach(
-                            quickOptions,
-                            id: \.self
-                        ) { minutes in
-                            Text(
-                                shiftText(minutes)
-                            )
-                            .tag(minutes)
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(quickOptions, id: \.self) { minutes in
+                                Button(shiftText(minutes)) { shiftMinutes = minutes }
+                                    .buttonStyle(.bordered)
+                                    .tint(shiftMinutes == minutes ? Color.orange : Color.gray)
+                            }
                         }
                     }
-                    .pickerStyle(.wheel)
-                    .frame(height: 120)
+
+                    TextField("Точно в минутах", value: $shiftMinutes, format: .number)
+                        .keyboardType(.numbersAndPunctuation)
                 }
 
                 // MARK: - Применить
 
                 Section("Применить") {
-                    Toggle(
-                        "Сдвинуть последующие события",
-                        isOn: $shiftFollowingEvents
-                    )
-
-                    if shiftFollowingEvents {
-                        Text(
-                            "Будут сдвинуты выбранное событие и все последующие события этапа."
-                        )
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                    } else {
-                        Text(
-                            "Будет изменено только выбранное событие."
-                        )
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                    Picker("Какие строки", selection: $scope) {
+                        ForEach(ShiftScope.allCases, id: \.self) { option in
+                            Text(option.rawValue).tag(option)
+                        }
                     }
+                    Text("Будет перенесено: \(eventsToShift.count) событий. Прошедшие и завершённые строки сохранят своё время.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
                 }
 
                 // MARK: - Результат
@@ -121,10 +117,13 @@ struct ShiftScheduleView: View {
                         applyShift()
                     }
                     .disabled(
-                        shiftMinutes == 0
+                        shiftMinutes == 0 || eventsToShift.isEmpty
                     )
                 }
             }
+        }
+        .onAppear {
+            if event.groupID?.isEmpty != false { scope = .event }
         }
     }
 
@@ -136,6 +135,26 @@ struct ShiftScheduleView: View {
             value: shiftMinutes,
             to: event.plannedStart
         ) ?? event.plannedStart
+    }
+
+    private var eventsToShift: [ScheduleEvent] {
+        guard let stage = event.stage else { return [] }
+        let start = event.plannedStart
+        let group = event.groupID?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let calendar = Calendar.current
+        return stage.scheduleEvents.filter { candidate in
+            guard candidate.status == "scheduled", candidate.plannedStart > .now,
+                  candidate.plannedStart >= start else { return false }
+            switch scope {
+            case .event: return candidate === event
+            case .group:
+                guard let group, !group.isEmpty else { return candidate === event }
+                return candidate.groupID == group &&
+                    calendar.isDate(candidate.plannedStart, inSameDayAs: start)
+            case .day:
+                return calendar.isDate(candidate.plannedStart, inSameDayAs: start)
+            }
+        }.sorted { $0.plannedStart < $1.plannedStart }
     }
 
     // MARK: - Text
@@ -157,28 +176,7 @@ struct ShiftScheduleView: View {
             return
         }
 
-        let originalStart =
-            event.plannedStart
-
-        let eventsToShift: [ScheduleEvent]
-
-        if shiftFollowingEvents {
-
-            eventsToShift =
-                stage.scheduleEvents
-                    .filter {
-                        $0.plannedStart >= originalStart
-                    }
-                    .sorted {
-                        $0.plannedStart < $1.plannedStart
-                    }
-
-        } else {
-
-            eventsToShift = [
-                event
-            ]
-        }
+        guard shiftMinutes != 0, !eventsToShift.isEmpty else { return }
 
         for scheduleEvent in eventsToShift {
             scheduleEvent.plannedStart =

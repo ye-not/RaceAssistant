@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "Formula1.com official session timetable, checked 2026-10-06",
+  "sourceURL": "https://www.formula1.com/en/racing/2026/united-arab-emirates",
+  "sourceDate": "2026-10-06",
+  "sourceVersion": 1,
+  "sourceNotes": "Основные сессии F1; серии поддержки не включены. Время в часовом поясе трассы, при импорте переводится во время устройства. Для Гран-при 120 минут — лимит времени, не прогноз финиша. Расписание может обновляться.",
+  "referenceData": {
+    "roles": [],
+    "raceClasses": [
+      {
+        "name": "Formula 1",
+        "shortName": "F1",
+        "active": true
+      }
+    ],
+    "circuits": [
+      {
+        "name": "Yas Marina Circuit",
+        "shortName": "Yas Marina",
+        "city": "Абу-Даби",
+        "country": "ОАЭ",
+        "lengthMeters": 5281
+      }
+    ]
+  },
+  "scheduleImports": [
+    {
+      "seriesName": "Formula 1",
+      "seasonName": "2026",
+      "seasonYear": 2026,
+      "stageName": "Abu Dhabi Grand Prix",
+      "timeZoneIdentifier": "Asia/Dubai",
+      "events": [
+        {
+          "sourceRow": 1,
+          "date": "2026-12-04",
+          "startTime": "13:30",
+          "endTime": "14:30",
+          "durationMinutes": 60,
+          "title": "Тренировка 1",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 2,
+          "date": "2026-12-04",
+          "startTime": "17:00",
+          "endTime": "18:00",
+          "durationMinutes": 60,
+          "title": "Тренировка 2",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 3,
+          "date": "2026-12-05",
+          "startTime": "14:30",
+          "endTime": "15:30",
+          "durationMinutes": 60,
+          "title": "Тренировка 3",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 4,
+          "date": "2026-12-05",
+          "startTime": "18:00",
+          "endTime": "19:00",
+          "durationMinutes": 60,
+          "title": "Квалификация",
+          "type": "schedule",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 5,
+          "date": "2026-12-06",
+          "startTime": "17:00",
+          "endTime": "19:00",
+          "durationMinutes": 120,
+          "title": "Гран-при · 58 кругов (лимит 120 мин)",
+          "type": "race",
+          "isRace": true,
+          "groupID": null,
+          "classShortNames": [
+            "F1"
+          ],
+          "roleShortNames": [],
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        }
+      ]
+    }
+  ]
+}

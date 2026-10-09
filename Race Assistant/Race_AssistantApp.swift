@@ -28,8 +28,13 @@ struct Race_AssistantApp: App {
                     SeedDataImporter.importIfNeeded(
                         modelContext: context
                     )
+                    SeedDataImporter.repairBundledStageLinks(modelContext: context)
                     SeedDataImporter.fillEmptyBundledSchedules(modelContext: context)
                     ChampionshipClassSetup.configure(context)
+                    CircuitConfigurationSetup.seedMRW(context)
+                    CircuitCatalogSetup.apply(context)
+                    StageClassSetup.configure(context)
+                    _ = await StewardReminderManager.synchronize(context)
                     PhoneWatchConnectivityManager.shared.sendPreferredStage()
                 }
         }

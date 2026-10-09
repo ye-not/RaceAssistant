@@ -16,6 +16,7 @@ struct AddScheduleEventView: View {
     @State private var title = ""
     @State private var plannedStart: Date
     @State private var plannedDuration = 30
+    @State private var selectedConfiguration: CircuitConfiguration?
     @State private var isRace = false
 
     @State private var selectedRoles: [Role] = []
@@ -26,7 +27,7 @@ struct AddScheduleEventView: View {
     }
 
     private var activeRaceClasses: [RaceClass] {
-        let allowed = stage.season?.championship?.raceClasses ?? []
+        let allowed = stage.availableClasses
         return allRaceClasses.filter { item in
             (item.active && allowed.contains { $0 === item }) || selectedRaceClasses.contains { $0 === item }
         }
@@ -60,13 +61,15 @@ struct AddScheduleEventView: View {
 
         let calendar = Calendar.current
 
-        let startOfStageDay =
-            calendar.startOfDay(
-                for: stage.startDate
-            )
+        let now = Date()
+        let startOfStageDay = calendar.startOfDay(for: stage.startDate)
+        let endOfStageDay = calendar.startOfDay(for: stage.endDate)
+        let day = min(endOfStageDay, max(startOfStageDay, calendar.startOfDay(for: now)))
+        let hour = calendar.component(.hour, from: now)
+        let defaultStart = calendar.date(byAdding: .hour, value: hour, to: day) ?? day
 
         _plannedStart = State(
-            initialValue: startOfStageDay
+            initialValue: defaultStart
         )
     }
 
@@ -96,6 +99,13 @@ struct AddScheduleEventView: View {
                         "Гонка",
                         isOn: $isRace
                     )
+                }
+
+                if isRace, let circuit = stage.circuit {
+                    Section("Конфигурация гонки") {
+                        ConfigurationPicker(circuit: circuit, selection: $selectedConfiguration,
+                                            inherited: stage.effectiveConfiguration, usesStageDefault: true)
+                    }
                 }
 
                 // MARK: - Длительность
@@ -320,6 +330,7 @@ struct AddScheduleEventView: View {
         
         event.isRace = isRace
 
+        event.circuitConfiguration = isRace ? selectedConfiguration : nil
         modelContext.insert(event)
 
         // Роли

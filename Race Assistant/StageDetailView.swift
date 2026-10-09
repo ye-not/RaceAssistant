@@ -8,6 +8,7 @@ struct StageDetailView: View {
     private var allRoles: [Role]
 
     @Query private var storedSafetyCarPeriods: [SafetyCarPeriod]
+    @Query private var storedInterruptions: [RaceInterruption]
     @ScaledMetric(relativeTo: .headline) private var timeColumnWidth: CGFloat = 82
     let stage: Stage
     @State private var didInitialScroll = false
@@ -15,6 +16,7 @@ struct StageDetailView: View {
     @State private var showingAddScheduleEvent = false
     @State private var eventToEdit: ScheduleEvent?
     @State private var eventToShift: ScheduleEvent?
+    @State private var raceToControl: ScheduleEvent?
 
     // Пользовательские переопределения автоматического состояния дней.
     @State private var manuallyExpandedDays: Set<Date> = []
@@ -30,6 +32,22 @@ struct StageDetailView: View {
 
     private var activeSafetyCarPeriod: SafetyCarPeriod? {
         allSafetyCarPeriods.first { $0.isActive }
+    }
+
+    private var pendingRedFlagRace: ScheduleEvent? {
+        stage.scheduleEvents.first { race in
+            race.isRace && race.status == "red_flag" &&
+            storedInterruptions.contains {
+                $0.raceID == race.notificationID && $0.outcomeRaw == "awaiting"
+            }
+        }
+    }
+
+    private func isProtectedRace(_ event: ScheduleEvent) -> Bool {
+        storedInterruptions.contains {
+            $0.raceID == event.notificationID ||
+            $0.continuationRaceID == event.notificationID
+        }
     }
 
     private var safetyCarDeploymentCount: Int {
@@ -97,6 +115,53 @@ struct StageDetailView: View {
         ScrollViewReader { proxy in
         TimelineView(.periodic(from: .now, by: 1)) { context in
             List {
+                Section {
+                    Text(stage.season?.championship?.name ?? "Серия не указана").font(.caption).foregroundStyle(.secondary)
+                    if let circuit = stage.circuit {
+                        NavigationLink { StageCircuitInfoView(stage: stage, circuit: circuit) } label: {
+                            HStack(spacing: 12) {
+                                CatalogLogo(data: circuit.logoData, symbol: "road.lanes").frame(width: 52, height: 36)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(circuit.name).font(.headline)
+                                    let config = stage.effectiveConfiguration
+                                    let length = config?.lengthMeters ?? circuit.lengthMeters
+                                    Text([config?.name, length.map { String(format: "%.3f км", $0 / 1000) }]
+                                        .compactMap { $0 }.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    } else { Text("Автодром не указан").foregroundStyle(.secondary) }
+                }
+                StageClassesSection(stage: stage)
+                if let race = pendingRedFlagRace {
+                    Section {
+                        Button {
+                            raceToControl = race
+                        } label: {
+                            Label("КРАСНЫЙ ФЛАГ · \(race.groupID ?? race.title)",
+                                  systemImage: "flag.fill")
+                                .foregroundStyle(.red)
+                        }
+                    } footer: {
+                        Text("Ожидается решение о продолжении гонки")
+                    }
+                }
+                if StewardRole.matches(stage) {
+                    Section {
+                        NavigationLink {
+                            StewardIncidentListView(stage: stage)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "checklist").font(.title2).foregroundStyle(.orange)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text("Журнал КСК").fontWeight(.semibold)
+                                    Text("Инциденты, задачи и решения · открыто \(stage.stewardIncidents.filter { $0.status != .decided }.count)")
+                                        .font(.caption).foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
                 if stage.myRole?.shortName
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                     .caseInsensitiveCompare("SC") == .orderedSame {
@@ -157,33 +222,11 @@ struct StageDetailView: View {
                     }
                 }
                 
-                Section {
-                    if SchedulePresentation.isSafetyCar(stage.myRole) || !stage.scheduleEvents.flatMap(\.safetyCarPeriods).isEmpty {
-                    NavigationLink { SafetyCarStatisticsView(stage: stage) } label: {
-                        Label("Статистика SC за этап", systemImage: "chart.bar")
-                    }
-                    if let season = stage.season {
-                        NavigationLink("Статистика SC за сезон") { SafetyCarSeasonStatisticsView(season: season) }
-                    }
-                    }
-                    NavigationLink { StageScheduleFilesView(stage: stage) } label: {
-                        Label("Файл расписания этапа", systemImage: "doc")
-                    }
-                }
-
-                Section("Моя роль") {
-                    Picker("Роль на этапе", selection: roleBinding) {
-                        Text("Не выбрана")
-                            .tag(nil as Role?)
-
-                        ForEach(activeRoles) { role in
-                            Text(roleDisplayName(role))
-                                .tag(role as Role?)
-                        }
-                    }
-                }
+                StageParticipationSection(stage: stage)
 
                 Section("Уведомления") {
+                    Text("Время на экранах: \(TimeZone.current.identifier). Источник: \(stage.scheduleTimeZoneIdentifier ?? "часовой пояс не указан").")
+                        .font(.caption).foregroundStyle(.secondary)
                     HStack {
                         Text("События")
 
@@ -237,9 +280,10 @@ struct StageDetailView: View {
                     .padding(.vertical, 3)
 
                     if stage.notificationMode == .myRole,
-                       stage.myRole == nil {
+                       (!stage.isInterested || (stage.participation == .official && stage.myRole == nil) ||
+                        (stage.participation == .athlete && stage.participationClasses.isEmpty)) {
                         Label(
-                            "Сначала выбери свою роль",
+                            "Сначала укажите участие, служебную роль или классы",
                             systemImage: "exclamationmark.circle"
                         )
                         .font(.caption)
@@ -262,19 +306,36 @@ struct StageDetailView: View {
                         )
                     }
                 }
+                if let circuit = stage.circuit {
+                    Section("Конфигурация этапа") {
+                        ConfigurationPicker(circuit: circuit, selection: Binding(
+                            get: { stage.circuitConfiguration },
+                            set: { value in
+                                stage.circuitConfiguration = value
+                                notificationSettingsChanged()
+                            }
+                        ), showsSchemeLink: false)
+                    }
+                }
+                Section("Управление расписанием") {
+                    Button("Добавить событие", systemImage: "plus") { showingAddScheduleEvent = true }
+                    NavigationLink { StageScheduleFilesView(stage: stage) } label: {
+                        Label("Файлы расписания и импорт", systemImage: "doc")
+                    }
+                    if SchedulePresentation.isSafetyCar(stage.myRole) || !allSafetyCarPeriods.isEmpty {
+                        NavigationLink { SafetyCarStatisticsView(stage: stage) } label: {
+                            Label("Статистика SC за этап", systemImage: "chart.bar")
+                        }
+                    }
+                }
             }
         }
         .navigationTitle(stage.name)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("К сейчас") { scrollToNow(proxy) }
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    showingAddScheduleEvent = true
-                } label: {
-                    Image(systemName: "plus")
+                if canScrollToNow {
+                    Button("К сейчас") { scrollToNow(proxy) }
                 }
             }
         }
@@ -292,6 +353,9 @@ struct StageDetailView: View {
         }
         .sheet(item: $eventToShift) { event in
             ShiftScheduleView(event: event)
+        }
+        .sheet(item: $raceToControl) { event in
+            RaceControlView(race: event)
         }
         .sheet(isPresented: $showingSafetyCarPanel) {
             SafetyCarPanelView(stage: stage)
@@ -368,12 +432,13 @@ struct StageDetailView: View {
         let day = calendar.startOfDay(for: date)
         let today = calendar.startOfDay(for: now)
 
-        let isPastDay = day < today
+        let isPastDay = day < today ||
+            (day == today && !events.isEmpty && events.allSatisfy { isPast($0, now: now) })
         let isToday = calendar.isDate(day, inSameDayAs: today)
         let hasMyEvents = dayHasMyEvents(events)
 
         let isIrrelevantDay =
-            stage.myRole != nil &&
+            stage.isInterested &&
             !hasMyEvents
 
         let shouldAutoCollapse =
@@ -473,7 +538,7 @@ struct StageDetailView: View {
     // MARK: - Day Has My Events
 
     private func dayHasMyEvents(_ events: [ScheduleEvent]) -> Bool {
-        guard stage.myRole != nil else {
+        guard stage.isInterested else {
             return true
         }
 
@@ -575,14 +640,12 @@ struct StageDetailView: View {
         
         HStack {
             
-            Text(
-                date.formatted(
-                    .dateTime
-                        .weekday(.wide)
-                        .day()
-                        .month(.wide)
-                )
-            )
+            VStack(alignment: .leading, spacing: 2) {
+                Text(date.formatted(.dateTime.weekday(.wide).day().month(.wide)))
+                if let interval = dayInterval(date) {
+                    Text(interval).font(.caption).foregroundStyle(.secondary)
+                }
+            }
             
             if isToday {
                 
@@ -608,6 +671,17 @@ struct StageDetailView: View {
             .foregroundStyle(.secondary)
         }
     }
+
+    private func dayInterval(_ date: Date) -> String? {
+        let events = stage.scheduleEvents.filter {
+            Calendar.current.isDate($0.plannedStart, inSameDayAs: date)
+        }
+        guard let first = events.map(\.plannedStart).min(),
+              let last = events.max(by: {
+                  SchedulePresentation.end($0) < SchedulePresentation.end($1)
+              }) else { return nil }
+        return "\(RaceClock.time(first))–\(RaceClock.time(SchedulePresentation.end(last)))"
+    }
     // MARK: - Today Compact List
 
     private func compactTodayEvents(_ events: [ScheduleEvent], now: Date) -> [ScheduleEvent] {
@@ -615,6 +689,7 @@ struct StageDetailView: View {
     }
 
     private func scrollToNow(_ proxy: ScrollViewProxy) {
+        guard canScrollToNow else { return }
         let now = Date()
         let today = Calendar.current.startOfDay(for: now)
         manuallyCollapsedDays.remove(today)
@@ -722,7 +797,10 @@ struct StageDetailView: View {
         isGroupEnd: Bool = false
     ) -> some View {
         Button {
-            eventToEdit = event
+            if event.isRace && storedInterruptions.contains(where: { $0.raceID == event.notificationID }) {
+                raceToControl = event
+            }
+            else { eventToEdit = event }
         } label: {
             eventRow(
                 event,
@@ -736,24 +814,39 @@ struct StageDetailView: View {
         .buttonStyle(.plain)
         .id(event.notificationID)
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            Button(role: .destructive) {
-                deleteEvent(event)
-            } label: {
-                Label("Удалить", systemImage: "trash")
+            if event.isRace && event.plannedStart <= .now &&
+                (event.status == "scheduled" || event.status == "red_flag") {
+                Button {
+                    raceToControl = event
+                } label: {
+                    Label("Красный флаг", systemImage: "flag.fill")
+                }
+                .tint(.red)
+            }
+            if !isProtectedRace(event) {
+                Button(role: .destructive) {
+                    deleteEvent(event)
+                } label: {
+                    Label("Удалить", systemImage: "trash")
+                }
             }
 
-            Button {
-                eventToEdit = event
-            } label: {
-                Label("Изменить", systemImage: "pencil")
+            if !isProtectedRace(event) {
+                Button {
+                    eventToEdit = event
+                } label: {
+                    Label("Изменить", systemImage: "pencil")
+                }
             }
 
-            Button {
-                eventToShift = event
-            } label: {
-                Label("Сдвинуть", systemImage: "clock.arrow.circlepath")
+            if event.status == "scheduled" {
+                Button {
+                    eventToShift = event
+                } label: {
+                    Label("Сдвинуть", systemImage: "clock.arrow.circlepath")
+                }
+                .tint(.orange)
             }
-            .tint(.orange)
         }
     }
 
@@ -822,20 +915,9 @@ struct StageDetailView: View {
         isGroupEnd: Bool
     ) -> some View {
         let personal = requiresMyRole(event)
-        let hasRoles = !event.eventRoles.isEmpty
+        let foreign = forceDimmed || (stage.isInterested && !personal)
 
-        let foreign =
-            !event.isRace &&
-            (
-                forceDimmed ||
-                (
-                    stage.myRole != nil &&
-                    hasRoles &&
-                    !personal
-                )
-            )
-
-        let current = isCurrent(event, now: now)
+        let current = !foreign && isCurrent(event, now: now)
 
         VStack(alignment: .leading, spacing: 6) {
             if let groupTitle = groupTitle ?? (current ? SchedulePresentation.groupTitle(event) : nil) {
@@ -879,8 +961,7 @@ struct StageDetailView: View {
                         .foregroundStyle(foreign ? .tertiary : .secondary)
                     }
 
-                    if event.isRace &&
-                        normalizedGroupID(event.groupID) == nil {
+                    if event.isRace {
                         Text("ГОНКА")
                             .font(.system(size: 9, weight: .bold))
                             .foregroundStyle(Color.orange)
@@ -900,6 +981,30 @@ struct StageDetailView: View {
                     alignment: .leading,
                     spacing: foreign ? 3 : 5
                 ) {
+                    if let interruption = storedInterruptions.first(where: {
+                        $0.raceID == event.notificationID
+                    }) {
+                        let detail = interruption.outcomeRaw == "resumed"
+                            ? "Продолжена отдельной частью"
+                            : (interruption.outcomeRaw == "ended" ? "Гонка завершена" : "Ожидается решение")
+                        Label("КРАСНЫЙ ФЛАГ · \(detail)", systemImage: "flag.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.red)
+                        if interruption.plannedLaps > 0 && interruption.outcomeRaw != "awaiting" {
+                            Text("Пройдено \(interruption.completedLaps) из \(interruption.plannedLaps) кр.")
+                                .font(.caption2).foregroundStyle(.secondary)
+                        }
+                    }
+                    if event.status == "red_flag" && !isProtectedRace(event) {
+                        Label("КРАСНЫЙ ФЛАГ", systemImage: "flag.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.red)
+                    }
+                    if event.status == "finished" && !isProtectedRace(event) {
+                        Label("Завершено вручную", systemImage: "checkmark.circle.fill")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
                     if current {
                         HStack(spacing: 5) {
                             Circle()
@@ -981,7 +1086,7 @@ struct StageDetailView: View {
             }
         }
         .padding(.vertical, foreign ? 0 : 2)
-        .opacity(foreign ? 0.58 : 1.0)
+        .opacity(foreign || event.status == "finished" ? 0.58 : 1.0)
         .padding(
             .leading,
             normalizedGroupID(event.groupID) != nil ? 9 : 0
@@ -1013,17 +1118,6 @@ struct StageDetailView: View {
 
             Spacer(minLength: 8)
 
-            if isRace {
-                Text("ГОНКА")
-                    .font(.system(size: 9, weight: .bold))
-                    .foregroundStyle(Color.orange)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background {
-                        Capsule()
-                            .fill(Color.orange.opacity(0.12))
-                    }
-            }
         }
     }
 
@@ -1053,7 +1147,7 @@ struct StageDetailView: View {
         now: Date
     ) -> Bool {
         guard
-            event.status != "finished",
+            event.status == "scheduled",
             event.plannedDuration > 0
         else {
             return false
@@ -1070,7 +1164,7 @@ struct StageDetailView: View {
         _ event: ScheduleEvent,
         now: Date
     ) -> Bool {
-        if event.status == "finished" {
+        if event.status != "scheduled" {
             return true
         }
 
@@ -1116,24 +1210,16 @@ struct StageDetailView: View {
 
     // MARK: - Role
 
-    private func requiresMyRole(
-        _ event: ScheduleEvent
-    ) -> Bool {
-        guard let myRole = stage.myRole else {
-            return false
+    private var canScrollToNow: Bool {
+        let now = Date()
+        return SchedulePresentation.events(stage).contains {
+            Calendar.current.isDate($0.plannedStart, inSameDayAs: now) &&
+            (SchedulePresentation.current([$0], now: now) != nil || $0.plannedStart > now)
         }
+    }
 
-        guard !event.eventRoles.isEmpty else {
-            return false
-        }
-
-        return event.eventRoles.contains { eventRole in
-            guard let role = eventRole.role else {
-                return false
-            }
-
-            return role === myRole
-        }
+    private func requiresMyRole(_ event: ScheduleEvent) -> Bool {
+        stage.isInterested && SchedulePresentation.relevant(event, stage: stage)
     }
 
     // MARK: - Event End
@@ -1286,6 +1372,7 @@ struct StageDetailView: View {
     private func deleteEvent(
         _ event: ScheduleEvent
     ) {
+        guard !isProtectedRace(event) else { return }
         NotificationManager.shared.removeNotifications(for: event)
         modelContext.delete(event)
 

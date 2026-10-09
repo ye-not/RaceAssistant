@@ -1,5 +1,22 @@
 import Foundation
 
+struct WatchStewardTask: Codable, Identifiable {
+    let id: UUID
+    let title: String
+    let due: Date?
+}
+
+struct WatchStewardIncident: Codable, Identifiable {
+    let id: UUID
+    let title: String
+    let occurredAt: Date
+    let status: String
+    let description: String
+    let raceClass: String
+    let driverNumbers: String
+    let tasks: [WatchStewardTask]
+}
+
 struct WatchScheduleItem: Codable, Identifiable {
     let id: UUID
     let title: String
@@ -25,6 +42,11 @@ struct WatchScheduleData: Codable {
     let circuitName: String
     let myRole: String
     let events: [WatchScheduleItem]
+    var redFlagTitle: String? = nil
+    var participationRawValue: String? = nil
+    var stageAvailable: Bool? = nil
+    var stewardMode: Bool? = nil
+    var stewardIncidents: [WatchStewardIncident]? = nil
 }
 
 // Shared by the iPhone and Watch targets. All countdown rounding lives here.

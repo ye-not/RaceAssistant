@@ -14,6 +14,10 @@ struct SafetyCarRecordRow: View {
                 Text("\(date.formatted(.dateTime.day().month())) · \(RaceClock.time(date))")
                     .font(.caption).foregroundStyle(.secondary)
             }
+            if let km = period.distanceKilometers {
+                Text("\(String(format: "%.3f", km)) км · \(period.configurationNameSnapshot ?? "")")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
             if !period.notes.isEmpty { Text(period.notes).font(.caption) }
         }.foregroundStyle(.primary)
     }
@@ -51,6 +55,7 @@ struct SafetyCarStatisticsView: View {
             Section(event == nil ? "Итого за этап" : "Итого за гонку") {
                 LabeledContent("Выездов", value: "\(periods.count)")
                 LabeledContent("Кругов под SC", value: "\(periods.reduce(0) { $0 + $1.lapCount })")
+                LabeledContent("Дистанция SC", value: SafetyCarDistance.text(periods))
             }
             ForEach(classGroups, id: \.self) { group in
                 let groupRaces = races.filter { classTitle($0) == group }
@@ -111,6 +116,7 @@ struct SafetyCarSeasonStatisticsView: View {
             Section("\(season.championship?.name ?? "") · \(season.displayName)") {
                 LabeledContent("Выездов", value: "\(items.count)")
                 LabeledContent("Кругов под SC", value: "\(items.reduce(0) { $0 + $1.lapCount })")
+                LabeledContent("Дистанция SC", value: SafetyCarDistance.text(items))
             }
             Section("По классам") {
                 ForEach(classes, id: \.self) { name in

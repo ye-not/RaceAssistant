@@ -13,6 +13,9 @@ struct ReferenceDataView: View {
     var body: some View {
         List {
             Section {
+                NavigationLink { ChampionshipManagementView() } label: {
+                    Label("Чемпионаты", systemImage: "flag.checkered")
+                }
                 NavigationLink {
                     CircuitListView()
                 } label: {

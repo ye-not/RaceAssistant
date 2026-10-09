@@ -11,6 +11,19 @@ final class SafetyCarPeriod {
     var notes: String
 
     var scheduleEvent: ScheduleEvent?
+    /// Historical records with nil length remain unknown until explicitly corrected.
+    var circuitLengthMetersSnapshot: Double?
+    var configurationNameSnapshot: String?
+
+    var distanceKilometers: Double? {
+        guard let meters = circuitLengthMetersSnapshot, meters > 0 else { return nil }
+        return Double(lapCount) * meters / 1000
+    }
+
+    func captureConfiguration(from event: ScheduleEvent) {
+        circuitLengthMetersSnapshot = event.circuitLengthMeters
+        configurationNameSnapshot = event.effectiveConfiguration?.name ?? event.stage?.circuit?.name
+    }
 
     init(
         startedAt: Date? = nil,
@@ -24,6 +37,7 @@ final class SafetyCarPeriod {
         self.lapCount = lapCount
         self.notes = notes
         self.scheduleEvent = scheduleEvent
+        if let scheduleEvent { captureConfiguration(from: scheduleEvent) }
     }
 
     var isActive: Bool {

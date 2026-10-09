@@ -10,6 +10,7 @@ struct EditSafetyCarPeriodView: View {
     @State private var lapCount: Int
     @State private var notes: String
     @State private var startedAt: Date
+    @State private var updateDistance = false
     @State private var errorMessage: String?
 
     private var raceEvents: [ScheduleEvent] {
@@ -49,6 +50,19 @@ struct EditSafetyCarPeriodView: View {
                         startedAt = Self.defaultStart(selectedEvent)
                     }
                 }
+                Section("Конфигурация для статистики") {
+                    if let period {
+                        Text(period.configurationNameSnapshot ?? "Ранее не указана")
+                        Text(period.circuitLengthMetersSnapshot.map { "\($0.formatted()) м" } ?? "Длина не сохранена")
+                            .foregroundStyle(.secondary)
+                        Toggle("Использовать текущую конфигурацию гонки", isOn: $updateDistance)
+                    }
+                    if let selectedEvent {
+                        Text("Сейчас: \(selectedEvent.effectiveConfiguration?.name ?? "Без конфигурации")")
+                        Text(selectedEvent.circuitLengthMeters.map { "\($0.formatted()) м" } ?? "Длина не указана")
+                            .foregroundStyle(.secondary)
+                    }
+                }
                 Section("Круги") {
                     Stepper("Кругов под SC: \(lapCount)", value: $lapCount, in: 0...999)
                 }
@@ -81,6 +95,9 @@ struct EditSafetyCarPeriodView: View {
         guard let selectedEvent else { return }
         let target = period ?? SafetyCarPeriod()
         if period == nil { modelContext.insert(target) }
+        if period == nil || target.scheduleEvent !== selectedEvent || updateDistance {
+            target.captureConfiguration(from: selectedEvent)
+        }
         target.scheduleEvent = selectedEvent
         target.lapCount = lapCount
         target.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)

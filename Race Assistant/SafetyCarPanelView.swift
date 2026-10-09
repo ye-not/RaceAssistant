@@ -100,6 +100,16 @@ struct SafetyCarPanelView: View {
                         }
                         LabeledContent("Кругов под Safety Car", value: "\(periods.reduce(0) { $0 + $1.lapCount })")
                     }
+                    if let season = stage.season {
+                        let seasonPeriods = storedPeriods.filter { $0.scheduleEvent?.stage?.season === season }
+                        Section("Итого за сезон · \(season.displayName)") {
+                            NavigationLink { SafetyCarSeasonStatisticsView(season: season) } label: {
+                                LabeledContent("Выездов Safety Car", value: "\(seasonPeriods.count)")
+                            }
+                            LabeledContent("Кругов под Safety Car", value: "\(seasonPeriods.reduce(0) { $0 + $1.lapCount })")
+                            LabeledContent("Дистанция", value: SafetyCarDistance.text(seasonPeriods))
+                        }
+                    }
                 }
             }
             .navigationTitle("Safety Car")

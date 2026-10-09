@@ -66,7 +66,10 @@ enum SeedDataImporter {
             try importRaceClasses(seed.referenceData.raceClasses.filter { item in
                 !existingClasses.contains { normalized($0.shortName) == normalized(item.shortName) }
             }, modelContext: modelContext)
+            let liveChampionships = try modelContext.fetch(FetchDescriptor<Championship>())
             for schedule in seed.scheduleImports {
+                guard liveChampionships.contains(where: { normalized($0.name) == normalized(schedule.seriesName) }) else { continue }
+
                 if try findStage(seriesName: schedule.seriesName, seasonName: schedule.seasonName,
                     seasonYear: schedule.seasonYear, stageName: schedule.stageName, modelContext: modelContext) == nil,
                    let series = seed.series.first(where: { normalized($0.name) == normalized(schedule.seriesName) }),
@@ -92,6 +95,30 @@ enum SeedDataImporter {
             }
             try modelContext.save()
         } catch { modelContext.rollback(); print("Заполнение пустых расписаний: \(error)") }
+    }
+
+    /// Restore missing circuit links from the catalog, without recreating deleted series.
+    @MainActor
+    static func repairBundledStageLinks(modelContext: ModelContext) {
+        guard let seed = loadSeed() else { return }
+        do {
+            let championships = try modelContext.fetch(FetchDescriptor<Championship>())
+            for series in seed.series {
+                guard let championship = championships.first(where: { normalized($0.name) == normalized(series.name) }) else { continue }
+                for sourceSeason in series.seasons {
+                    guard let season = championship.seasons.first(where: { $0.displayName == sourceSeason.resolvedName }) else { continue }
+                    for item in sourceSeason.stages {
+                        guard let stage = season.stages.first(where: { normalized($0.name) == normalized(item.name) }), stage.circuit == nil else { continue }
+                        if try findCircuit(name: item.circuitName, modelContext: modelContext) == nil,
+                           let reference = seed.referenceData.circuits.first(where: { normalized($0.name) == normalized(item.circuitName) }) {
+                            try importCircuits([reference], modelContext: modelContext)
+                        }
+                        stage.circuit = try findCircuit(name: item.circuitName, modelContext: modelContext)
+                    }
+                }
+            }
+            try modelContext.save()
+        } catch { modelContext.rollback(); print("Привязки автодромов: \(error)") }
     }
 
     // MARK: - Load JSON
@@ -327,9 +354,10 @@ enum SeedDataImporter {
                 existingCircuit.city =
                     item.city
 
-                existingCircuit.country =
-                    item.country
-
+                existingCircuit.country = item.country
+                if existingCircuit.lengthMeters == nil, let meters = item.lengthMeters, meters > 0 {
+                    existingCircuit.lengthMeters = Double(meters)
+                }
                 continue
             }
 
@@ -345,9 +373,8 @@ enum SeedDataImporter {
                         item.country
                 )
 
-            modelContext.insert(
-                circuit
-            )
+            if let meters = item.lengthMeters, meters > 0 { circuit.lengthMeters = Double(meters) }
+            modelContext.insert(circuit)
         }
     }
 
@@ -702,6 +729,7 @@ enum SeedDataImporter {
             return
         }
 
+        stage.scheduleTimeZoneIdentifier = schedule.timeZoneIdentifier
         let allRoles =
             try modelContext.fetch(
                 FetchDescriptor<Role>()
@@ -931,6 +959,13 @@ enum SeedDataImporter {
             importedCount += 1
         }
 
+        // An imported schedule makes its actual classes available in the stage editor.
+        for value in stage.scheduleEvents.flatMap({ $0.eventClasses.compactMap(\.raceClass) }) {
+            if !stage.raceClasses.contains(where: { $0 === value }) { stage.raceClasses.append(value) }
+            if let series = stage.season?.championship,
+               !series.raceClasses.contains(where: { $0 === value }) { series.raceClasses.append(value) }
+        }
+        stage.classesConfigured = true
         print(
             "✅ Расписание импортировано: \(importedCount), пропущено: \(skippedCount)"
         )
@@ -1330,6 +1365,7 @@ extension SeedDataImporter {
         var plans: [(schedule: ExternalScheduleImport, stage: Stage, protected: [(ScheduleEvent, Int)])] = []
         var seenStages = Set<PersistentIdentifier>()
         let storedSC = try modelContext.fetch(FetchDescriptor<SafetyCarPeriod>())
+        let interruptedRaceIDs = Set(try modelContext.fetch(FetchDescriptor<RaceInterruption>()).map(\.raceID))
         // Validate the full batch BEFORE deleting any event or notification.
         for schedule in file.scheduleImports {
             guard let stage = try findStage(seriesName: schedule.seriesName,
@@ -1339,6 +1375,10 @@ extension SeedDataImporter {
             }
             if let expectedStage, stage !== expectedStage {
                 throw ExternalScheduleError.invalidSchedule("Выбран файл другого этапа: \(schedule.stageName)")
+            }
+            guard !stage.scheduleEvents.contains(where: { interruptedRaceIDs.contains($0.notificationID) }) else {
+                throw ExternalScheduleError.invalidSchedule(
+                    "На этапе есть локальная история красного флага. Импорт отменён, чтобы сохранить первоначальную гонку, продолжение и записи SC.")
             }
             guard seenStages.insert(stage.persistentModelID).inserted else {
                 throw ExternalScheduleError.invalidSchedule("Этап повторяется в файле: \(stage.name)")
@@ -1359,7 +1399,7 @@ extension SeedDataImporter {
             }
             var protected: [(ScheduleEvent, Int)] = []
             var usedIndexes = Set<Int>()
-            for old in stage.scheduleEvents where storedSC.contains(where: { $0.scheduleEvent === old }) {
+            for old in stage.scheduleEvents where old.circuitConfiguration != nil || storedSC.contains(where: { $0.scheduleEvent === old }) {
                 let candidates = schedule.events.indices.filter { index in
                     let item = schedule.events[index]
                     guard item.isRace == old.isRace,
@@ -1371,7 +1411,7 @@ extension SeedDataImporter {
                 let matches = exact.isEmpty ? candidates : exact
                 guard matches.count == 1, let index = matches.first, usedIndexes.insert(index).inserted else {
                     throw ExternalScheduleError.invalidSchedule(
-                        "Гонка с записями SC не найдена однозначно в новом расписании: \(old.title). Импорт отменён, записи сохранены.")
+                        "Гонка с локальными данными (SC / конфигурация) не найдена однозначно в новом расписании: \(old.title). Импорт отменён, записи сохранены.")
                 }
                 protected.append((old, index))
             }
@@ -1387,10 +1427,11 @@ extension SeedDataImporter {
             }
             for plan in plans {
                 let stage = plan.stage
-                var preserved: [(Int, [SafetyCarPeriod], UUID, Date?, Int?, String)] = []
+                stage.scheduleTimeZoneIdentifier = plan.schedule.timeZoneIdentifier
+                var preserved: [(Int, [SafetyCarPeriod], UUID, Date?, Int?, String, CircuitConfiguration?)] = []
                 for (event, index) in plan.protected {
                     let periods = storedSC.filter { $0.scheduleEvent === event }
-                    preserved.append((index, periods, event.notificationID, event.actualStart, event.actualDuration, event.status))
+                    preserved.append((index, periods, event.notificationID, event.actualStart, event.actualDuration, event.status, event.circuitConfiguration))
                     event.safetyCarPeriods.removeAll()
                     for period in periods { period.scheduleEvent = nil }
                 }
@@ -1399,7 +1440,7 @@ extension SeedDataImporter {
                 stage.scheduleEvents.removeAll()
                 for event in oldEvents { modelContext.delete(event) }
                 try importSchedule(plan.schedule.asSeedScheduleImport, modelContext: modelContext)
-                for (index, periods, id, actualStart, actualDuration, status) in preserved {
+                for (index, periods, id, actualStart, actualDuration, status, configuration) in preserved {
                     let item = plan.schedule.events[index]
                     let start = try combine(dateString: item.date, timeString: item.startTime!, timeZoneIdentifier: plan.schedule.timeZoneIdentifier)
                     guard let replacement = stage.scheduleEvents.first(where: {
@@ -1409,6 +1450,7 @@ extension SeedDataImporter {
                     replacement.actualStart = actualStart
                     replacement.actualDuration = actualDuration
                     replacement.status = status
+                    replacement.circuitConfiguration = configuration
                     for period in periods { period.scheduleEvent = replacement }
                 }
                 stage.scheduleUpdatedAt = Date()
@@ -1461,6 +1503,9 @@ extension SeedDataImporter {
             for season in championship.seasons.sorted(by: { $0.displayName < $1.displayName }) {
                 for stage in season.stages.sorted(by: { $0.startDate < $1.startDate }) {
                     if let selectedStage, stage !== selectedStage { continue }
+                    let exportZone = stage.scheduleTimeZoneIdentifier.flatMap(TimeZone.init(identifier:)) ?? TimeZone.current
+                    dateFormatter.timeZone = exportZone
+                    timeFormatter.timeZone = exportZone
                     let events = stage.scheduleEvents.sorted(by: { $0.plannedStart < $1.plannedStart })
                     guard !events.isEmpty || selectedStage != nil else { continue }
 
@@ -1500,21 +1545,29 @@ extension SeedDataImporter {
                         "seasonName": season.displayName,
                         "seasonYear": season.year,
                         "stageName": stage.name,
-                "timeZoneIdentifier": TimeZone.current.identifier,
+                "timeZoneIdentifier": exportZone.identifier,
                         "events": eventJSON
                     ])
                 }
             }
         }
 
+        let exportedRoles = selectedStage.map { selected in
+            roles.filter { role in selected.scheduleEvents.contains { $0.eventRoles.contains { $0.role === role } } }
+        } ?? roles
+        let exportedClasses = selectedStage.map { selected in
+            classes.filter { value in selected.scheduleEvents.contains { $0.eventClasses.contains { $0.raceClass === value } } }
+        } ?? classes
+        let exportedCircuits = selectedStage.map { selected in circuits.filter { $0 === selected.circuit } } ?? circuits
+
         let root: [String: Any] = [
             "schemaVersion": 1,
             "generatedFrom": "Race Assistant export",
             "exportedAt": ISO8601DateFormatter().string(from: Date()),
             "referenceData": [
-                "roles": roles.map { ["name": $0.name, "shortName": $0.shortName, "active": $0.active] },
-                "raceClasses": classes.map { ["name": $0.name, "shortName": $0.shortName, "active": $0.active] },
-                "circuits": circuits.map {
+                "roles": exportedRoles.map { ["name": $0.name, "shortName": $0.shortName, "active": $0.active] },
+                "raceClasses": exportedClasses.map { ["name": $0.name, "shortName": $0.shortName, "active": $0.active] },
+                "circuits": exportedCircuits.map {
                     ["name": $0.name, "shortName": $0.shortName, "city": $0.city, "country": $0.country]
                 }
             ],

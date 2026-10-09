@@ -2,6 +2,8 @@ import SwiftUI
 import SwiftData
 
 struct ChampionshipDetailView: View {
+    @Environment(\.modelContext) private var modelContext
+    @State private var errorMessage: String?
     let championship: Championship
 
     @State private var showingAddSeason = false
@@ -13,6 +15,14 @@ struct ChampionshipDetailView: View {
 
     var body: some View {
         List {
+            Section {
+                CatalogLogo(data: championship.logoData, symbol: "flag.checkered").frame(height: 70).frame(maxWidth: .infinity)
+                Toggle("Интересуюсь этой серией", isOn: Binding(
+                    get: { championship.isFollowed },
+                    set: { championship.isFollowed = $0; do { try modelContext.save() } catch { modelContext.rollback(); errorMessage = error.localizedDescription } }
+                ))
+                if let url = URL(string: championship.website), ["https", "http"].contains(url.scheme ?? "") { Link("Сайт серии", destination: url) }
+            }
             if championship.seasons.isEmpty {
                 ContentUnavailableView(
                     "Нет сезонов",
@@ -25,6 +35,7 @@ struct ChampionshipDetailView: View {
                 }
             }
             Section("Настройки") {
+                NavigationLink("Логотип и сайт") { ChampionshipBrandView(championship: championship) }
                 NavigationLink("Классы соревнования") { ChampionshipClassesView(championship: championship) }
             }
             if championship.seasons.contains(where: { $0.stages.contains { SchedulePresentation.isSafetyCar($0.myRole) || !$0.scheduleEvents.flatMap(\.safetyCarPeriods).isEmpty } }) {
@@ -59,9 +70,10 @@ struct ChampionshipDetailView: View {
         .navigationDestination(item: $stageToOpen) { stage in
             StageDetailView(stage: stage)
         }
-        .onAppear {
-            configureInitialExpansion()
-        }
+        .onAppear { configureInitialExpansion() }
+        .alert("Ошибка сохранения", isPresented: Binding(get: { errorMessage != nil }, set: { if !$0 { errorMessage = nil } })) {
+            Button("OK") { errorMessage = nil }
+        } message: { Text(errorMessage ?? "") }
     }
 
     private var sortedSeasons: [Season] {

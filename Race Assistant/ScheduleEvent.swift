@@ -16,6 +16,16 @@ final class ScheduleEvent {
     var groupID: String?
 
     var stage: Stage?
+    var circuitConfiguration: CircuitConfiguration?
+
+    var effectiveConfiguration: CircuitConfiguration? {
+        if let chosen = circuitConfiguration, chosen.circuit === stage?.circuit { return chosen }
+        return stage?.effectiveConfiguration
+    }
+
+    var circuitLengthMeters: Double? {
+        effectiveConfiguration?.lengthMeters ?? stage?.circuit?.lengthMeters
+    }
 
     // Стабильный ID для уведомлений
     var notificationID: UUID = UUID()

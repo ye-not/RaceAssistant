@@ -1,5 +1,6 @@
 import Foundation
 import UserNotifications
+import SwiftData
 
 final class NotificationManager: NSObject {
     static let shared = NotificationManager()
@@ -82,10 +83,11 @@ final class NotificationManager: NSObject {
 
     // MARK: - Schedule One Event
 
+    @MainActor
     func scheduleNotifications(
         for event: ScheduleEvent
     ) async {
-
+        let eventID = event.notificationID
         let center =
             UNUserNotificationCenter.current()
 
@@ -103,8 +105,7 @@ final class NotificationManager: NSObject {
         // за уведомления,
         // iPhone ничего не создаёт.
 
-        if PhoneWatchConnectivityManager.shared
-            .watchNotificationsActive {
+        if watchOwnsNotifications(for: eventID) {
 
             print(
                 "iPhone notification skipped: Watch notifications active"
@@ -118,6 +119,9 @@ final class NotificationManager: NSObject {
         else {
             return
         }
+
+        guard event.status == "scheduled",
+              !stage.scheduleEvents.contains(where: { $0.isRace && $0.status == "red_flag" }) else { return }
 
         guard shouldNotify(
             for: event,
@@ -135,6 +139,7 @@ final class NotificationManager: NSObject {
             return
         }
 
+        var requests: [UNNotificationRequest] = []
         for minutesBefore in offsets {
 
             guard let notificationDate =
@@ -216,10 +221,23 @@ final class NotificationManager: NSObject {
                         trigger
                 )
 
+            requests.append(request)
+        }
+        let stageID = stage.persistentModelID
+        for request in requests {
+            if queuedStages[stageID] != nil {
+                center.removePendingNotificationRequests(withIdentifiers: requests.map(\.identifier))
+                return
+            }
             do {
-                try await center.add(
-                    request
-                )
+                try await center.add(request)
+                if queuedStages[stageID] != nil {
+                    center.removePendingNotificationRequests(withIdentifiers: requests.map(\.identifier))
+                    return
+                }
+                if watchOwnsNotifications(for: eventID) {
+                    center.removePendingNotificationRequests(withIdentifiers: [request.identifier])
+                }
 
                 print(
                     "iPhone notification created: \(request.identifier)"
@@ -233,11 +251,25 @@ final class NotificationManager: NSObject {
         }
     }
 
+    @MainActor private var queuedStages: [PersistentIdentifier: Stage] = [:]
+    @MainActor private var schedulingStages: Set<PersistentIdentifier> = []
+
     // MARK: - Reschedule Stage
 
-    func rescheduleNotifications(
-        for stage: Stage
-    ) async {
+    @MainActor
+    func rescheduleNotifications(for stage: Stage) async {
+        let id = stage.persistentModelID
+        queuedStages[id] = stage
+        guard !schedulingStages.contains(id) else { return }
+        schedulingStages.insert(id)
+        defer { schedulingStages.remove(id) }
+        while let latest = queuedStages.removeValue(forKey: id) {
+            await rebuildNotifications(for: latest)
+        }
+    }
+
+    @MainActor
+    private func rebuildNotifications(for stage: Stage) async {
 
         // Сначала полностью очищаем
         // старые уведомления этапа.
@@ -247,6 +279,9 @@ final class NotificationManager: NSObject {
                 for: event
             )
         }
+
+        // Пока судьёй не объявлено новое время, старые напоминания этого этапа недостоверны.
+        guard !stage.scheduleEvents.contains(where: { $0.isRace && $0.status == "red_flag" }) else { return }
 
         // Режим "Не уведомлять".
         // После очистки больше
@@ -258,20 +293,6 @@ final class NotificationManager: NSObject {
 
             print(
                 "iPhone stage notifications disabled"
-            )
-
-            return
-        }
-
-        // Если Watch отвечает
-        // за уведомления,
-        // iPhone остаётся fallback.
-
-        if PhoneWatchConnectivityManager.shared
-            .watchNotificationsActive {
-
-            print(
-                "iPhone stage notifications removed: Watch owns notifications"
             )
 
             return
@@ -295,7 +316,7 @@ final class NotificationManager: NSObject {
         let futureEvents =
             stage.scheduleEvents
                 .filter {
-                    $0.plannedStart > Date()
+                    $0.status == "scheduled" && $0.plannedStart > Date()
                 }
                 .sorted {
                     $0.plannedStart <
@@ -303,6 +324,7 @@ final class NotificationManager: NSObject {
                 }
 
         for event in futureEvents {
+            guard stage.scheduleEvents.contains(where: { $0 === event }) else { continue }
             await scheduleNotifications(
                 for: event
             )
@@ -313,62 +335,23 @@ final class NotificationManager: NSObject {
         )
     }
 
+    @MainActor
+    private func watchOwnsNotifications(for eventID: UUID) -> Bool {
+        let watch = PhoneWatchConnectivityManager.shared
+        return watch.watchNotificationsActive &&
+            (watch.lastSentSchedule?.events.contains { $0.id == eventID } ?? false)
+    }
+
     // MARK: - Notification Filtering
 
-    private func shouldNotify(
-        for event: ScheduleEvent,
-        stage: Stage
-    ) -> Bool {
-
+    @MainActor
+    func shouldNotify(for event: ScheduleEvent, stage: Stage) -> Bool {
         switch stage.notificationMode {
-
-        // Ничего не уведомляем.
-
-        case .none:
-            return false
-
-        // Любая строка расписания.
-
-        case .all:
-            return true
-
-        // Только строки,
-        // в которых явно указана
-        // моя роль.
-
+        case .none: return false
+        case .all: return true
         case .myRole:
-
-            guard let myRole =
-                stage.myRole
-            else {
-                return false
-            }
-
-            // Пустой список ролей
-            // НЕ считаем общим событием.
-            //
-            // В импортированном расписании
-            // это может означать,
-            // что роли ещё просто
-            // не заполнены.
-
-            guard
-                !event.eventRoles.isEmpty
-            else {
-                return false
-            }
-
-            return event.eventRoles
-                .contains { eventRole in
-
-                    guard let role =
-                        eventRole.role
-                    else {
-                        return false
-                    }
-
-                    return role === myRole
-                }
+            guard stage.isInterested else { return false }
+            return SchedulePresentation.relevant(event, stage: stage)
         }
     }
 
@@ -556,7 +539,10 @@ extension NotificationManager:
             )
 
         case UNNotificationDefaultActionIdentifier:
-
+            if let value = response.notification.request.content.userInfo["stewardIncidentID"] as? String,
+               let id = UUID(uuidString: value) {
+                Task { @MainActor in StewardNotificationRouter.shared.request = StewardOpenRequest(id: id) }
+            }
             print(
                 "Notification opened"
             )

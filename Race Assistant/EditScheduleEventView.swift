@@ -16,6 +16,7 @@ struct EditScheduleEventView: View {
     @State private var title: String
     @State private var plannedStart: Date
     @State private var plannedDuration: Int
+    @State private var selectedConfiguration: CircuitConfiguration?
     @State private var isRace: Bool
     @State private var selectedRoles: [Role]
     @State private var selectedRaceClasses: [RaceClass]
@@ -27,7 +28,7 @@ struct EditScheduleEventView: View {
     }
 
     private var activeRaceClasses: [RaceClass] {
-        let allowed = event.stage?.season?.championship?.raceClasses ?? []
+        let allowed = event.stage?.availableClasses ?? []
         return allRaceClasses.filter { item in
             (item.active && allowed.contains { $0 === item }) || selectedRaceClasses.contains { $0 === item }
         }
@@ -65,6 +66,7 @@ struct EditScheduleEventView: View {
 
     init(event: ScheduleEvent) {
         self.event = event
+        _selectedConfiguration = State(initialValue: event.circuitConfiguration)
 
         _title = State(
             initialValue: event.title
@@ -146,6 +148,13 @@ struct EditScheduleEventView: View {
                         isOn: $isRace
                     )
                     
+                }
+
+                if isRace, let circuit = event.stage?.circuit {
+                    Section("Конфигурация гонки") {
+                        ConfigurationPicker(circuit: circuit, selection: $selectedConfiguration,
+                                            inherited: event.stage?.effectiveConfiguration, usesStageDefault: true)
+                    }
                 }
 
                 // MARK: - Длительность
@@ -396,6 +405,7 @@ struct EditScheduleEventView: View {
         event.plannedStart = plannedStart
         event.plannedDuration = plannedDuration
         event.isRace = isRace
+        event.circuitConfiguration = isRace ? selectedConfiguration : nil
 
         // Роли
 

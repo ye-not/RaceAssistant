@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import UserNotifications
 import WatchConnectivity
 
 @MainActor
@@ -80,14 +81,25 @@ final class WatchConnectivityManager: NSObject, ObservableObject {
     }
 
     private func acknowledge(_ token: String) {
-        let session = WCSession.default
-        let payload = ["scheduleAcknowledged": token]
-        if session.isReachable {
-            session.sendMessage(payload, replyHandler: nil) { _ in session.transferUserInfo(payload) }
-        } else {
-            session.transferUserInfo(payload)
+        Task {
+            let center = UNUserNotificationCenter.current()
+            let settings = await center.notificationSettings()
+            let requests = await center.pendingNotificationRequests()
+            let allowed = settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
+            let session = WCSession.default
+            let payload: [String: Any] = [
+                "scheduleAcknowledged": token,
+                "notificationsAllowed": allowed,
+                "notificationCount": requests.filter { $0.identifier.hasPrefix("raceassistant-watch-") }.count
+            ]
+            if session.isReachable {
+                session.sendMessage(payload, replyHandler: nil) { _ in session.transferUserInfo(payload) }
+            } else {
+                session.transferUserInfo(payload)
+            }
         }
     }
+
 }
 
 extension WatchConnectivityManager: WCSessionDelegate {

@@ -2,72 +2,28 @@ import SwiftUI
 import SwiftData
 
 struct RaceClassListView: View {
-    @Environment(\.modelContext) private var modelContext
-
-    @Query(sort: \RaceClass.name)
-    private var raceClasses: [RaceClass]
-
-    @State private var showingAddRaceClass = false
-
+    @Query(sort: \RaceClass.name) private var classes: [RaceClass]
+    @State private var search = ""
+    @State private var adding = false
+    @State private var editing: RaceClass?
     var body: some View {
         List {
-            if raceClasses.isEmpty {
-                ContentUnavailableView(
-                    "Нет классов",
-                    systemImage: "car.2",
-                    description: Text("Добавь первый класс соревнований")
-                )
-            } else {
-                ForEach(raceClasses) { raceClass in
-                    HStack {
+            Section {
+                ForEach(classes.filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) || $0.shortName.localizedCaseInsensitiveContains(search) }) { item in
+                    Button { editing = item } label: {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(raceClass.name)
-                                .font(.headline)
-
-                            if !raceClass.shortName.isEmpty {
-                                Text(raceClass.shortName)
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
+                            Text(item.name).foregroundStyle(.primary)
+                            Text([item.shortName, item.active ? "" : "В архиве"].filter { !$0.isEmpty }.joined(separator: " · "))
+                                .font(.caption).foregroundStyle(.secondary)
                         }
-
-                        Spacer()
-
-                        Toggle(
-                            "",
-                            isOn: Binding(
-                                get: { raceClass.active },
-                                set: { newValue in
-                                    raceClass.active = newValue
-                                    saveChanges()
-                                }
-                            )
-                        )
-                        .labelsHidden()
                     }
                 }
-            }
+            } footer: { Text("Нажмите на класс для редактирования. Архивные классы остаются в существующих расписаниях.") }
         }
         .navigationTitle("Классы")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    showingAddRaceClass = true
-                } label: {
-                    Image(systemName: "plus")
-                }
-            }
-        }
-        .sheet(isPresented: $showingAddRaceClass) {
-            AddRaceClassView()
-        }
-    }
-
-    private func saveChanges() {
-        do {
-            try modelContext.save()
-        } catch {
-            print("Ошибка сохранения классов: \(error)")
-        }
+        .searchable(text: $search, prompt: "Название или сокращение")
+        .toolbar { Button { adding = true } label: { Image(systemName: "plus") } }
+        .sheet(isPresented: $adding) { AddRaceClassView() }
+        .sheet(item: $editing) { AddRaceClassView(raceClass: $0) }
     }
 }

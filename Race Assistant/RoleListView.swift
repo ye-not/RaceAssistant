@@ -9,6 +9,11 @@ struct RoleListView: View {
 
     @State private var showingAddRole = false
 
+    @State private var search = ""
+    private var visible: [Role] {
+        roles.filter { search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) || $0.shortName.localizedCaseInsensitiveContains(search) }
+    }
+
     var body: some View {
         List {
             if roles.isEmpty {
@@ -18,7 +23,7 @@ struct RoleListView: View {
                     description: Text("Добавь первую роль")
                 )
             } else {
-                ForEach(roles) { role in
+                ForEach(visible) { role in
                     HStack {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(role.name)
@@ -49,6 +54,7 @@ struct RoleListView: View {
                 .onDelete(perform: deleteRoles)
             }
         }
+        .searchable(text: $search, prompt: "Поиск")
         .navigationTitle("Роли")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -66,7 +72,7 @@ struct RoleListView: View {
 
     private func deleteRoles(offsets: IndexSet) {
         for index in offsets {
-            modelContext.delete(roles[index])
+            modelContext.delete(visible[index])
         }
 
         saveChanges()

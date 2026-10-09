@@ -1,0 +1,4437 @@
+{
+  "schemaVersion": 4,
+  "generatedFrom": "СМП РСКГ Спринт / Эндуранс, Moscow Raceway, официальный PDF v2.6 от 23.09.2026",
+  "sourceVersion": "2.6",
+  "sourceDate": "2026-09-23",
+  "timeZone": "Europe/Moscow",
+  "sourceNotes": [
+    "PDF внутри: 07–11.10.2026, несмотря на августовскую дату в имени файла.",
+    "Строки «Световой день» не импортированы. Таблица явки на странице 5 включена отдельными строками.",
+    "В таблице явки заголовок «Четверг 07 октября» противоречит календарю: 07.10.2026 — среда. Строки отнесены к 07 октября.",
+    "Начало Leading car перед линией старта перенесено на 5 минут раньше; конец оставлен по PDF. Добавлена роль SC. В гонки добавлена роль SC.",
+    "В команду 5 минут добавлены SC/MC; в команду 1 минута перед стартом с хода добавлены LC/MC.",
+    "Указанный в PDF интервал для мгновенных сигналов и закрытия пит-лейн означает счёт до следующего этапа; длительность этих событий 0."
+  ],
+  "referenceData": {
+    "roles": [
+      {
+        "name": "Safety car",
+        "shortName": "SC",
+        "active": true
+      },
+      {
+        "name": "Leading car",
+        "shortName": "LC",
+        "active": true
+      },
+      {
+        "name": "Medical car",
+        "shortName": "MC",
+        "active": true
+      }
+    ],
+    "raceClasses": [
+      {
+        "name": "SMP TCR Russia",
+        "shortName": "TCR",
+        "active": true
+      },
+      {
+        "name": "GT4",
+        "shortName": "GT4",
+        "active": true
+      },
+      {
+        "name": "Touring-lite",
+        "shortName": "TL",
+        "active": true
+      },
+      {
+        "name": "Super Production",
+        "shortName": "SP",
+        "active": true
+      },
+      {
+        "name": "S1600",
+        "shortName": "S1600",
+        "active": true
+      },
+      {
+        "name": "SMP F4",
+        "shortName": "F4",
+        "active": true
+      }
+    ],
+    "circuits": [
+      {
+        "name": "Moscow Raceway",
+        "shortName": "MRW",
+        "city": "Волоколамск",
+        "country": "Россия",
+        "lengthMeters": 3955
+      }
+    ]
+  },
+  "scheduleImports": [
+    {
+      "seriesName": "СМП РСКГ",
+      "seasonYear": 2026,
+      "stageName": "Финал · Спринт",
+      "timeZoneIdentifier": "Europe/Moscow",
+      "events": [
+        {
+          "sourceRow": 1,
+          "date": "2026-10-07",
+          "startTime": "13:00",
+          "endTime": "19:00",
+          "durationMinutes": 360,
+          "title": "Входная техническая инспекция",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 2,
+          "date": "2026-10-07",
+          "startTime": "13:00",
+          "endTime": "19:00",
+          "durationMinutes": 360,
+          "title": "Свободный режим взвешивания. Бокс ТИ",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 3,
+          "date": "2026-10-07",
+          "startTime": "13:00",
+          "endTime": "17:00",
+          "durationMinutes": 240,
+          "title": "Административные проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Расписание по зачётным группам",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 4,
+          "date": "2026-10-07",
+          "startTime": "13:00",
+          "endTime": "13:30",
+          "durationMinutes": 30,
+          "title": "Административные проверки · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 5,
+          "date": "2026-10-07",
+          "startTime": "13:15",
+          "endTime": "13:55",
+          "durationMinutes": 40,
+          "title": "Инспекция трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 6,
+          "date": "2026-10-07",
+          "startTime": "13:30",
+          "endTime": "14:00",
+          "durationMinutes": 30,
+          "title": "Административные проверки · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 7,
+          "date": "2026-10-07",
+          "startTime": "14:00",
+          "endTime": "14:40",
+          "durationMinutes": 40,
+          "title": "Административные проверки · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 8,
+          "date": "2026-10-07",
+          "startTime": "14:40",
+          "endTime": "15:30",
+          "durationMinutes": 50,
+          "title": "Административные проверки · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 9,
+          "date": "2026-10-07",
+          "startTime": "15:30",
+          "endTime": "16:00",
+          "durationMinutes": 30,
+          "title": "Административные проверки · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 10,
+          "date": "2026-10-07",
+          "startTime": "17:00",
+          "endTime": "17:30",
+          "durationMinutes": 30,
+          "title": "Организационное совещание",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 11,
+          "date": "2026-10-07",
+          "startTime": "17:30",
+          "endTime": "17:40",
+          "durationMinutes": 10,
+          "title": "Регистрация спортсменов на брифинг",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 12,
+          "date": "2026-10-07",
+          "startTime": "17:40",
+          "endTime": "18:00",
+          "durationMinutes": 20,
+          "title": "Брифинг спортсменов",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 13,
+          "date": "2026-10-07",
+          "startTime": "17:50",
+          "endTime": "18:00",
+          "durationMinutes": 10,
+          "title": "Регистрация спортсменов на брифинг",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 14,
+          "date": "2026-10-07",
+          "startTime": "18:00",
+          "endTime": "18:20",
+          "durationMinutes": 20,
+          "title": "Брифинг спортсменов",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 15,
+          "date": "2026-10-07",
+          "startTime": "18:20",
+          "endTime": "18:30",
+          "durationMinutes": 10,
+          "title": "Регистрация спортсменов на брифинг",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 16,
+          "date": "2026-10-07",
+          "startTime": "18:30",
+          "endTime": "19:00",
+          "durationMinutes": 30,
+          "title": "Брифинг спортсменов",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 17,
+          "date": "2026-10-07",
+          "startTime": "19:30",
+          "endTime": "20:00",
+          "durationMinutes": 30,
+          "title": "Коллегия спортивных комиссаров",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Утверждение списков спортсменов и команд",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 18,
+          "date": "2026-10-08",
+          "startTime": "07:50",
+          "endTime": "10:40",
+          "durationMinutes": 170,
+          "title": "Медицинский осмотр",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 19,
+          "date": "2026-10-08",
+          "startTime": "07:50",
+          "endTime": "08:30",
+          "durationMinutes": 40,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 20,
+          "date": "2026-10-08",
+          "startTime": "08:30",
+          "endTime": "08:40",
+          "durationMinutes": 10,
+          "title": "Ознакомительный круг КСК",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Ознакомительный круг КСК",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 21,
+          "date": "2026-10-08",
+          "startTime": "08:40",
+          "endTime": "08:45",
+          "durationMinutes": 5,
+          "title": "Закрытие трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Закрытие трассы",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 22,
+          "date": "2026-10-08",
+          "startTime": "08:45",
+          "endTime": "08:50",
+          "durationMinutes": 5,
+          "title": "Медицинская инспекция трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC"
+          ],
+          "sourceParticipantsText": "Медицинская инспекция трассы",
+          "sourceOfficialsText": "Medical car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 23,
+          "date": "2026-10-08",
+          "startTime": "08:50",
+          "endTime": "09:00",
+          "durationMinutes": 10,
+          "title": "Инспекция трассы, все службы на местах",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Инспекция трассы, все службы на местах",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 24,
+          "date": "2026-10-08",
+          "startTime": "08:50",
+          "endTime": "09:20",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 25,
+          "date": "2026-10-08",
+          "startTime": "09:00",
+          "endTime": "10:00",
+          "durationMinutes": 60,
+          "title": "Тренировка 1",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 26,
+          "date": "2026-10-08",
+          "startTime": "09:20",
+          "endTime": "10:00",
+          "durationMinutes": 40,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 27,
+          "date": "2026-10-08",
+          "startTime": "10:00",
+          "endTime": "10:05",
+          "durationMinutes": 5,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 28,
+          "date": "2026-10-08",
+          "startTime": "10:00",
+          "endTime": "10:40",
+          "durationMinutes": 40,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 29,
+          "date": "2026-10-08",
+          "startTime": "10:05",
+          "endTime": "10:25",
+          "durationMinutes": 20,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 30,
+          "date": "2026-10-08",
+          "startTime": "10:25",
+          "endTime": "10:35",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 31,
+          "date": "2026-10-08",
+          "startTime": "10:35",
+          "endTime": "11:15",
+          "durationMinutes": 40,
+          "title": "Тестовая сессия",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 32,
+          "date": "2026-10-08",
+          "startTime": "11:15",
+          "endTime": "11:20",
+          "durationMinutes": 5,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 33,
+          "date": "2026-10-08",
+          "startTime": "11:20",
+          "endTime": "11:40",
+          "durationMinutes": 20,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 34,
+          "date": "2026-10-08",
+          "startTime": "11:40",
+          "endTime": "11:45",
+          "durationMinutes": 5,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 35,
+          "date": "2026-10-08",
+          "startTime": "11:45",
+          "endTime": "12:45",
+          "durationMinutes": 60,
+          "title": "Тренировка 2",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 36,
+          "date": "2026-10-08",
+          "startTime": "12:45",
+          "endTime": "12:50",
+          "durationMinutes": 5,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 37,
+          "date": "2026-10-08",
+          "startTime": "12:50",
+          "endTime": "13:20",
+          "durationMinutes": 30,
+          "title": "Монтажные работы Матч ТВ",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 38,
+          "date": "2026-10-08",
+          "startTime": "13:20",
+          "endTime": "13:25",
+          "durationMinutes": 5,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 39,
+          "date": "2026-10-08",
+          "startTime": "13:25",
+          "endTime": "14:05",
+          "durationMinutes": 40,
+          "title": "Тестовая сессия",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 40,
+          "date": "2026-10-08",
+          "startTime": "14:05",
+          "endTime": "14:15",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 41,
+          "date": "2026-10-08",
+          "startTime": "14:15",
+          "endTime": "14:35",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 42,
+          "date": "2026-10-08",
+          "startTime": "14:35",
+          "endTime": "14:45",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 43,
+          "date": "2026-10-08",
+          "startTime": "14:45",
+          "endTime": "15:05",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 44,
+          "date": "2026-10-08",
+          "startTime": "15:05",
+          "endTime": "15:15",
+          "durationMinutes": 10,
+          "title": "Открытие трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Открытие трассы",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 45,
+          "date": "2026-10-08",
+          "startTime": "15:15",
+          "endTime": "15:30",
+          "durationMinutes": 15,
+          "title": "Квалификация 1",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 46,
+          "date": "2026-10-08",
+          "startTime": "15:30",
+          "endTime": "15:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 47,
+          "date": "2026-10-08",
+          "startTime": "15:40",
+          "endTime": "15:55",
+          "durationMinutes": 15,
+          "title": "Квалификация 2",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 48,
+          "date": "2026-10-08",
+          "startTime": "15:55",
+          "endTime": "16:05",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 49,
+          "date": "2026-10-08",
+          "startTime": "16:05",
+          "endTime": "16:45",
+          "durationMinutes": 40,
+          "title": "Тестовая сессия",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 50,
+          "date": "2026-10-08",
+          "startTime": "16:45",
+          "endTime": "16:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 51,
+          "date": "2026-10-08",
+          "startTime": "16:55",
+          "endTime": "17:15",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 52,
+          "date": "2026-10-08",
+          "startTime": "17:15",
+          "endTime": "17:25",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 53,
+          "date": "2026-10-08",
+          "startTime": "17:25",
+          "endTime": "17:45",
+          "durationMinutes": 20,
+          "title": "Квалификация",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 54,
+          "date": "2026-10-08",
+          "startTime": "17:45",
+          "endTime": "17:50",
+          "durationMinutes": 5,
+          "title": "Открытие трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Открытие трассы",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 55,
+          "date": "2026-10-09",
+          "startTime": "08:05",
+          "endTime": "14:55",
+          "durationMinutes": 410,
+          "title": "Медицинский осмотр",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 56,
+          "date": "2026-10-09",
+          "startTime": "08:05",
+          "endTime": "08:45",
+          "durationMinutes": 40,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 57,
+          "date": "2026-10-09",
+          "startTime": "08:55",
+          "endTime": "09:00",
+          "durationMinutes": 5,
+          "title": "Закрытие трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Закрытие трассы",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 58,
+          "date": "2026-10-09",
+          "startTime": "09:00",
+          "endTime": "09:05",
+          "durationMinutes": 5,
+          "title": "Медицинская инспекция трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC"
+          ],
+          "sourceParticipantsText": "Медицинская инспекция трассы",
+          "sourceOfficialsText": "Medical car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 59,
+          "date": "2026-10-09",
+          "startTime": "09:00",
+          "endTime": "09:30",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 60,
+          "date": "2026-10-09",
+          "startTime": "09:05",
+          "endTime": "09:15",
+          "durationMinutes": 10,
+          "title": "Инспекция трассы, все службы на местах",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Инспекция трассы, все службы на местах",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 61,
+          "date": "2026-10-09",
+          "startTime": "09:15",
+          "endTime": "09:30",
+          "durationMinutes": 15,
+          "title": "Тренировка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 62,
+          "date": "2026-10-09",
+          "startTime": "09:30",
+          "endTime": "09:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 63,
+          "date": "2026-10-09",
+          "startTime": "09:40",
+          "endTime": "09:55",
+          "durationMinutes": 15,
+          "title": "Квалификация 1",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 64,
+          "date": "2026-10-09",
+          "startTime": "09:55",
+          "endTime": "10:05",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 65,
+          "date": "2026-10-09",
+          "startTime": "10:00",
+          "endTime": "10:05",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Leading car перед линией старта",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 66,
+          "date": "2026-10-09",
+          "startTime": "10:03",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 67,
+          "date": "2026-10-09",
+          "startTime": "10:05",
+          "endTime": "10:10",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 68,
+          "date": "2026-10-09",
+          "startTime": "10:08",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 69,
+          "date": "2026-10-09",
+          "startTime": "10:10",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 70,
+          "date": "2026-10-09",
+          "startTime": "10:25",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 71,
+          "date": "2026-10-09",
+          "startTime": "10:27",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 72,
+          "date": "2026-10-09",
+          "startTime": "10:29",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 73,
+          "date": "2026-10-09",
+          "startTime": "10:29:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 74,
+          "date": "2026-10-09",
+          "startTime": "10:30",
+          "endTime": "11:40",
+          "durationMinutes": 70,
+          "title": "Гонка 1 (60 минут + 1 круг, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 75,
+          "date": "2026-10-09",
+          "startTime": "10:40",
+          "endTime": "11:20",
+          "durationMinutes": 40,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 76,
+          "date": "2026-10-09",
+          "startTime": "11:40",
+          "endTime": "11:55",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 1",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 77,
+          "date": "2026-10-09",
+          "startTime": "11:40",
+          "endTime": "11:50",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 78,
+          "date": "2026-10-09",
+          "startTime": "11:53",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 79,
+          "date": "2026-10-09",
+          "startTime": "11:55",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 80,
+          "date": "2026-10-09",
+          "startTime": "11:55",
+          "endTime": "12:00",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 81,
+          "date": "2026-10-09",
+          "startTime": "11:58",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 82,
+          "date": "2026-10-09",
+          "startTime": "12:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 83,
+          "date": "2026-10-09",
+          "startTime": "12:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 84,
+          "date": "2026-10-09",
+          "startTime": "12:17",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 85,
+          "date": "2026-10-09",
+          "startTime": "12:19",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 86,
+          "date": "2026-10-09",
+          "startTime": "12:19:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 87,
+          "date": "2026-10-09",
+          "startTime": "12:20",
+          "endTime": "13:00",
+          "durationMinutes": 40,
+          "title": "Гонка 1 (16 кругов, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 88,
+          "date": "2026-10-09",
+          "startTime": "13:00",
+          "endTime": "13:15",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 1",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 89,
+          "date": "2026-10-09",
+          "startTime": "13:00",
+          "endTime": "13:10",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 90,
+          "date": "2026-10-09",
+          "startTime": "13:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Автомобили выстраиваются перед боксами под 45° к выезду с пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 91,
+          "date": "2026-10-09",
+          "startTime": "13:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Открытие ворот на трассе для прохода зрителей на прогулку по пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 92,
+          "date": "2026-10-09",
+          "startTime": "13:15",
+          "endTime": "13:55",
+          "durationMinutes": 40,
+          "title": "Прогулка зрителей по пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 93,
+          "date": "2026-10-09",
+          "startTime": "13:55",
+          "endTime": "14:00",
+          "durationMinutes": 5,
+          "title": "Окончание прогулки по пит-лейн, Сопровождение зрителей до ворот.",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 94,
+          "date": "2026-10-09",
+          "startTime": "14:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Закрытие ворот после возвращения зрителей",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 95,
+          "date": "2026-10-09",
+          "startTime": "14:00",
+          "endTime": "14:05",
+          "durationMinutes": 5,
+          "title": "Закрытие трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Закрытие трассы",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 96,
+          "date": "2026-10-09",
+          "startTime": "14:05",
+          "endTime": "14:10",
+          "durationMinutes": 5,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 97,
+          "date": "2026-10-09",
+          "startTime": "14:08",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 98,
+          "date": "2026-10-09",
+          "startTime": "14:10",
+          "endTime": "14:15",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 99,
+          "date": "2026-10-09",
+          "startTime": "14:10",
+          "endTime": "14:50",
+          "durationMinutes": 40,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 100,
+          "date": "2026-10-09",
+          "startTime": "14:13",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 101,
+          "date": "2026-10-09",
+          "startTime": "14:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 102,
+          "date": "2026-10-09",
+          "startTime": "14:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 103,
+          "date": "2026-10-09",
+          "startTime": "14:32",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 104,
+          "date": "2026-10-09",
+          "startTime": "14:34",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 105,
+          "date": "2026-10-09",
+          "startTime": "14:34:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 106,
+          "date": "2026-10-09",
+          "startTime": "14:35",
+          "endTime": "15:10",
+          "durationMinutes": 35,
+          "title": "Гонка 1 (28 минут + 1 круг, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 107,
+          "date": "2026-10-09",
+          "startTime": "15:10",
+          "endTime": "15:25",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 1",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 108,
+          "date": "2026-10-09",
+          "startTime": "15:10",
+          "endTime": "15:20",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 109,
+          "date": "2026-10-09",
+          "startTime": "15:23",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 110,
+          "date": "2026-10-09",
+          "startTime": "15:25",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 111,
+          "date": "2026-10-09",
+          "startTime": "15:25",
+          "endTime": "15:30",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 112,
+          "date": "2026-10-09",
+          "startTime": "15:28",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 113,
+          "date": "2026-10-09",
+          "startTime": "15:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 114,
+          "date": "2026-10-09",
+          "startTime": "15:40",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 115,
+          "date": "2026-10-09",
+          "startTime": "15:42",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 116,
+          "date": "2026-10-09",
+          "startTime": "15:44",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 117,
+          "date": "2026-10-09",
+          "startTime": "15:44:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 118,
+          "date": "2026-10-09",
+          "startTime": "15:45",
+          "endTime": "16:25",
+          "durationMinutes": 40,
+          "title": "Гонка 1 (16 кругов, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 119,
+          "date": "2026-10-09",
+          "startTime": "16:25",
+          "endTime": "16:40",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 1",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 120,
+          "date": "2026-10-09",
+          "startTime": "16:25",
+          "endTime": "16:35",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 121,
+          "date": "2026-10-09",
+          "startTime": "16:38",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 122,
+          "date": "2026-10-09",
+          "startTime": "16:40",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 123,
+          "date": "2026-10-09",
+          "startTime": "16:40",
+          "endTime": "16:45",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 124,
+          "date": "2026-10-09",
+          "startTime": "16:43",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 125,
+          "date": "2026-10-09",
+          "startTime": "16:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 126,
+          "date": "2026-10-09",
+          "startTime": "17:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 127,
+          "date": "2026-10-09",
+          "startTime": "17:02",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 128,
+          "date": "2026-10-09",
+          "startTime": "17:04",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 129,
+          "date": "2026-10-09",
+          "startTime": "17:04:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 130,
+          "date": "2026-10-09",
+          "startTime": "17:05",
+          "endTime": "17:40",
+          "durationMinutes": 35,
+          "title": "Гонка 2 (28 минут + 1 круг, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 131,
+          "date": "2026-10-09",
+          "startTime": "17:40",
+          "endTime": "17:55",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 2",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 132,
+          "date": "2026-10-09",
+          "startTime": "17:40",
+          "endTime": "17:50",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 133,
+          "date": "2026-10-10",
+          "startTime": "07:50",
+          "endTime": "09:20",
+          "durationMinutes": 90,
+          "title": "Медицинский осмотр",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Все зачётные группы",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 134,
+          "date": "2026-10-10",
+          "startTime": "07:50",
+          "endTime": "08:20",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 135,
+          "date": "2026-10-10",
+          "startTime": "08:15",
+          "endTime": "08:35",
+          "durationMinutes": 20,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 136,
+          "date": "2026-10-10",
+          "startTime": "08:35",
+          "endTime": "08:40",
+          "durationMinutes": 5,
+          "title": "Медицинская инспекция трассы",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "MC"
+          ],
+          "sourceParticipantsText": "Медицинская инспекция трассы",
+          "sourceOfficialsText": "Medical car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 137,
+          "date": "2026-10-10",
+          "startTime": "08:35",
+          "endTime": "08:55",
+          "durationMinutes": 20,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "S1600, Туринг-лайт",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 138,
+          "date": "2026-10-10",
+          "startTime": "08:40",
+          "endTime": "08:50",
+          "durationMinutes": 10,
+          "title": "Инспекция трассы, все службы на местах",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Инспекция трассы, все службы на местах",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 139,
+          "date": "2026-10-10",
+          "startTime": "08:50",
+          "endTime": "09:05",
+          "durationMinutes": 15,
+          "title": "Квалификация 2",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 140,
+          "date": "2026-10-10",
+          "startTime": "08:50",
+          "endTime": "09:20",
+          "durationMinutes": 30,
+          "title": "Медицинский осмотр · явка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 141,
+          "date": "2026-10-10",
+          "startTime": "09:05",
+          "endTime": "09:15",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 142,
+          "date": "2026-10-10",
+          "startTime": "09:15",
+          "endTime": "09:25",
+          "durationMinutes": 10,
+          "title": "Разминка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 143,
+          "date": "2026-10-10",
+          "startTime": "09:25",
+          "endTime": "09:35",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 144,
+          "date": "2026-10-10",
+          "startTime": "09:35",
+          "endTime": "09:45",
+          "durationMinutes": 10,
+          "title": "Разминка",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 145,
+          "date": "2026-10-10",
+          "startTime": "09:45",
+          "endTime": "09:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 146,
+          "date": "2026-10-10",
+          "startTime": "09:50",
+          "endTime": "09:55",
+          "durationMinutes": 5,
+          "title": "Leading car перед линией старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "LC",
+            "SC"
+          ],
+          "sourceParticipantsText": "Leading car перед линией старта",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 147,
+          "date": "2026-10-10",
+          "startTime": "09:53",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 148,
+          "date": "2026-10-10",
+          "startTime": "09:55",
+          "endTime": "10:00",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 149,
+          "date": "2026-10-10",
+          "startTime": "09:58",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 150,
+          "date": "2026-10-10",
+          "startTime": "10:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 151,
+          "date": "2026-10-10",
+          "startTime": "10:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 152,
+          "date": "2026-10-10",
+          "startTime": "10:17",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 153,
+          "date": "2026-10-10",
+          "startTime": "10:19",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "LC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 154,
+          "date": "2026-10-10",
+          "startTime": "10:19:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 155,
+          "date": "2026-10-10",
+          "startTime": "10:20",
+          "endTime": "11:30",
+          "durationMinutes": 70,
+          "title": "Гонка 2 (60 минут + 1 круг, старт с хода)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 156,
+          "date": "2026-10-10",
+          "startTime": "11:30",
+          "endTime": "11:45",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP GT4 · Гонка 2",
+          "classShortNames": [
+            "GT4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP GT4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 157,
+          "date": "2026-10-10",
+          "startTime": "11:30",
+          "endTime": "11:40",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 158,
+          "date": "2026-10-10",
+          "startTime": "11:43",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 159,
+          "date": "2026-10-10",
+          "startTime": "11:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 160,
+          "date": "2026-10-10",
+          "startTime": "11:45",
+          "endTime": "11:50",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 161,
+          "date": "2026-10-10",
+          "startTime": "11:48",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 162,
+          "date": "2026-10-10",
+          "startTime": "11:50",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 163,
+          "date": "2026-10-10",
+          "startTime": "12:05",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 164,
+          "date": "2026-10-10",
+          "startTime": "12:07",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 165,
+          "date": "2026-10-10",
+          "startTime": "12:09",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 166,
+          "date": "2026-10-10",
+          "startTime": "12:09:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 167,
+          "date": "2026-10-10",
+          "startTime": "12:10",
+          "endTime": "12:45",
+          "durationMinutes": 35,
+          "title": "Гонка 3 (28 минут + 1 круг, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 168,
+          "date": "2026-10-10",
+          "startTime": "12:45",
+          "endTime": "13:00",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 3",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 169,
+          "date": "2026-10-10",
+          "startTime": "12:45",
+          "endTime": "12:55",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 170,
+          "date": "2026-10-10",
+          "startTime": "13:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Начало прогулки для зрителей по пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 171,
+          "date": "2026-10-10",
+          "startTime": "13:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Автомобили выстраиваются перед боксами под 45° к выезду с пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 172,
+          "date": "2026-10-10",
+          "startTime": "13:00",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Открытие ворот на трассе для прохода зрителей на прогулку по пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 173,
+          "date": "2026-10-10",
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "durationMinutes": 60,
+          "title": "ПРОМО Автоваз Искра",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 174,
+          "date": "2026-10-10",
+          "startTime": "13:00",
+          "endTime": "14:00",
+          "durationMinutes": 60,
+          "title": "Прогулка зрителей по пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 175,
+          "date": "2026-10-10",
+          "startTime": "14:00",
+          "endTime": "14:05",
+          "durationMinutes": 5,
+          "title": "Окончание прогулки по пит-лейн, Сопровождение зрителей до ворот.",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 176,
+          "date": "2026-10-10",
+          "startTime": "14:05",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Закрытие ворот после возвращения зрителей",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [],
+          "sourceParticipantsText": null,
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 177,
+          "date": "2026-10-10",
+          "startTime": "14:05",
+          "endTime": "14:15",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 178,
+          "date": "2026-10-10",
+          "startTime": "14:13",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 179,
+          "date": "2026-10-10",
+          "startTime": "14:15",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 180,
+          "date": "2026-10-10",
+          "startTime": "14:15",
+          "endTime": "14:20",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 181,
+          "date": "2026-10-10",
+          "startTime": "14:18",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 182,
+          "date": "2026-10-10",
+          "startTime": "14:20",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 183,
+          "date": "2026-10-10",
+          "startTime": "14:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 184,
+          "date": "2026-10-10",
+          "startTime": "14:32",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 185,
+          "date": "2026-10-10",
+          "startTime": "14:34",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 186,
+          "date": "2026-10-10",
+          "startTime": "14:34:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 187,
+          "date": "2026-10-10",
+          "startTime": "14:35",
+          "endTime": "15:10",
+          "durationMinutes": 35,
+          "title": "Гонка 2 (13 кругов, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 188,
+          "date": "2026-10-10",
+          "startTime": "15:10",
+          "endTime": "15:25",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP TCR Russia + Супер-продакшн · Гонка 2",
+          "classShortNames": [
+            "SP",
+            "TCR"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP TCR Russia, Супер-продакшн",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 189,
+          "date": "2026-10-10",
+          "startTime": "15:10",
+          "endTime": "15:20",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 190,
+          "date": "2026-10-10",
+          "startTime": "15:23",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 191,
+          "date": "2026-10-10",
+          "startTime": "15:25",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 192,
+          "date": "2026-10-10",
+          "startTime": "15:25",
+          "endTime": "15:30",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 193,
+          "date": "2026-10-10",
+          "startTime": "15:28",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 194,
+          "date": "2026-10-10",
+          "startTime": "15:30",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 195,
+          "date": "2026-10-10",
+          "startTime": "15:40",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 196,
+          "date": "2026-10-10",
+          "startTime": "15:42",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 197,
+          "date": "2026-10-10",
+          "startTime": "15:44",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 198,
+          "date": "2026-10-10",
+          "startTime": "15:44:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 199,
+          "date": "2026-10-10",
+          "startTime": "15:45",
+          "endTime": "16:20",
+          "durationMinutes": 35,
+          "title": "Гонка 2 (13 кругов, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 200,
+          "date": "2026-10-10",
+          "startTime": "16:20",
+          "endTime": "16:35",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "Туринг-лайт + S1600 · Гонка 2",
+          "classShortNames": [
+            "TL",
+            "S1600"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "Туринг-лайт, S1600",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 201,
+          "date": "2026-10-10",
+          "startTime": "16:20",
+          "endTime": "16:30",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 202,
+          "date": "2026-10-10",
+          "startTime": "16:33",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до открытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 203,
+          "date": "2026-10-10",
+          "startTime": "16:35",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Safety car на линии старта",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "Safety car на линии старта",
+          "sourceOfficialsText": "Safety car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 204,
+          "date": "2026-10-10",
+          "startTime": "16:35",
+          "endTime": "16:40",
+          "durationMinutes": 5,
+          "title": "пит-лейн открыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 205,
+          "date": "2026-10-10",
+          "startTime": "16:38",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "Сигнал 2 минуты до закрытия пит-лейн",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 206,
+          "date": "2026-10-10",
+          "startTime": "16:40",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "пит-лейн закрыт",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 207,
+          "date": "2026-10-10",
+          "startTime": "16:55",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "5 минут",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC",
+            "MC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 208,
+          "date": "2026-10-10",
+          "startTime": "16:57",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "3 минуты",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 209,
+          "date": "2026-10-10",
+          "startTime": "16:59",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "1 минута",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 210,
+          "date": "2026-10-10",
+          "startTime": "16:59:45",
+          "endTime": null,
+          "durationMinutes": 0,
+          "title": "15 секунд",
+          "type": "Команда",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 211,
+          "date": "2026-10-10",
+          "startTime": "17:00",
+          "endTime": "17:35",
+          "durationMinutes": 35,
+          "title": "Гонка 4 (28 минут + 1 круг, старт с места)",
+          "type": "Гонка",
+          "isRace": true,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [
+            "SC"
+          ],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 212,
+          "date": "2026-10-10",
+          "startTime": "17:35",
+          "endTime": "17:50",
+          "durationMinutes": 15,
+          "title": "Церемония подиума",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": "SMP F4 · Гонка 4",
+          "classShortNames": [
+            "F4"
+          ],
+          "roleShortNames": [],
+          "sourceParticipantsText": "SMP F4",
+          "sourceOfficialsText": null,
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        },
+        {
+          "sourceRow": 213,
+          "date": "2026-10-10",
+          "startTime": "17:35",
+          "endTime": "17:45",
+          "durationMinutes": 10,
+          "title": "Круг проверки",
+          "type": "Активность",
+          "isRace": false,
+          "groupID": null,
+          "classShortNames": [],
+          "roleShortNames": [
+            "LC"
+          ],
+          "sourceParticipantsText": "Круг проверки",
+          "sourceOfficialsText": "Leading car",
+          "remind10Minutes": true,
+          "remind5Minutes": true,
+          "remind1Minute": true
+        }
+      ]
+    }
+  ]
+}

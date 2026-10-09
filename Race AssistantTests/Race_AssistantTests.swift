@@ -165,9 +165,82 @@ struct Race_AssistantTests {
         #expect(stage.scheduleEvents.first?.plannedDuration == 120)
     }
 
+    @Test func configurationInheritanceAndSCStayStable() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let circuit = Circuit(name: "MRW")
+        let gp9 = CircuitConfiguration(name: "GP9", lengthMeters: 3931, circuit: circuit)
+        let gp10 = CircuitConfiguration(name: "GP10", lengthMeters: 3985, circuit: circuit)
+        context.insert(circuit); context.insert(gp9); context.insert(gp10)
+        circuit.defaultConfiguration = gp9
+        let stage = Stage(name: "Этап", startDate: .now, endDate: .now, circuit: circuit)
+        let race = ScheduleEvent(title: "Гонка", plannedStart: .now, plannedDuration: 30, stage: stage, isRace: true)
+        context.insert(stage); context.insert(race)
+        #expect(race.effectiveConfiguration === gp9)
+        stage.circuitConfiguration = gp10
+        #expect(race.effectiveConfiguration === gp10)
+        race.circuitConfiguration = gp9
+        #expect(race.effectiveConfiguration === gp9)
+        let period = SafetyCarPeriod(lapCount: 2, scheduleEvent: race)
+        context.insert(period)
+        try context.save()
+        #expect(period.distanceKilometers == 7.862)
+        gp9.lengthMeters = 4000
+        stage.circuitConfiguration = nil
+        circuit.defaultConfiguration = gp10
+        try context.save()
+        #expect(race.effectiveConfiguration === gp9)
+        #expect(period.circuitLengthMetersSnapshot == 3931)
+        #expect(period.distanceKilometers == 7.862)
+        race.circuitConfiguration = nil
+        #expect(race.effectiveConfiguration === gp10)
+        let oldPeriod = SafetyCarPeriod(lapCount: 3)
+        oldPeriod.scheduleEvent = race
+        #expect(oldPeriod.distanceKilometers == nil)
+    }
+
+    @Test func workFiltersExcludeUnassignedActivities() {
+        let sc = Role(name: "Safety Car", shortName: "SC")
+        let mc = Role(name: "Medical Car", shortName: "MC")
+        let stage = Stage(name: "Этап", startDate: .now, endDate: .now, myRole: sc, notificationMode: .myRole)
+        let award = ScheduleEvent(title: "Награждение", plannedStart: .now, plannedDuration: 15, stage: stage)
+        let race = ScheduleEvent(title: "Гонка", plannedStart: .now, plannedDuration: 30, stage: stage, isRace: true)
+        #expect(!SchedulePresentation.relevant(award, role: sc))
+        #expect(!SchedulePresentation.watchRelevant(award, role: sc))
+        #expect(!NotificationManager.shared.shouldNotify(for: award, stage: stage))
+        #expect(SchedulePresentation.relevant(race, role: sc))
+        #expect(NotificationManager.shared.shouldNotify(for: race, stage: stage))
+        #expect(!SchedulePresentation.relevant(race, role: mc))
+        award.eventRoles.append(EventRole(scheduleEvent: award, role: sc))
+        #expect(SchedulePresentation.watchRelevant(award, role: sc))
+        #expect(NotificationManager.shared.shouldNotify(for: award, stage: stage))
+        #expect(SchedulePresentation.relevant(award, role: nil))
+    }
+
+    @Test func scheduleRefreshPreservesRaceConfigurationWithoutSC() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let championship = Championship(name: "Config Series")
+        let season = Season(year: 2026, championship: championship)
+        let circuit = Circuit(name: "Test Circuit")
+        let configuration = CircuitConfiguration(name: "Short", lengthMeters: 2000, circuit: circuit)
+        let stage = Stage(name: "Config Stage", startDate: .now, endDate: .now, season: season, circuit: circuit)
+        let race = ScheduleEvent(title: "Race", plannedStart: .now, plannedDuration: 30, stage: stage, isRace: true)
+        race.circuitConfiguration = configuration
+        context.insert(championship); context.insert(season); context.insert(circuit)
+        context.insert(configuration); context.insert(stage); context.insert(race)
+        try context.save()
+        let data = try SeedDataImporter.exportCurrentJSON(modelContext: context, stage: stage)
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString + ".json")
+        defer { try? FileManager.default.removeItem(at: url) }
+        try data.write(to: url)
+        _ = try SeedDataImporter.importExternalJSON(from: url, modelContext: context, expectedStage: stage, updateReminders: false)
+        #expect(stage.scheduleEvents.first?.circuitConfiguration === configuration)
+    }
+
     private func makeContainer() throws -> ModelContainer {
         let schema = Schema([Championship.self, Season.self, Stage.self, ScheduleEvent.self,
-            Circuit.self, Role.self, RaceClass.self, EventRole.self, EventClass.self, SafetyCarPeriod.self])
+            Circuit.self, CircuitConfiguration.self, Role.self, RaceClass.self, EventRole.self, EventClass.self, SafetyCarPeriod.self, RaceInterruption.self])
         return try ModelContainer(for: schema, configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)])
     }
 }

@@ -36,7 +36,15 @@ struct StageScheduleFilesView: View {
                 Button("Загрузить JSON этого этапа") { showingImporter = true }
                 if let url = bundledURL {
                     Text(bundleDescription(url)).font(.caption).foregroundStyle(.secondary)
-                    Button("Загрузить расписание из приложения") { importFile(url) }
+                    if bundledEventCount(url) > 0 {
+                        Button("Загрузить расписание из приложения") { importFile(url) }
+                    }
+                    if let metadata = metadata(url) {
+                        if let notes = metadata["sourceNotes"] as? String { Text(notes).font(.caption).foregroundStyle(.secondary) }
+                        if let source = metadata["sourceURL"] as? String, let sourceURL = URL(string: source) {
+                            Link("Официальный источник", destination: sourceURL)
+                        }
+                    }
                 }
             } header: {
                 Text(stage.name)
@@ -62,6 +70,16 @@ struct StageScheduleFilesView: View {
             get: { message != nil }, set: { if !$0 { message = nil } }
         )) { Button("OK") { message = nil } } message: { Text(message ?? "") }
     }
+    private func metadata(_ url: URL) -> [String: Any]? {
+        guard let data = try? Data(contentsOf: url) else { return nil }
+        return (try? JSONSerialization.jsonObject(with: data)) as? [String: Any]
+    }
+    private func bundledEventCount(_ url: URL) -> Int {
+        let schedules = metadata(url)?["scheduleImports"] as? [[String: Any]] ?? []
+        return schedules.filter { $0["stageName"] as? String == stage.name }
+            .reduce(0) { $0 + (($1["events"] as? [[String: Any]])?.count ?? 0) }
+    }
+
     private func bundleDescription(_ url: URL) -> String {
         guard let data = try? Data(contentsOf: url),
               let file = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else { return "" }

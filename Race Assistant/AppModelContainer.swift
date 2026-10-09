@@ -9,11 +9,15 @@ enum AppModelContainer {
             Stage.self,
             ScheduleEvent.self,
             Circuit.self,
+            CircuitConfiguration.self,
             Role.self,
             RaceClass.self,
             EventRole.self,
             EventClass.self,
             SafetyCarPeriod.self,
+            RaceInterruption.self,
+            StewardIncident.self,
+            StewardIncidentTask.self,
         ])
 
         let configuration = ModelConfiguration(

@@ -5,6 +5,7 @@
   "timeZone": "Europe/Moscow",
   "sourceTimeZone": "Asia/Baku",
   "referenceData": {
+    "roles": [],
     "raceClasses": [
       {
         "name": "Formula 1",
@@ -15,6 +16,15 @@
         "name": "Formula 2",
         "shortName": "F2",
         "active": true
+      }
+    ],
+    "circuits": [
+      {
+        "name": "Baku City Circuit",
+        "shortName": "Baku",
+        "city": "Баку",
+        "country": "Азербайджан",
+        "lengthMeters": 6003
       }
     ]
   },

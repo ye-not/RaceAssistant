@@ -25,6 +25,12 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
     @Published private(set)
     var isWaitingForWatchSync = false
 
+    @Published private(set) var lastSentAt: Date?
+    @Published private(set) var lastAcknowledgedAt: Date?
+    @Published private(set) var lastSentSchedule: WatchScheduleData?
+    @Published private(set) var lastSyncError: String?
+    @Published private(set) var watchPendingNotificationCount: Int?
+
     private var pendingSyncToken: String?
 
     private var pendingNotificationIDs: [UUID] = []
@@ -101,6 +107,7 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
 
     // MARK: - Send Raw Schedule
 
+    @MainActor
     func send(
         schedule: WatchScheduleData
     ) {
@@ -172,6 +179,9 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
                 "sentAt": Date().timeIntervalSince1970
             ]
             try session.updateApplicationContext(payload)
+            lastSentAt = Date()
+            lastSentSchedule = schedule
+            lastSyncError = nil
             if session.isReachable {
                 session.sendMessage(payload, replyHandler: nil) { error in
                     print("Instant schedule delivery: \(error)")
@@ -199,6 +209,7 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
             pendingNotificationIDs =
                 []
 
+            lastSyncError = error.localizedDescription
             print(
                 "Ошибка отправки расписания на Watch: \(error)"
             )
@@ -209,17 +220,26 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
     func sendPreferredStage() {
         let stages = (try? AppModelContainer.shared.mainContext.fetch(FetchDescriptor<Stage>())) ?? []
         let now = Date()
-        let nonempty = stages.filter { !$0.scheduleEvents.isEmpty }
+        let nonempty = stages.filter {
+            $0.season?.championship != nil && $0.isInterested &&
+            (!$0.scheduleEvents.isEmpty || StewardRole.matches($0))
+        }
         let upcoming = nonempty.filter { $0.endDate >= Calendar.current.startOfDay(for: now) }.sorted {
-            if ($0.myRole != nil) != ($1.myRole != nil) { return $0.myRole != nil }
+            if $0.participation == .official && $1.participation != .official { return true }
+            if $1.participation == .official && $0.participation != .official { return false }
             return $0.startDate < $1.startDate
         }
-        if let stage = SchedulePresentation.workingStage(nonempty, now: now)
+        let stewardStage = SchedulePresentation.todayStages(nonempty, now: now).first {
+            StewardRole.matches($0) && $0.stewardIncidents.contains { $0.status != .decided }
+        }
+        if let stage = stewardStage ?? SchedulePresentation.workingStage(nonempty, now: now)
             ?? SchedulePresentation.todayStages(nonempty, now: now).first ?? upcoming.first {
             send(stage: stage)
-        } else if let data = WCSession.default.applicationContext["schedule"] as? Data,
-                  let schedule = try? JSONDecoder().decode(WatchScheduleData.self, from: data) {
-            send(schedule: schedule)
+        } else {
+            // Explicitly invalidate an old Watch cache; never re-send a deleted stage.
+            var empty = WatchScheduleData(championshipName: "", seasonYear: 0, stageName: "", circuitName: "", myRole: "", events: [])
+            empty.stageAvailable = false
+            send(schedule: empty)
         }
     }
 
@@ -228,7 +248,12 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
     @MainActor
     func send(stage requestedStage: Stage) {
         let stages = (try? AppModelContainer.shared.mainContext.fetch(FetchDescriptor<Stage>())) ?? []
-        let stage = SchedulePresentation.workingStage(stages.filter { !$0.scheduleEvents.isEmpty }, now: .now) ?? requestedStage
+        guard requestedStage.season?.championship != nil, requestedStage.isInterested else {
+            sendPreferredStage()
+            return
+        }
+        let stage = StewardRole.matches(requestedStage) ? requestedStage :
+            (SchedulePresentation.workingStage(stages.filter { !$0.scheduleEvents.isEmpty }, now: .now) ?? requestedStage)
 
         // Передаём на Watch всё расписание этапа,
         // а не только сегодняшний день.
@@ -236,10 +261,15 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
         // Завершённые вручную события
         // исключаем.
 
+        let haltedRace = stage.scheduleEvents.first {
+            $0.isRace && $0.status == "red_flag" && SchedulePresentation.relevant($0, stage: stage)
+        }
+        let hasPendingRedFlag = haltedRace != nil
         let events =
-            stage.scheduleEvents
+            (hasPendingRedFlag ? [] : stage.scheduleEvents)
                 .filter {
-                    $0.status != "finished"
+                    $0.status == "scheduled" &&
+                    SchedulePresentation.relevant($0, stage: stage)
                 }
                 .sorted {
                     $0.plannedStart <
@@ -343,10 +373,10 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
                 : role.shortName
 
         } else {
-            myRoleName = ""
+            myRoleName = stage.participation == .unspecified ? "" : stage.participation.title
         }
 
-        let schedule =
+        var schedule =
             WatchScheduleData(
                 championshipName:
                     championshipName,
@@ -364,106 +394,42 @@ final class PhoneWatchConnectivityManager: NSObject, ObservableObject {
                     myRoleName,
 
                 events:
-                    watchEvents
+                    watchEvents,
+
+                redFlagTitle:
+                    haltedRace?.title
             )
 
-        send(
-            schedule: schedule
-        )
+        schedule.participationRawValue = stage.participation.rawValue
+        schedule.stageAvailable = true
+        schedule.stewardMode = StewardRole.matches(stage)
+        schedule.stewardIncidents = StewardRole.watchIncidents(stage)
+        send(schedule: schedule)
+        Task { @MainActor in
+            await NotificationManager.shared.rescheduleNotifications(for: stage)
+        }
     }
 
     // MARK: - Watch Notification Filtering
 
-    private func shouldWatchNotify(
-        event: ScheduleEvent,
-        stage: Stage
-    ) -> Bool {
-
-        switch stage.notificationMode {
-
-        case .none:
-            return false
-
-        case .all:
-            return true
-
-        case .myRole:
-
-            guard let myRole =
-                stage.myRole
-            else {
-                return false
-            }
-
-            // Если роли у события не заполнены,
-            // в режиме "По моей роли"
-            // уведомление не создаём.
-
-            guard
-                !event.eventRoles.isEmpty
-            else {
-                return false
-            }
-
-            return event.eventRoles
-                .contains { eventRole in
-
-                    guard let role =
-                        eventRole.role
-                    else {
-                        return false
-                    }
-
-                    return
-                        role === myRole
-                }
-        }
+    @MainActor
+    private func shouldWatchNotify(event: ScheduleEvent, stage: Stage) -> Bool {
+        NotificationManager.shared.shouldNotify(for: event, stage: stage)
     }
 
     // MARK: - Watch Acknowledgement
 
-    private func handleAcknowledgement(
-        token: String
-    ) {
-        guard
-            token == pendingSyncToken
-        else {
-            print(
-                "Получено подтверждение устаревшей синхронизации: \(token)"
-            )
-
-            return
-        }
-
-        let idsToRemove =
-            pendingNotificationIDs
-
-        DispatchQueue.main.async {
-            self.watchNotificationsActive =
-                true
-
-            self.isWaitingForWatchSync =
-                false
-
-            self.pendingSyncToken =
-                nil
-
-            self.pendingNotificationIDs =
-                []
-        }
-
-        removePhoneNotifications(
-            eventIDs:
-                idsToRemove
-        )
-
-        print(
-            "Watch подтвердил получение расписания"
-        )
-
-        print(
-            "iPhone fallback-уведомления удалены: \(idsToRemove.count) событий"
-        )
+    @MainActor
+    private func handleAcknowledgement(token: String, notificationsAllowed: Bool, notificationCount: Int?) {
+        guard token == pendingSyncToken else { return }
+        let ids = pendingNotificationIDs
+        watchNotificationsActive = notificationsAllowed
+        lastAcknowledgedAt = Date()
+        watchPendingNotificationCount = notificationCount
+        isWaitingForWatchSync = false
+        pendingSyncToken = nil
+        pendingNotificationIDs = []
+        if notificationsAllowed { removePhoneNotifications(eventIDs: ids) }
     }
 
     // MARK: - Remove Phone Fallback
@@ -556,9 +522,11 @@ extension PhoneWatchConnectivityManager:
             return
         }
 
-        handleAcknowledgement(
-            token: token
-        )
+        let allowed = message["notificationsAllowed"] as? Bool ?? false
+        let count = message["notificationCount"] as? Int
+        Task { @MainActor in
+            self.handleAcknowledgement(token: token, notificationsAllowed: allowed, notificationCount: count)
+        }
     }
 
     // MARK: - Background Acknowledgement
@@ -576,9 +544,11 @@ extension PhoneWatchConnectivityManager:
             return
         }
 
-        handleAcknowledgement(
-            token: token
-        )
+        let allowed = userInfo["notificationsAllowed"] as? Bool ?? false
+        let count = userInfo["notificationCount"] as? Int
+        Task { @MainActor in
+            self.handleAcknowledgement(token: token, notificationsAllowed: allowed, notificationCount: count)
+        }
     }
 
     func sessionReachabilityDidChange(

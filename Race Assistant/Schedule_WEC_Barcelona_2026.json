@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": "FIA WEC official calendar, checked 2026-10-06",
+  "sourceURL": "https://www.fiawec.com/en/race/6-hours-of-barcelona-2026",
+  "sourceDate": "2026-10-06",
+  "sourceVersion": 1,
+  "sourceNotes": "Даты этапа подтверждены официальным календарём. Подтверждённое расписание сессий пока не получено; время начала гонки и тренировок не добавлено.",
+  "scheduleImports": [
+    {
+      "seriesName": "FIA WEC",
+      "seasonName": "2026",
+      "seasonYear": 2026,
+      "stageName": "6 Hours of Barcelona",
+      "timeZoneIdentifier": "Europe/Madrid",
+      "events": []
+    }
+  ],
+  "referenceData": {
+    "roles": [],
+    "raceClasses": [],
+    "circuits": [
+      {
+        "name": "Circuit de Barcelona-Catalunya",
+        "shortName": "Barcelona",
+        "city": "Монмело",
+        "country": "Испания",
+        "lengthMeters": 4657
+      }
+    ]
+  }
+}

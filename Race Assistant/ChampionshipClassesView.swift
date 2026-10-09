@@ -2,32 +2,8 @@ import SwiftUI
 import SwiftData
 
 struct ChampionshipClassesView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query(sort: \RaceClass.name) private var classes: [RaceClass]
     let championship: Championship
-    @State private var errorMessage: String?
-    var body: some View {
-        List {
-            Section {
-                ForEach(classes) { item in
-                    Toggle(item.shortName.isEmpty ? item.name : item.shortName, isOn: Binding(
-                        get: { championship.raceClasses.contains { $0 === item } },
-                        set: { selected in
-                            if selected { championship.raceClasses.append(item) }
-                            else { championship.raceClasses.removeAll { $0 === item } }
-                            championship.classesConfigured = true
-                            do { try modelContext.save() }
-                            catch { modelContext.rollback(); errorMessage = error.localizedDescription }
-                        }
-                    ))
-                }
-            } footer: { Text("В событиях этого соревнования доступны только выбранные классы. Если классы не нужны, снимите все отметки. Классы существующих событий сохраняются.") }
-        }
-        .navigationTitle("Классы соревнования")
-        .alert("Ошибка сохранения", isPresented: Binding(get: { errorMessage != nil }, set: { if !$0 { errorMessage = nil } })) {
-            Button("OK") { errorMessage = nil }
-        } message: { Text(errorMessage ?? "") }
-    }
+    var body: some View { ClassAssignmentView(championship: championship) }
 }
 
 @MainActor

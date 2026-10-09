@@ -15,7 +15,7 @@ enum StageNotificationMode: String, Codable, CaseIterable {
             return "Все события"
 
         case .myRole:
-            return "По моей роли"
+            return "По моему участию"
         }
     }
 }
@@ -28,12 +28,52 @@ final class Stage {
 
     var season: Season?
     var circuit: Circuit?
+    /// nil inherits the circuit default; does not copy it into every race.
+    var circuitConfiguration: CircuitConfiguration?
+
+    var effectiveConfiguration: CircuitConfiguration? {
+        if let chosen = circuitConfiguration, chosen.circuit === circuit { return chosen }
+        return circuit?.defaultConfiguration
+    }
 
     // Последний внешний импорт расписания для этапа.
     var scheduleUpdatedAt: Date?
 
     // Роль пользователя на конкретном этапе
     var myRole: Role?
+
+    var participationRawValue: String = "unspecified"
+    var participationClasses: [RaceClass] = []
+    var raceClasses: [RaceClass] = []
+    var classesConfigured: Bool = false
+    var availableClasses: [RaceClass] {
+        let used = scheduleEvents.flatMap(\.eventClasses).compactMap(\.raceClass)
+        let configured = classesConfigured ? raceClasses :
+            (used.isEmpty ? (season?.championship?.raceClasses ?? []) : raceClasses)
+        var seen = Set<PersistentIdentifier>()
+        return (configured + used).filter { seen.insert($0.persistentModelID).inserted }
+    }
+    var scheduleTimeZoneIdentifier: String?
+
+    var participation: StageParticipation {
+        get {
+            // Existing role assignments migrate without changing the stored relationship.
+            if participationRawValue == "unspecified", myRole != nil { return .official }
+            return StageParticipation(rawValue: participationRawValue) ?? .unspecified
+        }
+        set { participationRawValue = newValue.rawValue }
+    }
+
+    var isInterested: Bool { participation != .unspecified }
+    var participationTitle: String {
+        if participation == .official, let role = myRole {
+            return "Официальное лицо · \(role.shortName.isEmpty ? role.name : role.shortName)"
+        }
+        if participation == .athlete, !participationClasses.isEmpty {
+            return "Спортсмен · " + participationClasses.map { $0.shortName.isEmpty ? $0.name : $0.shortName }.sorted().joined(separator: ", ")
+        }
+        return participation.title
+    }
 
     // MARK: - Notification Settings
 
@@ -64,6 +104,9 @@ final class Stage {
         inverse: \ScheduleEvent.stage
     )
     var scheduleEvents: [ScheduleEvent] = []
+
+    @Relationship(deleteRule: .cascade, inverse: \StewardIncident.stage)
+    var stewardIncidents: [StewardIncident] = []
 
     init(
         name: String,

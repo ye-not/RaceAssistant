@@ -3,6 +3,7 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
 
     @Query(sort: \Championship.name)
     private var championships: [Championship]
@@ -12,7 +13,10 @@ struct ContentView: View {
 
     @ScaledMetric(relativeTo: .headline) private var timeColumnWidth: CGFloat = 82
 
+    @StateObject private var stewardRouter = StewardNotificationRouter.shared
     @State private var showingAddChampionship = false
+    @State private var showingStagePicker = false
+    @State private var showingSchedulePicker = false
     @State private var eventToEdit: ScheduleEvent?
     @State private var championshipToOpen: Championship?
 
@@ -33,8 +37,16 @@ struct ContentView: View {
                 ToolbarItem(
                     placement: .topBarTrailing
                 ) {
-                    Button {
-                        showingAddChampionship = true
+                    Menu {
+                        Button("Новый чемпионат", systemImage: "flag") {
+                            showingAddChampionship = true
+                        }
+                        Button("Новый этап", systemImage: "calendar.badge.plus") {
+                            showingStagePicker = true
+                        }
+                        Button("Загрузить расписание", systemImage: "doc.badge.arrow.up") {
+                            showingSchedulePicker = true
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -46,6 +58,12 @@ struct ContentView: View {
                 AddChampionshipView { championshipToOpen = $0 }
             }
             .navigationDestination(item: $championshipToOpen) { ChampionshipDetailView(championship: $0) }
+            .sheet(isPresented: $showingStagePicker) {
+                QuickStagePickerView()
+            }
+            .sheet(isPresented: $showingSchedulePicker) {
+                QuickSchedulePickerView()
+            }
             .sheet(
                 item: $eventToEdit
             ) { event in
@@ -53,9 +71,19 @@ struct ContentView: View {
                     event: event
                 )
             }
+            .sheet(item: $stewardRouter.request) { request in
+                StewardNotificationDestination(request: request)
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { Task { _ = await StewardReminderManager.synchronize(modelContext) } }
+            }
+            .onChange(of: stages.count) { _, _ in
+                Task { _ = await StewardReminderManager.synchronize(modelContext) }
+            }
             .task {
                 await NotificationManager.shared
                     .requestPermission()
+                _ = await StewardReminderManager.synchronize(modelContext)
             }
         }
     }
@@ -71,7 +99,7 @@ struct ContentView: View {
 
                 // MARK: - Сегодня
 
-                ForEach(SchedulePresentation.todayStages(stages, now: now).filter { $0.myRole != nil }) { stage in
+                ForEach(SchedulePresentation.todayStages(stages, now: now).filter { $0.isInterested }) { stage in
                     Section {
 
                         // MARK: Информация об этапе
@@ -152,9 +180,9 @@ struct ContentView: View {
                                 } else {
 
                                     Label(
-                                        "Зритель",
+                                        stage.participationTitle,
                                         systemImage:
-                                            "person"
+                                            stage.participation.symbol
                                     )
                                     .font(.caption)
                                     .foregroundStyle(
@@ -169,6 +197,16 @@ struct ContentView: View {
                         }
 
                         // MARK: Расписание
+
+                        if let interrupted = stage.scheduleEvents.first(where: { $0.isRace && $0.status == "red_flag" }) {
+                            NavigationLink {
+                                StageDetailView(stage: stage)
+                            } label: {
+                                Label("КРАСНЫЙ ФЛАГ · \(interrupted.groupID ?? interrupted.title)",
+                                      systemImage: "flag.fill")
+                                    .foregroundStyle(.red)
+                            }
+                        }
 
                         let events =
                             todayEvents(
@@ -275,14 +313,14 @@ struct ContentView: View {
                     }
                 }
 
-                let otherStages = SchedulePresentation.todayStages(stages, now: now).filter { $0.myRole == nil }
+                let otherStages = SchedulePresentation.todayStages(stages, now: now).filter { !$0.isInterested }
                 if !otherStages.isEmpty {
                     Section("Сегодня · другие соревнования") {
                         ForEach(otherStages) { stage in
                             NavigationLink { StageDetailView(stage: stage) } label: {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text("\(stage.season?.championship?.name ?? "") · \(stage.name)")
-                                    Text("Зритель · \(stage.circuit?.shortName ?? "")")
+                                    Text("\(stage.participationTitle) · \(stage.circuit?.shortName ?? "")")
                                         .font(.caption).foregroundStyle(.secondary)
                                 }
                             }
@@ -294,10 +332,8 @@ struct ContentView: View {
 
                 Section("Предстоящие этапы") {
 
-                    let upcoming =
-                        upcomingStages(
-                            now: now
-                        )
+                    let allUpcoming = allUpcomingStages(now: now).filter { Calendar.current.startOfDay(for: $0.startDate) > Calendar.current.startOfDay(for: now) }
+                    let upcoming = Array(allUpcoming.prefix(5))
 
                     if upcoming.isEmpty {
 
@@ -321,88 +357,57 @@ struct ContentView: View {
                                 )
                             }
                         }
-                    }
-                }
-
-                // MARK: - Чемпионаты
-
-                Section {
-                    ForEach(
-                        championships
-                    ) { championship in
 
                         NavigationLink {
-                            ChampionshipDetailView(
-                                championship:
-                                    championship
-                            )
+                            UpcomingStagesView()
                         } label: {
-                            Text(
-                                championship.name
-                            )
-                            .foregroundStyle(
-                                .secondary
-                            )
+                            Label("Все предстоящие этапы", systemImage: "calendar")
                         }
                     }
-                    .onDelete(
-                        perform:
-                            deleteChampionships
-                    )
-
-                } header: {
-                    Text("Управление")
                 }
 
-            // MARK: - Справочники
+                if allUpcomingStages(now: now).filter({ Calendar.current.startOfDay(for: $0.startDate) > Calendar.current.startOfDay(for: now) }).isEmpty {
+                    Section {
+                        NavigationLink { UpcomingStagesView() } label: {
+                            Label("Текущие и предстоящие этапы", systemImage: "calendar")
+                        }
+                    }
+                }
+                Section("Гоночные серии") {
+                    ChampionshipTiles(championships: championships) { championship in
+                        guard championshipToOpen == nil else { return }
+                        championshipToOpen = championship
+                    }
+                    NavigationLink("Все серии · поиск") { ChampionshipCatalogView() }
+                }
+
+                Section("Управление") {
+                    NavigationLink { ReferenceDataView() } label: {
+                        Label("Редактировать справочники", systemImage: "list.bullet.rectangle")
+                    }
+                    NavigationLink { DiagnosticsView() } label: {
+                        Label("Диагностика", systemImage: "stethoscope")
+                    }
+                }
 
             NavigationLink {
-                ReferenceDataView()
+                ReleaseHistoryView()
             } label: {
-                Text(
-                    "Редактировать справочники"
-                )
-                .font(.footnote)
-                .foregroundStyle(
-                    .secondary
-                )
-                .padding(
-                    .vertical,
-                    12
-                )
+                Text("Версия \(ReleaseHistory.currentVersion) (\(ReleaseHistory.currentBuild))")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
             }
+            .listRowBackground(Color.clear)
             }
         }
     }
 
     // MARK: - Upcoming Stages
 
-    private func upcomingStages(
-        now: Date
-    ) -> [Stage] {
-        let calendar =
-            Calendar.current
-
-        let today =
-            calendar.startOfDay(
-                for: now
-            )
-
-        return stages
-            .filter { stage in
-                let start =
-                    calendar.startOfDay(
-                        for: stage.startDate
-                    )
-
-                return start > today
-            }
-            .sorted {
-                $0.startDate <
-                $1.startDate
-            }
-            .prefix(5)
-            .map { $0 }
+    private func allUpcomingStages(now: Date) -> [Stage] {
+        SchedulePresentation.upcoming(stages, now: now)
     }
 
     @ViewBuilder
@@ -442,6 +447,11 @@ struct ContentView: View {
 
             Text(stage.name)
                 .font(.headline)
+
+            if stage.isInterested {
+                Label(stage.participationTitle, systemImage: stage.participation.symbol)
+                    .font(.caption.weight(.semibold)).foregroundStyle(.orange)
+            }
 
             // Автодром
 
@@ -573,7 +583,7 @@ struct ContentView: View {
             return false
         }
 
-        guard event.plannedDuration > 0
+        guard event.status == "scheduled", event.plannedDuration > 0
         else {
             return false
         }
@@ -1014,4 +1024,57 @@ struct ContentView: View {
         )
     }
 
+}
+
+private struct QuickStagePickerView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Query private var seasons: [Season]
+    @State private var selectedSeason: Season?
+    @State private var search = ""
+
+    var body: some View {
+        NavigationStack {
+            List(seasons.filter { $0.championship != nil && (search.isEmpty || ($0.championship?.name ?? "").localizedCaseInsensitiveContains(search) || $0.displayName.localizedCaseInsensitiveContains(search)) }.sorted { $0.year > $1.year }) { season in
+                Button("\(season.championship?.name ?? "Чемпионат") · \(season.displayName)") {
+                    selectedSeason = season
+                }
+            }
+            .overlay {
+                if seasons.isEmpty {
+                    ContentUnavailableView("Сначала добавьте чемпионат и сезон", systemImage: "calendar.badge.plus")
+                }
+            }
+            .searchable(text: $search, prompt: "Серия или сезон")
+            .navigationTitle("Выберите сезон")
+            .toolbar { Button("Закрыть") { dismiss() } }
+            .sheet(item: $selectedSeason) { season in
+                AddStageView(season: season) { _ in dismiss() }
+            }
+        }
+    }
+}
+
+private struct QuickSchedulePickerView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Query private var stages: [Stage]
+    @State private var search = ""
+
+    var body: some View {
+        NavigationStack {
+            List(stages.filter { $0.season?.championship != nil && (search.isEmpty || $0.name.localizedCaseInsensitiveContains(search) || ($0.season?.championship?.name ?? "").localizedCaseInsensitiveContains(search)) }.sorted { $0.startDate > $1.startDate }) { stage in
+                NavigationLink {
+                    StageScheduleFilesView(stage: stage)
+                } label: {
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(stage.name)
+                        Text("\(stage.season?.championship?.name ?? "") · \(stage.startDate.formatted(date: .abbreviated, time: .omitted))")
+                            .font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .searchable(text: $search, prompt: "Серия или этап")
+            .navigationTitle("Выберите этап")
+            .toolbar { Button("Закрыть") { dismiss() } }
+        }
+    }
 }
